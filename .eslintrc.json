@@ -11,7 +11,8 @@
     "@typescript-eslint/no-namespace": "off",
     "import/prefer-default-export": "off",
     "no-useless-constructor": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "class-methods-use-this": "off"
   },
   "parserOptions": {
     "ecmaVersion": 8,
