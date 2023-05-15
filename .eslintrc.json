@@ -12,7 +12,8 @@
     "import/prefer-default-export": "off",
     "no-useless-constructor": "off",
     "consistent-return": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "import/no-extraneous-dependencies": "off"
   },
   "parserOptions": {
     "ecmaVersion": 8,
