@@ -8,7 +8,8 @@
   ],
   "rules": {
     "prettier/prettier": "error",
-    "@typescript-eslint/no-namespace": "off"
+    "@typescript-eslint/no-namespace": "off",
+    "import/prefer-default-export": "off"
   },
   "parserOptions": {
     "ecmaVersion": 8,
