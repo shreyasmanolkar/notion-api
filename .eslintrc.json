@@ -9,7 +9,9 @@
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/no-namespace": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-useless-constructor": "off",
+    "consistent-return": "off"
   },
   "parserOptions": {
     "ecmaVersion": 8,

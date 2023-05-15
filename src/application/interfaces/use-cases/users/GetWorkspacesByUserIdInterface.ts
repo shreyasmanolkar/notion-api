@@ -3,9 +3,7 @@ import { UseCase } from '@application/interfaces/use-cases/UseCase';
 
 export namespace GetWorkspacesByUserIdInterface {
   export type Request = string;
-  export type Response = {
-    data: WorkspaceType[];
-  };
+  export type Response = WorkspaceType[];
 }
 
 export interface GetWorkspacesByUserIdInterface

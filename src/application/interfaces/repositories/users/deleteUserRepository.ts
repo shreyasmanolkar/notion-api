@@ -4,7 +4,7 @@ export namespace DeleteUserRepository {
 }
 
 export interface DeleteUserRepository {
-  deleteComment(
+  deleteUser(
     userId: DeleteUserRepository.Request
   ): Promise<DeleteUserRepository.Response>;
 }

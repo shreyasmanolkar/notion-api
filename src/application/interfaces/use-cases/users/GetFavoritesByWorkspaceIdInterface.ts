@@ -1,3 +1,4 @@
+import { WorkspaceNotFoundError } from '@application/errors/WorkspaceNotFoundError';
 import { UseCase } from '@application/interfaces/use-cases/UseCase';
 
 export namespace GetFavoritesByWorkspaceIdInterface {
@@ -5,7 +6,7 @@ export namespace GetFavoritesByWorkspaceIdInterface {
     userId: string;
     workspaceId: string;
   };
-  export type Response = string[];
+  export type Response = string[] | WorkspaceNotFoundError;
 }
 
 export interface GetFavoritesByWorkspaceIdInterface

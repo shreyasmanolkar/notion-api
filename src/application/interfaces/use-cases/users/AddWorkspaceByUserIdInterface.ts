@@ -1,3 +1,4 @@
+import { UserNotFoundError } from '@application/errors/UserNotFoundError';
 import { UseCase } from '@application/interfaces/use-cases/UseCase';
 
 export namespace AddWorkspaceByUserIdInterface {
@@ -5,7 +6,7 @@ export namespace AddWorkspaceByUserIdInterface {
     userId: string;
     workspaceId: string;
   };
-  export type Response = void;
+  export type Response = void | UserNotFoundError;
 }
 
 export interface AddWorkspaceByUserIdInterface

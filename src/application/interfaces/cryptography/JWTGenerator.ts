@@ -1,3 +1,3 @@
-export interface IJWTGenerator {
+export interface JWTGenerator {
   generate(payload: string): Promise<string>;
 }

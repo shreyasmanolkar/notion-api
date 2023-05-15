@@ -4,7 +4,7 @@ import { UseCase } from '@application/interfaces/use-cases/UseCase';
 export namespace AddPageIdToFavoritesByWorkspaceIdInterface {
   export type Request = {
     userId: string;
-    workdpaceId: string;
+    workspaceId: string;
     pageId: string;
   };
   export type Response = void | WorkspaceNotFoundError;
