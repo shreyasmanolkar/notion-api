@@ -19,7 +19,7 @@ export class AddPageIdToFavoritesByWorkspaceId
     const allWorkspaces =
       await this.getWorkspacesByUserIdRepository.getWorkspacesByUserId(userId);
 
-    const verifiedWorkspace = allWorkspaces.find(
+    const verifiedWorkspace = allWorkspaces?.find(
       workspace => workspace.workspaceId === workspaceId
     );
 

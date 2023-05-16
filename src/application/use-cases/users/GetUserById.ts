@@ -3,12 +3,12 @@ import { GetUserByIdRepository } from '@application/interfaces/repositories/user
 import { GetUserByIdInterface } from '@application/interfaces/use-cases/users/GetUserByIdInterface';
 
 export class GetUserById implements GetUserByIdInterface {
-  constructor(private readonly getUserBuIdRepository: GetUserByIdRepository) {}
+  constructor(private readonly getUserByIdRepository: GetUserByIdRepository) {}
 
   async execute(
     userId: GetUserByIdInterface.Request
   ): Promise<GetUserByIdInterface.Response> {
-    const user = await this.getUserBuIdRepository.getUserById(userId);
+    const user = await this.getUserByIdRepository.getUserById(userId);
     if (!user) {
       return new UserNotFoundError();
     }

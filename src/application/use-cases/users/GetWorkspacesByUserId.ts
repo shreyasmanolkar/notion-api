@@ -12,6 +12,6 @@ export class GetWorkspacesByUserId implements GetWorkspacesByUserIdInterface {
     const workspaces =
       await this.getWorkspacesByUserIdRepository.getWorkspacesByUserId(userId);
 
-    return workspaces;
+    return workspaces!;
   }
 }

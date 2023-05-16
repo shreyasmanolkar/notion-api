@@ -13,7 +13,8 @@
     "no-useless-constructor": "off",
     "consistent-return": "off",
     "class-methods-use-this": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
   "parserOptions": {
     "ecmaVersion": 8,
