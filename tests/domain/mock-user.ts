@@ -2,7 +2,7 @@ import { User } from '@domain/entities/User';
 
 const mockUser = (): User => {
   return new User({
-    id: 'sample-userID',
+    id: '112233445566778899aabbcc',
     name: 'sample-name',
     email: 'sample@email.com',
     password: 'sample-password',

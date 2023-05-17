@@ -120,11 +120,11 @@ export class UserRepository
       }
     );
 
-    if (rawWorkspaces && rawWorkspaces.favorites) {
-      return rawWorkspaces.favorites;
+    if (rawWorkspaces) {
+      return rawWorkspaces.workspaces;
     }
 
-    return [];
+    return null;
   }
 
   async getFavoritesByWorkspaceId(
@@ -137,14 +137,14 @@ export class UserRepository
         _id: stringToObjectId(userId),
         'workspaces.workspaceId': workspaceId,
       },
-      { projection: { favorites: 1 } }
+      { projection: { 'workspaces.$': 1 } }
     );
 
-    if (rawFavorites && rawFavorites.favorites) {
-      return rawFavorites.favorites;
+    if (rawFavorites && rawFavorites.workspaces[0]) {
+      return rawFavorites.workspaces[0].favorites;
     }
 
-    return [];
+    return null;
   }
 
   async updateUser(
@@ -186,7 +186,8 @@ export class UserRepository
 
     const { value: rawUser } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(userId) },
-      { $pull: { workspaces: { workspaceId } } } as SetFields<Document>
+      { $pull: { workspaces: { workspaceId } } } as SetFields<Document>,
+      { returnDocument: 'after' }
     );
     return mapDocument(rawUser);
   }
@@ -203,7 +204,8 @@ export class UserRepository
       },
       {
         $pull: { 'workspaces.$.favorites': pageId },
-      } as SetFields<Document>
+      } as SetFields<Document>,
+      { returnDocument: 'after' }
     );
 
     return mapDocument(rawUser);

@@ -3,7 +3,7 @@ export namespace GetFavoritesByWorkspaceIdRepository {
     userId: string;
     workspaceId: string;
   };
-  export type Response = string[];
+  export type Response = string[] | null;
 }
 
 export interface GetFavoritesByWorkspaceIdRepository {
