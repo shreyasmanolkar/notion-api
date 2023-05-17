@@ -370,4 +370,27 @@ describe('User Repository', () => {
       expect(updatedUser.workspaces[0].favorites).toHaveLength(0);
     });
   });
+
+  describe('DeleteUser', () => {
+    it('should delete a user on success', async () => {
+      const userRepository = new UserRepository();
+
+      const { name, email, password, isDarkMode, profilePicture, workspaces } =
+        mockUser();
+
+      const { insertedId } = await userCollection.insertOne({
+        name,
+        email,
+        password,
+        isDarkMode,
+        profilePicture,
+        workspaces,
+      });
+
+      await userRepository.deleteUser(objectIdToString(insertedId));
+      const count = await userCollection.countDocuments();
+
+      expect(count).toBe(0);
+    });
+  });
 });
