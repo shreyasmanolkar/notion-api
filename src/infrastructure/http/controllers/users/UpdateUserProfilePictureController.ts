@@ -7,12 +7,12 @@ import { UpdateUserProfilePictureInterface } from '@application/interfaces/use-c
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
 import { Validation } from '@infrastructure/http/interfaces/Validation';
 
-export namespace UpdateUserProfilePictureConroller {
+export namespace UpdateUserProfilePictureController {
   export type Request = HttpRequest<{ url: string }>;
   export type Response = HttpResponse<undefined | UserNotFoundError>;
 }
 
-export class UpdateUserProfilePictureConroller extends BaseController {
+export class UpdateUserProfilePictureController extends BaseController {
   constructor(
     private readonly updateUserProfiePictureValidation: Validation,
     private readonly getUserById: GetUserByIdInterface,
@@ -22,8 +22,8 @@ export class UpdateUserProfilePictureConroller extends BaseController {
   }
 
   async execute(
-    httpRequest: UpdateUserProfilePictureConroller.Request
-  ): Promise<UpdateUserProfilePictureConroller.Response> {
+    httpRequest: UpdateUserProfilePictureController.Request
+  ): Promise<UpdateUserProfilePictureController.Response> {
     const userId = httpRequest.userId!;
     const { url } = httpRequest.body!;
 
