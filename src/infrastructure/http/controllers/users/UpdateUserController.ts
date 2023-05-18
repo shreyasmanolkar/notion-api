@@ -20,7 +20,7 @@ export class UpdateUserController extends BaseController {
     private readonly getUserById: GetUserByIdInterface,
     private readonly updateUser: UpdateUserInterface
   ) {
-    super();
+    super(updateUserValidation);
   }
 
   async execute(

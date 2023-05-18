@@ -5,7 +5,7 @@ import { HttpResponse } from '@infrastructure/http/interfaces/HttpResponse';
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
 import { Validation } from '@infrastructure/http/interfaces/Validation';
 import { SignInInterface } from '@application/interfaces/use-cases/users/SignInInterface';
-import { forbidden, ok } from '@infrastructure/http/helpers/http';
+import { forbidden, ok, unauthorized } from '@infrastructure/http/helpers/http';
 
 export namespace SignUpController {
   export type Request = HttpRequest<SignUpInterface.Request>;
@@ -56,7 +56,7 @@ export class SignUpController extends BaseController {
     });
 
     if (authenticationTokenOrError instanceof Error) {
-      throw authenticationTokenOrError;
+      return unauthorized(authenticationTokenOrError);
     }
 
     return ok({

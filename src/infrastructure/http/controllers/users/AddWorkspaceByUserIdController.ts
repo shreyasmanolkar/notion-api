@@ -3,7 +3,6 @@ import { AddWorkspaceByUserIdInterface } from '@application/interfaces/use-cases
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
 import { HttpResponse } from '@infrastructure/http/interfaces/HttpResponse';
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
-import { Validation } from '@infrastructure/http/interfaces/Validation';
 import { GetUserByIdInterface } from '@application/interfaces/use-cases/users/GetUserByIdInterface';
 import { notFound, ok } from '@infrastructure/http/helpers/http';
 
@@ -16,11 +15,10 @@ export namespace AddWorkspaceByUserIdController {
 
 export class AddWorkspaceByUserIdController extends BaseController {
   constructor(
-    private readonly addWorkspaceByUserIdValidation: Validation,
     private readonly getUserById: GetUserByIdInterface,
-    private readonly addWorkspaceById: AddWorkspaceByUserIdInterface
+    private readonly addWorkspaceByUserId: AddWorkspaceByUserIdInterface
   ) {
-    super(addWorkspaceByUserIdValidation);
+    super();
   }
 
   async execute(
@@ -35,7 +33,7 @@ export class AddWorkspaceByUserIdController extends BaseController {
       return notFound(userOrError);
     }
 
-    const addWorkspaceById = await this.addWorkspaceById.execute({
+    const addWorkspaceById = await this.addWorkspaceByUserId.execute({
       userId,
       workspaceId,
     });

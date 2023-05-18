@@ -5,6 +5,7 @@ import { BaseController } from '@infrastructure/http/controllers/BaseController'
 import { GetUserByIdInterface } from '@application/interfaces/use-cases/users/GetUserByIdInterface';
 import { UpdateUserProfilePictureInterface } from '@application/interfaces/use-cases/users/UpdateUserProfilePictureInterface';
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
+import { Validation } from '@infrastructure/http/interfaces/Validation';
 
 export namespace UpdateUserProfilePictureConroller {
   export type Request = HttpRequest<{ url: string }>;
@@ -13,10 +14,11 @@ export namespace UpdateUserProfilePictureConroller {
 
 export class UpdateUserProfilePictureConroller extends BaseController {
   constructor(
+    private readonly updateUserProfiePictureValidation: Validation,
     private readonly getUserById: GetUserByIdInterface,
     private readonly updateUserProfilePicture: UpdateUserProfilePictureInterface
   ) {
-    super();
+    super(updateUserProfiePictureValidation);
   }
 
   async execute(
