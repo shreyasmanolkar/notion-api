@@ -33,6 +33,6 @@ export class GetFavoritesByWorkspaceId
         workspaceId,
       });
 
-    return favorites;
+    return favorites!;
   }
 }

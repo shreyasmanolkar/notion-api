@@ -23,7 +23,7 @@ export class CreateUserRepositoryStub implements CreateUserRepository {
   }
 }
 
-export class addWorkspaceByUserIdRepositoryStub
+export class AddWorkspaceByUserIdRepositoryStub
   implements AddWorkspaceByUserIdRepository
 {
   async addWorkspaceByUserId(
@@ -33,7 +33,7 @@ export class addWorkspaceByUserIdRepositoryStub
   }
 }
 
-export class addPageIdToFavoritesByWorkspaceIdRepositoryStub
+export class AddPageIdToFavoritesByWorkspaceIdRepositoryStub
   implements AddPageIdToFavoritesByWorkspaceIdRepository
 {
   async addPageIdToFavoritesByWorkspaceId(
@@ -43,7 +43,9 @@ export class addPageIdToFavoritesByWorkspaceIdRepositoryStub
   }
 }
 
-export class loadUserByEmail implements LoadUserByEmailRepository {
+export class LoadUserByEmailRepositoryStub
+  implements LoadUserByEmailRepository
+{
   async loadUserByEmail(
     _email: LoadUserByEmailRepository.Request
   ): Promise<LoadUserByEmailRepository.Response> {
@@ -51,7 +53,7 @@ export class loadUserByEmail implements LoadUserByEmailRepository {
   }
 }
 
-export class getUserByIdRepositoryStub implements GetUserByIdRepository {
+export class GetUserByIdRepositoryStub implements GetUserByIdRepository {
   async getUserById(
     _userId: GetUserByIdRepository.Request
   ): Promise<GetUserByIdRepository.Response> {
@@ -59,7 +61,7 @@ export class getUserByIdRepositoryStub implements GetUserByIdRepository {
   }
 }
 
-export class getWorkspacesByUserIdRepositoryStub
+export class GetWorkspacesByUserIdRepositoryStub
   implements GetWorkspacesByUserIdRepository
 {
   async getWorkspacesByUserId(
@@ -70,7 +72,7 @@ export class getWorkspacesByUserIdRepositoryStub
   }
 }
 
-export class getFavoritesByWorkspaceIdRepositoryStub
+export class GetFavoritesByWorkspaceIdRepositoryStub
   implements GetFavoritesByWorkspaceIdRepository
 {
   async getFavoritesByWorkspaceId(
@@ -82,7 +84,7 @@ export class getFavoritesByWorkspaceIdRepositoryStub
   }
 }
 
-export class updateUserRepositoryStub implements UpdateUserRepository {
+export class UpdateUserRepositoryStub implements UpdateUserRepository {
   async updateUser(
     _params: UpdateUserRepository.Request
   ): Promise<UpdateUserRepository.Response> {
@@ -90,7 +92,7 @@ export class updateUserRepositoryStub implements UpdateUserRepository {
   }
 }
 
-export class updateUserProfilePictureRepositoryStub
+export class UpdateUserProfilePictureRepositoryStub
   implements UpdateUserProfilePictureRepository
 {
   async updateUserProfilePicture(
@@ -100,7 +102,7 @@ export class updateUserProfilePictureRepositoryStub
   }
 }
 
-export class removeWorkspaceByUserIdRepositoryStub
+export class RemoveWorkspaceByUserIdRepositoryStub
   implements RemoveWorkspaceByUserIdRepository
 {
   async removeWorkspaceByUserId(
@@ -110,7 +112,7 @@ export class removeWorkspaceByUserIdRepositoryStub
   }
 }
 
-export class removePageIdFromFavoritesByWorkspaceIdRepositoryStub
+export class RemovePageIdFromFavoritesByWorkspaceIdRepositoryStub
   implements RemovePageIdFromFavoritesByWorkspaceIdRepository
 {
   async removePageIdFromFavoritesByWorkspaceId(
@@ -120,7 +122,7 @@ export class removePageIdFromFavoritesByWorkspaceIdRepositoryStub
   }
 }
 
-export class deleteUserRepositoryStub implements DeleteUserRepository {
+export class DeleteUserRepositoryStub implements DeleteUserRepository {
   async deleteUser(
     userId: DeleteUserRepository.Request
     // eslint-disable-next-line @typescript-eslint/no-empty-function

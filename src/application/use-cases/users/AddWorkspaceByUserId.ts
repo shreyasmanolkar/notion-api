@@ -6,7 +6,7 @@ import { AddWorkspaceByUserIdInterface } from '@application/interfaces/use-cases
 export class AddWorkspaceByUserId implements AddWorkspaceByUserIdInterface {
   constructor(
     private readonly getUserByIdRepository: GetUserByIdRepository,
-    private readonly addWorkspaceByIdRepository: AddWorkspaceByUserIdRepository
+    private readonly addWorkspaceByUserIdRepository: AddWorkspaceByUserIdRepository
   ) {}
 
   async execute(
@@ -20,7 +20,7 @@ export class AddWorkspaceByUserId implements AddWorkspaceByUserIdInterface {
       return new UserNotFoundError();
     }
 
-    await this.addWorkspaceByIdRepository.addWorkspaceByUserId({
+    await this.addWorkspaceByUserIdRepository.addWorkspaceByUserId({
       userId,
       workspaceId,
     });

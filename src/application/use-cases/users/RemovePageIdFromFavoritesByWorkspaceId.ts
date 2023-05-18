@@ -8,7 +8,7 @@ export class RemovePageIdFromFavoritesByWorkspaceId
 {
   constructor(
     private readonly getWorkspacesByUserIdRepository: GetWorkspacesByUserIdRepository,
-    private readonly removePageIdFromFavoritesByWorkspacesIdRepository: RemovePageIdFromFavoritesByWorkspaceIdRepository
+    private readonly removePageIdFromFavoritesByWorkspaceIdRepository: RemovePageIdFromFavoritesByWorkspaceIdRepository
   ) {}
 
   async execute(
@@ -27,7 +27,7 @@ export class RemovePageIdFromFavoritesByWorkspaceId
       return new WorkspaceNotFoundError();
     }
 
-    await this.removePageIdFromFavoritesByWorkspacesIdRepository.removePageIdFromFavoritesByWorkspaceId(
+    await this.removePageIdFromFavoritesByWorkspaceIdRepository.removePageIdFromFavoritesByWorkspaceId(
       {
         userId,
         workspaceId,

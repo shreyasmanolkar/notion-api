@@ -1,6 +1,6 @@
 import { UserNotFoundError } from '@application/errors/UserNotFoundError';
 import { UpdateUserProfilePictureConroller } from '@infrastructure/http/controllers/users/UpdateUserProfilePictureController';
-import { notFound, ok } from '@infrastructure/http/helpers/http';
+import { notFound } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
 import {
   GetUserByIdStub,
