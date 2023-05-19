@@ -7,7 +7,10 @@ import { forbidden, ok } from '@infrastructure/http/helpers/http';
 import { PermissionError } from '@infrastructure/http/errors/PermissionError';
 
 export namespace GetFavoritesByWorkspaceIdController {
-  export type Request = HttpRequest<undefined, { workspaceId: string }>;
+  export type Request = HttpRequest<
+    undefined,
+    { userId: string; workspaceId: string }
+  >;
   export type Response =
     HttpResponse<GetFavoritesByWorkspaceIdInterface.Response>;
 }
@@ -23,8 +26,7 @@ export class GetFavoritesByWorkspaceIdController extends BaseController {
   async execute(
     httpRequest: GetFavoritesByWorkspaceIdController.Request
   ): Promise<GetFavoritesByWorkspaceIdController.Response> {
-    const userId = httpRequest.userId!;
-    const { workspaceId } = httpRequest.params!;
+    const { userId, workspaceId } = httpRequest.params!;
 
     const workspaces = await this.getWorkspacesByUserId.execute(userId);
 

@@ -1,5 +1,5 @@
 import { UserNotFoundError } from '@application/errors/UserNotFoundError';
-import { UpdateUserProfilePictureConroller } from '@infrastructure/http/controllers/users/UpdateUserProfilePictureController';
+import { UpdateUserProfilePictureController } from '@infrastructure/http/controllers/users/UpdateUserProfilePictureController';
 import { notFound } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
 import {
@@ -10,7 +10,7 @@ import mockUser from '@tests/domain/mock-user';
 import { ValidationStub } from '@tests/infrastructure/mocks/validators';
 
 type SutTypes = {
-  sut: UpdateUserProfilePictureConroller;
+  sut: UpdateUserProfilePictureController;
   validationStub: ValidationStub;
   getUserByIdStub: GetUserByIdStub;
   updateUserProfilePictureStub: UpdateUserProfilePictureStub;
@@ -20,7 +20,7 @@ const makeSut = (): SutTypes => {
   const validationStub = new ValidationStub();
   const getUserByIdStub = new GetUserByIdStub();
   const updateUserProfilePictureStub = new UpdateUserProfilePictureStub();
-  const sut = new UpdateUserProfilePictureConroller(
+  const sut = new UpdateUserProfilePictureController(
     validationStub,
     getUserByIdStub,
     updateUserProfilePictureStub

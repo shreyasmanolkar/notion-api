@@ -11,10 +11,11 @@ export class PayloadValidator implements Validation {
     const validator = ajvInstance.compile(this.schema);
 
     const isValid = validator(input);
-
     if (!isValid) {
       const { errors }: any = validator;
-      return new Error(errors);
+      const { instancePath, message } = errors[0];
+
+      return new Error(`${instancePath} ${message}`);
     }
 
     return null;

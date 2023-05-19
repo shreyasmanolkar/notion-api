@@ -19,7 +19,9 @@ export const signUpSchema = {
     profilePicture: {
       type: 'object',
       properties: {
-        url: 'string',
+        url: {
+          type: 'string',
+        },
       },
       required: ['url'],
     },

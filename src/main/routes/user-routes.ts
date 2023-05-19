@@ -12,17 +12,24 @@ import { makeGetFavoritesByWorkspaceIdController } from '@main/factories/control
 import { makeUpdateUserProfilePictureController } from '@main/factories/controllers/users/update-user-profile-picture/controller-factory';
 import { makeGetUserByIdController } from '@main/factories/controllers/users/get-user-by-id/controller-factory';
 import { makeDeleteUserController } from '@main/factories/controllers/users/delete-user/controller-factory';
+import { authMiddleware } from '@main/middlewares/auth-middleware';
 
 export default (router: Router): void => {
   router.get(
-    '/users/:id/workspaces',
+    '/users/:userId/workspaces-access',
+    authMiddleware,
     expressRouteAdapter(makeGetWorkspacesByUserIdController())
   );
   router.get(
-    '/users/:id/workspaces/:workspaceId/favorites',
+    '/users/:userId/workspaces-access/:workspaceId/favorites',
+    authMiddleware,
     expressRouteAdapter(makeGetFavoritesByWorkspaceIdController())
   );
-  router.get('/users/:id', expressRouteAdapter(makeGetUserByIdController()));
+  router.get(
+    '/users/:id',
+    authMiddleware,
+    expressRouteAdapter(makeGetUserByIdController())
+  );
   router.post('/login', expressRouteAdapter(makeSignInController()));
   router.post('/register', expressRouteAdapter(makeSignUpController()));
   router.post(

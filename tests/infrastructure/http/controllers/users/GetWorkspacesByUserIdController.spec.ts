@@ -21,7 +21,9 @@ const makeSut = (): SutTypes => {
 const makeFakeHttpRequest = (): HttpRequest => {
   const { id } = mockUser();
   return {
-    userId: id,
+    params: {
+      userId: id,
+    },
   };
 };
 
@@ -35,10 +37,11 @@ describe('GetWorkspacesByUserIdController', () => {
     );
 
     const httpRequest = makeFakeHttpRequest();
+
     await sut.handle(httpRequest);
 
     expect(getFavoritesByWorkspaceIdControllerSpy).toHaveBeenCalledWith(
-      httpRequest.userId
+      httpRequest.params.userId
     );
   });
 
