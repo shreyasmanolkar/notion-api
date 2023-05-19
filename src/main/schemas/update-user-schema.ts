@@ -17,5 +17,5 @@ export const updateUserSchema = {
       type: 'boolean',
     },
   },
-  required: ['name', 'email', 'password', 'isDarkMode'],
+  required: [],
 };

@@ -7,7 +7,7 @@ import { DeleteUserInterface } from '@application/interfaces/use-cases/users/Del
 import { noContent } from '@infrastructure/http/helpers/http';
 
 export namespace DeleteUserController {
-  export type Request = HttpRequest;
+  export type Request = HttpRequest<undefined, { userId: string }>;
   export type Response = HttpResponse<
     undefined | UserNotFoundError | PermissionError
   >;
@@ -21,7 +21,7 @@ export class DeleteUserController extends BaseController {
   async execute(
     httpRequest: DeleteUserController.Request
   ): Promise<DeleteUserController.Response> {
-    const userId = httpRequest.userId!;
+    const { userId } = httpRequest.params!;
 
     // TODO: delete workspaces corresponding to userId if workspace is not shared else delete user
 

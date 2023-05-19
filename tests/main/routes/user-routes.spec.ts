@@ -153,7 +153,7 @@ describe('user routes', () => {
     });
   });
 
-  describe('GET /users/:id/workspaces-access', () => {
+  describe('GET /users/:userId/workspaces-access', () => {
     it('should return 200 on success and list of workspaces', async () => {
       const token = await getToken();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -205,6 +205,227 @@ describe('user routes', () => {
         .get(`/v1/users/${userId}/workspaces-access/${workspaceId}/favorites`)
         .set('Authorization', `Bearer ${token}`)
         .expect(403);
+    });
+  });
+
+  describe('GET /users/:userId', () => {
+    it('should return 200 on success and user', async () => {
+      const token = await getToken();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+
+      await request(app)
+        .get(`/v1/users/${userId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect('Content-Type', /json/)
+        .expect(200);
+    });
+  });
+
+  describe('POST /users/:userId/workspaces-access/:workspaceId', () => {
+    it('should return 204 on success and add workspaceId and favorites', async () => {
+      const token = await getToken();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+
+      const workspaceId = 'new-workspaceId';
+
+      await request(app)
+        .post(`/v1/users/${userId}/workspaces-access/${workspaceId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(204);
+    });
+
+    it('should return 404 if user is not found', async () => {
+      const token = await getToken();
+
+      const userId = 'no-user';
+      const workspaceId = 'new-workspaceId';
+
+      await request(app)
+        .post(`/v1/users/${userId}/workspaces-access/${workspaceId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(404);
+    });
+  });
+
+  describe('POST /users/:userId/workspaces-access/:workspaceId/favorites/:pageId', () => {
+    it('should return 204 on success and add pageId to favorites', async () => {
+      const token = await getToken();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+
+      const workspaceId = 'any-workspaceId';
+      const pageId = 'sample-new-page';
+
+      await request(app)
+        .post(
+          `/v1/users/${userId}/workspaces-access/${workspaceId}/favorites/${pageId}`
+        )
+        .set('Authorization', `Bearer ${token}`)
+        .expect(204);
+    });
+
+    it('should return 403 if workspace is not found', async () => {
+      const token = await getToken();
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+
+      const workspaceId = 'non-existing-workspaceId';
+      const pageId = 'sample-new-page';
+
+      await request(app)
+        .post(
+          `/v1/users/${userId}/workspaces-access/${workspaceId}/favorites/${pageId}`
+        )
+        .set('Authorization', `Bearer ${token}`)
+        .expect(403);
+    });
+  });
+
+  describe('PATCH /users/:userId', () => {
+    it('should return 200 on success and user', async () => {
+      const token = await getToken();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+
+      await request(app)
+        .patch(`/v1/users/${userId}`)
+        .send({
+          name: 'v2-upadated-name',
+        })
+        .set('Authorization', `Bearer ${token}`)
+        .expect('Content-Type', /json/)
+        .expect(200);
+    });
+
+    it('should return 404 if user is not found', async () => {
+      const token = await getToken();
+
+      const userId = 'no-user';
+
+      await request(app)
+        .patch(`/v1/users/${userId}`)
+        .send({
+          name: 'upadated-name',
+        })
+        .set('Authorization', `Bearer ${token}`)
+        .expect(404);
+    });
+  });
+
+  describe('PATCH /users/:userId/profile-picture', () => {
+    it('should return 204 on success', async () => {
+      const token = await getToken();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+
+      await request(app)
+        .patch(`/v1/users/${userId}/profile-picture`)
+        .send({
+          url: 'updated-sample-url',
+        })
+        .set('Authorization', `Bearer ${token}`)
+        .expect(204);
+    });
+
+    it('should return 404 if user is not found', async () => {
+      const token = await getToken();
+
+      const userId = 'no-user';
+
+      await request(app)
+        .patch(`/v1/users/${userId}/profile-picture`)
+        .send({
+          url: 'updated-sample-url',
+        })
+        .set('Authorization', `Bearer ${token}`)
+        .expect(404);
+    });
+  });
+
+  describe('DELETE /users/:userId/workspaces-access/:workspaceId', () => {
+    it('should return 204 on success', async () => {
+      const token = await getToken();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+      const workspaceId = 'any-workspaceId';
+
+      await request(app)
+        .delete(`/v1/users/${userId}/workspaces-access/${workspaceId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(204);
+    });
+
+    it('should return 403 if workspace is not found in users workspaces-access', async () => {
+      const token = await getToken();
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+      const workspaceId = 'other-workspace-id';
+
+      await request(app)
+        .delete(`/v1/users/${userId}/workspaces-access/${workspaceId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(403);
+    });
+  });
+
+  describe('DELETE /users/:userId/workspaces-access/:workspaceId/favorites/:pageId', () => {
+    it('should return 204 on success', async () => {
+      const token = await getToken();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+      const workspaceId = 'another-workspaceId';
+      const pageId = 'another-page-2';
+
+      await request(app)
+        .delete(
+          `/v1/users/${userId}/workspaces-access/${workspaceId}/favorites/${pageId}`
+        )
+        .set('Authorization', `Bearer ${token}`)
+        .expect(204);
+    });
+
+    it('should return 403 if workspace is not found in users workspaces-access', async () => {
+      const token = await getToken();
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+      const workspaceId = 'other-workspace-id';
+      const pageId = 'another-page-2';
+
+      await request(app)
+        .delete(
+          `/v1/users/${userId}/workspaces-access/${workspaceId}/favorites/${pageId}`
+        )
+        .set('Authorization', `Bearer ${token}`)
+        .expect(403);
+    });
+  });
+
+  describe('DELETE /users/:userId', () => {
+    it('should return 204 on success', async () => {
+      const token = await getToken();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const userId = atob(jwtPayload);
+
+      await request(app)
+        .delete(`/v1/users/${userId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(204);
     });
   });
 });

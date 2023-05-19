@@ -5,12 +5,12 @@ import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
 import { HttpResponse } from '@infrastructure/http/interfaces/HttpResponse';
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
 import { GetWorkspacesByUserIdInterface } from '@application/interfaces/use-cases/users/GetWorkspacesByUserIdInterface';
-import { forbidden, ok } from '@infrastructure/http/helpers/http';
+import { forbidden, noContent } from '@infrastructure/http/helpers/http';
 
 export namespace AddPageIdToFavoritesByWorkspaceIdController {
   export type Request = HttpRequest<
     undefined,
-    { workspaceId: string; pageId: string }
+    { userId: string; workspaceId: string; pageId: string }
   >;
   export type Response = HttpResponse<
     | AddPageIdToFavoritesByWorkspaceIdInterface.Response
@@ -30,8 +30,7 @@ export class AddPageIdToFavoritesByWorkspaceIdController extends BaseController 
   async execute(
     httpRequest: AddPageIdToFavoritesByWorkspaceIdController.Request
   ): Promise<AddPageIdToFavoritesByWorkspaceIdController.Response> {
-    const userId = httpRequest.userId!;
-    const { workspaceId, pageId } = httpRequest.params!;
+    const { userId, workspaceId, pageId } = httpRequest.params!;
 
     const workspaces = await this.getWorkspacesByUserId.execute(userId);
 
@@ -43,13 +42,12 @@ export class AddPageIdToFavoritesByWorkspaceIdController extends BaseController 
       return forbidden(new PermissionError());
     }
 
-    const addPageIdToFavorites =
-      await this.addPageIdToFavoritesByWorkspaceId.execute({
-        userId,
-        workspaceId,
-        pageId,
-      });
+    await this.addPageIdToFavoritesByWorkspaceId.execute({
+      userId,
+      workspaceId,
+      pageId,
+    });
 
-    return ok(addPageIdToFavorites);
+    return noContent();
   }
 }

@@ -21,7 +21,9 @@ const makeSut = (): SutTypes => {
 const makeFakeHttpRequest = (): HttpRequest => {
   const { id } = mockUser();
   return {
-    userId: id,
+    params: {
+      userId: id,
+    },
   };
 };
 
@@ -34,7 +36,7 @@ describe('GetUserByIdController', () => {
     const httpRequest = makeFakeHttpRequest();
     await sut.handle(httpRequest);
 
-    expect(getUserByIdSpy).toHaveBeenCalledWith(httpRequest.userId);
+    expect(getUserByIdSpy).toHaveBeenCalledWith(httpRequest.params.userId);
   });
 
   it('should return 200 on success', async () => {

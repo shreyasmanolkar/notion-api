@@ -32,8 +32,8 @@ const makeSut = (): SutTypes => {
 const makeFakeHttpRequest = (): HttpRequest => {
   const { id } = mockUser();
   return {
-    userId: id,
     params: {
+      userId: id,
       workspaceId: 'sample-workspace-id-2',
     },
   };
@@ -54,7 +54,6 @@ describe('AddWorkspaceByUserIdController', () => {
 
     expect(addWorkspaceByUserIdSpy).toHaveBeenCalledWith({
       ...httpRequest.params,
-      userId: httpRequest.userId,
     });
   });
 
@@ -70,11 +69,11 @@ describe('AddWorkspaceByUserIdController', () => {
     expect(httpResponse).toEqual(notFound(new UserNotFoundError()));
   });
 
-  it('should return 200 on success', async () => {
+  it('should return 204 on success', async () => {
     const { sut } = makeSut();
     const httpRequest = makeFakeHttpRequest();
     const httpResponse = await sut.handle(httpRequest);
 
-    expect(httpResponse.statusCode).toBe(200);
+    expect(httpResponse.statusCode).toBe(204);
   });
 });

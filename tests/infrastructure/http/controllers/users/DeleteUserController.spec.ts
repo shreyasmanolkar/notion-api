@@ -21,7 +21,9 @@ const makeSut = (): SutTypes => {
 const makeFakeHttpRequest = (): HttpRequest => {
   const { id } = mockUser();
   return {
-    userId: id,
+    params: {
+      userId: id,
+    },
   };
 };
 
@@ -33,7 +35,7 @@ describe('DeleteUserController', () => {
     const httpRequest = makeFakeHttpRequest();
     await sut.handle(httpRequest);
 
-    expect(deleteUserSpy).toHaveBeenCalledWith(httpRequest.userId);
+    expect(deleteUserSpy).toHaveBeenCalledWith(httpRequest.params.userId);
   });
 
   it('should return 204 on success', async () => {

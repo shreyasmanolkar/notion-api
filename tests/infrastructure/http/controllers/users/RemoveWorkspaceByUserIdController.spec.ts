@@ -32,8 +32,8 @@ const makeSut = (): SutTypes => {
 const makeFakeHttpRequest = (): HttpRequest => {
   const { id } = mockUser();
   return {
-    userId: id,
     params: {
+      userId: id,
       workspaceId: 'sample-workspace-id',
     },
   };
@@ -54,17 +54,14 @@ describe('RemoveWorkspaceByUserIdController', () => {
 
     expect(addWorkspaceByUserIdSpy).toHaveBeenCalledWith({
       ...httpRequest.params,
-      userId: httpRequest.userId,
     });
   });
 
   it('should return 403 if workspace is not verified', async () => {
     const { sut } = makeSut();
-    const { id } = mockUser();
     const httpRequest = makeFakeHttpRequest();
     const httpResponse = await sut.handle({
       params: { ...httpRequest.params, workspaceId: 'other_workspace_id' },
-      userId: id,
     });
 
     expect(httpResponse).toEqual(forbidden(new PermissionError()));

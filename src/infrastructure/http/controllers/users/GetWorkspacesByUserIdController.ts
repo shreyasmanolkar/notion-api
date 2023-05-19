@@ -20,7 +20,6 @@ export class GetWorkspacesByUserIdController extends BaseController {
     httpRequest: GetWorkspacesByUserIdController.Request
   ): Promise<GetWorkspacesByUserIdController.Response> {
     const { userId } = await httpRequest.params!;
-
     const response = await this.getWorkspacesByUserId.execute(userId);
     return ok(response);
   }

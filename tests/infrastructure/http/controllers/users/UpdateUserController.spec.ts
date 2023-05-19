@@ -36,7 +36,9 @@ const makeSut = (): SutTypes => {
 const makeFakeHttpRequest = (): HttpRequest => {
   const { name, email, password, isDarkMode, id } = mockUser();
   return {
-    userId: id,
+    params: {
+      userId: id,
+    },
     body: {
       name,
       email,
@@ -54,7 +56,7 @@ describe('UpdateUserController', () => {
     await sut.handle(httpRequest);
 
     expect(updateUserSpy).toHaveBeenCalledWith({
-      userId: httpRequest.userId,
+      userId: httpRequest.params.userId,
       userData: httpRequest.body,
     });
   });

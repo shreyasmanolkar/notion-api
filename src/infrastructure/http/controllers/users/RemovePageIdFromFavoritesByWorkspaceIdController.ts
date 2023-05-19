@@ -9,7 +9,7 @@ import { forbidden, noContent } from '@infrastructure/http/helpers/http';
 export namespace RemovePageIdFromFavoritesByWorkspaceIdController {
   export type Request = HttpRequest<
     undefined,
-    { workspaceId: string; pageId: string }
+    { userId: string; workspaceId: string; pageId: string }
   >;
   export type Response = HttpResponse<undefined | PermissionError>;
 }
@@ -25,8 +25,7 @@ export class RemovePageIdFromFavoritesByWorkspaceIdController extends BaseContro
   async execute(
     httpRequest: RemovePageIdFromFavoritesByWorkspaceIdController.Request
   ): Promise<RemovePageIdFromFavoritesByWorkspaceIdController.Response> {
-    const userId = httpRequest.userId!;
-    const { workspaceId, pageId } = httpRequest.params!;
+    const { userId, workspaceId, pageId } = httpRequest.params!;
 
     const workspaces = await this.getWorkspacesByUserId.execute(userId);
 

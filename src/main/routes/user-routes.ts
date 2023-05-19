@@ -26,32 +26,45 @@ export default (router: Router): void => {
     expressRouteAdapter(makeGetFavoritesByWorkspaceIdController())
   );
   router.get(
-    '/users/:id',
+    '/users/:userId',
     authMiddleware,
     expressRouteAdapter(makeGetUserByIdController())
   );
   router.post('/login', expressRouteAdapter(makeSignInController()));
   router.post('/register', expressRouteAdapter(makeSignUpController()));
   router.post(
-    '/users/:id/workspaces/:workspaceId',
+    '/users/:userId/workspaces-access/:workspaceId',
+    authMiddleware,
     expressRouteAdapter(makeAddWorkspaceByUserIdController())
   );
   router.post(
-    '/users/:id/workspaces/:workspaceId/favorites/:pageId',
+    '/users/:userId/workspaces-access/:workspaceId/favorites/:pageId',
+    authMiddleware,
     expressRouteAdapter(makeAddPageIdToFavoritesByWorkspaceIdController())
   );
-  router.patch('/users/:id', expressRouteAdapter(makeUpdateUserController()));
   router.patch(
-    '/users/:id/profile-picture',
+    '/users/:userId',
+    authMiddleware,
+    expressRouteAdapter(makeUpdateUserController())
+  );
+  router.patch(
+    '/users/:userId/profile-picture',
+    authMiddleware,
     expressRouteAdapter(makeUpdateUserProfilePictureController())
   );
   router.delete(
-    '/users/:id/workspaces/:workspaceId',
+    '/users/:userId/workspaces-access/:workspaceId',
+    authMiddleware,
     expressRouteAdapter(makeRemoveWorkspaceByUserIdController())
   );
   router.delete(
-    '/users/:id/workspaces/:workspaceId/favorites/:pageId',
+    '/users/:userId/workspaces-access/:workspaceId/favorites/:pageId',
+    authMiddleware,
     expressRouteAdapter(makeRemovePageIdFromFavoritesByWorkspaceIdController())
   );
-  router.delete('/users/:id', expressRouteAdapter(makeDeleteUserController()));
+  router.delete(
+    '/users/:userId',
+    authMiddleware,
+    expressRouteAdapter(makeDeleteUserController())
+  );
 };

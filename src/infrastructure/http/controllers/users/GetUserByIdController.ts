@@ -5,7 +5,7 @@ import { BaseController } from '@infrastructure/http/controllers/BaseController'
 import { ok } from '@infrastructure/http/helpers/http';
 
 export namespace GetUserByIdController {
-  export type Request = HttpRequest;
+  export type Request = HttpRequest<undefined, { userId: string }>;
   export type Response = HttpResponse<GetUserByIdInterface.Response>;
 }
 
@@ -17,7 +17,7 @@ export class GetUserByIdController extends BaseController {
   async execute(
     httpRequest: GetUserByIdController.Request
   ): Promise<GetUserByIdController.Response> {
-    const userId = httpRequest.userId!;
+    const { userId } = httpRequest.params!;
     const response = await this.getUserById.execute(userId);
     return ok(response);
   }

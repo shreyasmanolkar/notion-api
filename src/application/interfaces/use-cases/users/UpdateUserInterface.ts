@@ -10,6 +10,7 @@ export namespace UpdateUserInterface {
       'id' | 'createdAt' | 'updatedAt' | 'profilePicture' | 'workspaces'
     >
   >;
+
   export type Request = {
     userId: UserIdType;
     userData: UserDataType;

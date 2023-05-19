@@ -37,7 +37,9 @@ const makeFakeHttpRequest = (): HttpRequest => {
   const { profilePicture, id } = mockUser();
   const { url } = profilePicture;
   return {
-    userId: id,
+    params: {
+      userId: id,
+    },
     body: { url },
   };
 };
@@ -53,7 +55,7 @@ describe('UpdateUserProfilePictureConroller', () => {
     await sut.handle(httpRequest);
 
     expect(updateUserProfilePictureSpy).toHaveBeenCalledWith({
-      userId: httpRequest.userId,
+      userId: httpRequest.params.userId,
       url: httpRequest.body.url,
     });
   });

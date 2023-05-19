@@ -8,7 +8,7 @@ import { noContent, notFound } from '@infrastructure/http/helpers/http';
 import { Validation } from '@infrastructure/http/interfaces/Validation';
 
 export namespace UpdateUserProfilePictureController {
-  export type Request = HttpRequest<{ url: string }>;
+  export type Request = HttpRequest<{ url: string }, { userId: string }>;
   export type Response = HttpResponse<undefined | UserNotFoundError>;
 }
 
@@ -24,7 +24,7 @@ export class UpdateUserProfilePictureController extends BaseController {
   async execute(
     httpRequest: UpdateUserProfilePictureController.Request
   ): Promise<UpdateUserProfilePictureController.Response> {
-    const userId = httpRequest.userId!;
+    const { userId } = httpRequest.params!;
     const { url } = httpRequest.body!;
 
     const userOrError = await this.getUserById.execute(userId);

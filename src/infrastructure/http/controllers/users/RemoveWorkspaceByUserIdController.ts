@@ -7,7 +7,10 @@ import { GetWorkspacesByUserIdInterface } from '@application/interfaces/use-case
 import { forbidden, noContent } from '@infrastructure/http/helpers/http';
 
 export namespace RemoveWorkspaceByUserIdController {
-  export type Request = HttpRequest<undefined, { workspaceId: string }>;
+  export type Request = HttpRequest<
+    undefined,
+    { userId: string; workspaceId: string }
+  >;
   export type Response = HttpResponse<undefined | PermissionError>;
 }
 
@@ -22,8 +25,7 @@ export class RemoveWorkspaceByUserIdController extends BaseController {
   async execute(
     httpRequest: RemoveWorkspaceByUserIdController.Request
   ): Promise<RemoveWorkspaceByUserIdController.Response> {
-    const userId = httpRequest.userId!;
-    const { workspaceId } = httpRequest.params!;
+    const { userId, workspaceId } = httpRequest.params!;
 
     const workspaces = await this.getWorkspacesByUserId.execute(userId);
 

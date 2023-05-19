@@ -8,7 +8,10 @@ import { GetUserByIdInterface } from '@application/interfaces/use-cases/users/Ge
 import { notFound, ok } from '@infrastructure/http/helpers/http';
 
 export namespace UpdateUserController {
-  export type Request = HttpRequest<UpdateUserInterface.UserDataType>;
+  export type Request = HttpRequest<
+    UpdateUserInterface.UserDataType,
+    { userId: string }
+  >;
   export type Response = HttpResponse<
     UpdateUserInterface.Response | UserNotFoundError
   >;
@@ -26,8 +29,8 @@ export class UpdateUserController extends BaseController {
   async execute(
     httpRequest: UpdateUserController.Request
   ): Promise<UpdateUserController.Response> {
-    const userId = httpRequest.userId!;
-    const { name, email, password, isDarkMode } = httpRequest.body!;
+    const { userId } = httpRequest.params!;
+    const userData = httpRequest.body!;
 
     const userOrError = await this.getUserById.execute(userId);
 
@@ -37,7 +40,7 @@ export class UpdateUserController extends BaseController {
 
     const updateUserOrError = await this.updateUser.execute({
       userId,
-      userData: { name, email, password, isDarkMode },
+      userData,
     });
 
     if (updateUserOrError instanceof UserNotFoundError) {
