@@ -10,7 +10,7 @@ import { forbidden, ok, unauthorized } from '@infrastructure/http/helpers/http';
 export namespace SignUpController {
   export type Request = HttpRequest<SignUpInterface.Request>;
   export type Response = HttpResponse<
-    { authenticationToken: string } | EmailInUseError
+    { accessToken: string } | EmailInUseError
   >;
 }
 
@@ -50,17 +50,26 @@ export class SignUpController extends BaseController {
       return forbidden(idOrError);
     }
 
-    const authenticationTokenOrError = await this.signIn.execute({
+    const authenticationTokensOrError = await this.signIn.execute({
       email,
       password,
     });
 
-    if (authenticationTokenOrError instanceof Error) {
-      return unauthorized(authenticationTokenOrError);
+    if (authenticationTokensOrError instanceof Error) {
+      return unauthorized(authenticationTokensOrError);
     }
 
-    return ok({
-      authenticationToken: authenticationTokenOrError,
-    });
+    const { accessToken, refreshToken } = authenticationTokensOrError;
+
+    const refreshCookie = {
+      token: refreshToken,
+    };
+
+    return ok(
+      {
+        accessToken,
+      },
+      refreshCookie
+    );
   }
 }

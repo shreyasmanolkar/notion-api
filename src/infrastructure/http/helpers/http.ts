@@ -2,10 +2,16 @@
 import { HttpResponse } from '@infrastructure/http/interfaces/HttpResponse';
 import { ServerError } from '@infrastructure/http/errors/ServerError';
 
-export const ok = <T = any>(body: T): HttpResponse<T> => ({
-  statusCode: 200,
-  body,
-});
+export const ok = <T = any>(
+  body: T,
+  headers?: { token: string }
+): HttpResponse<T> => {
+  return {
+    statusCode: 200,
+    body,
+    headers,
+  };
+};
 
 export const noContent = (): HttpResponse => ({
   statusCode: 204,

@@ -9,7 +9,7 @@ import { ok, unauthorized } from '@infrastructure/http/helpers/http';
 export namespace SignInController {
   export type Request = HttpRequest<SignInInterface.Request>;
   export type Response = HttpResponse<
-    { authenticationToken: string } | UnauthorizedError
+    { accessToken: string } | UnauthorizedError
   >;
 }
 
@@ -25,17 +25,26 @@ export class SignInController extends BaseController {
     httpRequest: SignInController.Request
   ): Promise<SignInController.Response> {
     const { email, password } = httpRequest.body!;
-    const authenticationTokenOrError = await this.signIn.execute({
+    const authenticationTokensOrError = await this.signIn.execute({
       email,
       password,
     });
 
-    if (authenticationTokenOrError instanceof UnauthorizedError) {
-      return unauthorized(authenticationTokenOrError);
+    if (authenticationTokensOrError instanceof UnauthorizedError) {
+      return unauthorized(authenticationTokensOrError);
     }
 
-    return ok({
-      authenticationToken: authenticationTokenOrError,
-    });
+    const { accessToken, refreshToken } = authenticationTokensOrError;
+
+    const refreshCookie = {
+      token: refreshToken,
+    };
+
+    return ok(
+      {
+        accessToken,
+      },
+      refreshCookie
+    );
   }
 }
