@@ -1,14 +1,16 @@
 export type PageType = {
+  id: string;
   reference: string;
-  path: string;
-  children: Record<string, PageType> | object;
+  path: string | null;
+  icon: string;
 };
+
 export type WorkspaceProps = {
   id: string;
   name: string;
   icon: string;
   members: string[];
-  page: PageType[];
+  pages: PageType[];
   createdAt: Date;
   updatedAt?: Date;
 };
@@ -22,7 +24,7 @@ export class Workspace {
 
   public readonly members: string[];
 
-  public readonly page: PageType[];
+  public readonly pages: PageType[];
 
   public readonly createdAt: Date;
 
@@ -33,7 +35,7 @@ export class Workspace {
     this.name = props.name;
     this.icon = props.icon;
     this.members = props.members;
-    this.page = props.page;
+    this.pages = props.pages;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
   }

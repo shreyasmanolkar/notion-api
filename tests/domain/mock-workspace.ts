@@ -6,16 +6,24 @@ const mockWorkspace = (): Workspace => {
     name: 'sample-workspace-name',
     icon: 'sample-icon-url',
     members: ['112233445566778899aabbcc'],
-    page: [
+    pages: [
       {
+        id: 'sample-page-id-1',
         reference: 'sample-page-123',
-        path: '/sample-page-123',
-        children: {
-          'sample-page-456': {
-            path: '/sample-page-123/sample-page-456',
-            children: {},
-          },
-        },
+        path: null,
+        icon: '1F3F9',
+      },
+      {
+        id: 'sample-page-id-2',
+        reference: 'sample-page-456',
+        path: ',sample-page-123,',
+        icon: '1F3F9',
+      },
+      {
+        id: 'sample-page-id-3',
+        reference: 'sample-page-789',
+        path: ',sample-page-123,sample-page-456,',
+        icon: '1F3F9',
       },
     ],
     createdAt: new Date(),
