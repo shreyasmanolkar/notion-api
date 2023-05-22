@@ -1,4 +1,5 @@
 import { Express, Router } from 'express';
+import userRoutes from '@main/routes/user-routes';
 
 export default (app: Express): void => {
   const router = Router();
@@ -6,5 +7,6 @@ export default (app: Express): void => {
     res.status(200).json({ message: 'ok' });
   });
 
-  app.use(router);
+  app.use('/v1', router);
+  userRoutes(router);
 };
