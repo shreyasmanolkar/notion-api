@@ -1,0 +1,583 @@
+{
+	"info": {
+		"_postman_id": "1895a06a-fd28-4899-844d-9c70f0e569d2",
+		"name": "NotionAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20114396"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Workspace Access",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Favorites By WorkspaceId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId/favorites",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId",
+								"favorites"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "1684520270462"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add workspace To User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId",
+								""
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "new-workspace-id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add PageId To  Favorites",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId/favorites/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId",
+								"favorites",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "new-workspace-id"
+								},
+								{
+									"key": "pageId",
+									"value": "new-page-id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile Picture",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"updated-profile-picture\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/profile-picture",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"profile-picture"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"v2-updated-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Workspace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "new-workspace-id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove PageId From  Favorites",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId/favorites/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId",
+								"favorites",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "new-workspace-id"
+								},
+								{
+									"key": "pageId",
+									"value": "new-page-id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"user-name\",\n    \"email\": \"user@email.com\",\n    \"password\": \"sample-password\",\n    \"isDarkMode\": true,\n    \"profilePicture\": {\n        \"url\": \"sample-url\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/register",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set('accessToken', jsonData.accessToken);",
+									"",
+									"let [jwtHeader, jwtPayload, jwtSignature] = jsonData.accessToken.split('.');",
+									"",
+									"let decodedPayload = JSON.parse(atob(jwtPayload));",
+									"",
+									"pm.collectionVariables.set('authenticatedUserId', decodedPayload.userId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@email.com\",\n    \"password\": \"sample-password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/login",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/logout",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set('accessToken', jsonData.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/token",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sample Workspace",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/workspace",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"workspace"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "version",
+			"value": "v1",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "a",
+			"type": "string"
+		},
+		{
+			"key": "protocol",
+			"value": "http",
+			"type": "string"
+		},
+		{
+			"key": "host",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "3000",
+			"type": "string"
+		},
+		{
+			"key": "authenticatedUserId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
