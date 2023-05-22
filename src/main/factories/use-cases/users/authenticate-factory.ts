@@ -4,6 +4,9 @@ import { JWTAdapter } from '@infrastructure/cryptography/JWTAdapter';
 import env from '@main/config/env';
 
 export const makeAuthenticate = (): AuthenticateInterface => {
-  const jwtAdapter = new JWTAdapter(env.jwtSecret);
+  const jwtAdapter = new JWTAdapter(
+    env.accessTokenSecret,
+    env.refreshTokenSecret
+  );
   return new Authenticate(jwtAdapter);
 };

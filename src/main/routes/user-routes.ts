@@ -13,6 +13,10 @@ import { makeUpdateUserProfilePictureController } from '@main/factories/controll
 import { makeGetUserByIdController } from '@main/factories/controllers/users/get-user-by-id/controller-factory';
 import { makeDeleteUserController } from '@main/factories/controllers/users/delete-user/controller-factory';
 import { authMiddleware } from '@main/middlewares/auth-middleware';
+import { makeSignOutController } from '@main/factories/controllers/users/sign-out/controller-factory';
+import { makeGetAccessTokenController } from '@main/factories/controllers/users/get-access-token/controller-factory';
+import { expressRouteSetCookieAdapter } from '@main/adapters/express-route-set-cookie-adapter';
+import { expressRouteRemoveCookieAdapter } from '@main/adapters/express-route-remove-cookie-adapter';
 
 export default (router: Router): void => {
   router.get(
@@ -30,7 +34,13 @@ export default (router: Router): void => {
     authMiddleware,
     expressRouteAdapter(makeGetUserByIdController())
   );
-  router.post('/login', expressRouteAdapter(makeSignInController()));
+  router.get('/token', expressRouteAdapter(makeGetAccessTokenController()));
+  router.post('/login', expressRouteSetCookieAdapter(makeSignInController()));
+  router.post(
+    '/logout',
+    authMiddleware,
+    expressRouteRemoveCookieAdapter(makeSignOutController())
+  );
   router.post('/register', expressRouteAdapter(makeSignUpController()));
   router.post(
     '/users/:userId/workspaces-access/:workspaceId',
