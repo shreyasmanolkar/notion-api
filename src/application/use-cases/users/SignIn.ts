@@ -1,12 +1,14 @@
 import { UnauthorizedError } from '@application/errors/UnauthorizedError';
 import { HashComparer } from '@application/interfaces/cryptography/HashCompare';
 import { JWTGenerator } from '@application/interfaces/cryptography/JWTGenerator';
+import { CreateTokenRepository } from '@application/interfaces/repositories/tokens/createTokenRepository';
 import { LoadUserByEmailRepository } from '@application/interfaces/repositories/users/loadUserByEmailRepository';
 import { SignInInterface } from '@application/interfaces/use-cases/users/SignInInterface';
 
 export class SignIn implements SignInInterface {
   constructor(
     private readonly loadUserByEmailRepository: LoadUserByEmailRepository,
+    private readonly createTokenRepository: CreateTokenRepository,
     private readonly hashComparer: HashComparer,
     private readonly jwtGenerator: JWTGenerator
   ) {}
@@ -30,6 +32,14 @@ export class SignIn implements SignInInterface {
       return new UnauthorizedError();
     }
 
-    return this.jwtGenerator.generate(user.id);
+    const accessToken = await this.jwtGenerator.generateAccessToken(user.id);
+    const refreshToken = await this.jwtGenerator.generateRefreshToken(user.id);
+
+    await this.createTokenRepository.createToken(refreshToken);
+
+    return {
+      accessToken,
+      refreshToken,
+    };
   }
 }

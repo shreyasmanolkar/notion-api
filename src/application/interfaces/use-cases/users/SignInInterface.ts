@@ -3,7 +3,9 @@ import { UseCase } from '@application/interfaces/use-cases/UseCase';
 
 export namespace SignInInterface {
   export type Request = { email: string; password: string };
-  export type Response = string | UnauthorizedError;
+  export type Response =
+    | { accessToken: string; refreshToken: string }
+    | UnauthorizedError;
 }
 
 export interface SignInInterface

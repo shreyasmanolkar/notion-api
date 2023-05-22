@@ -1,3 +1,4 @@
 export interface JWTGenerator {
-  generate(payload: string): Promise<string>;
+  generateAccessToken(payload: string): Promise<string>;
+  generateRefreshToken(payload: string): Promise<string>;
 }
