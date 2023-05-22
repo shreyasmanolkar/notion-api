@@ -1,6 +1,7 @@
 import { UnauthorizedError } from '@application/errors/UnauthorizedError';
 import { SignIn } from '@application/use-cases/users/SignIn';
 import mockUser from '@tests/domain/mock-user';
+import { CreateTokenRepositoryStub } from '@tests/infrastructure/mocks/tokens/repositories';
 import {
   HashCompareStub,
   JWTGeneratorStub,
@@ -10,16 +11,19 @@ import { LoadUserByEmailRepositoryStub } from '@tests/infrastructure/mocks/users
 type SutTypes = {
   sut: SignIn;
   loadUserByEmailRepositoryStub: LoadUserByEmailRepositoryStub;
+  createTokenRepositoryStub: CreateTokenRepositoryStub;
   hashComparerStub: HashCompareStub;
   jwtGeneratorStub: JWTGeneratorStub;
 };
 
 const makesSut = (): SutTypes => {
   const loadUserByEmailRepositoryStub = new LoadUserByEmailRepositoryStub();
+  const createTokenRepositoryStub = new CreateTokenRepositoryStub();
   const hashComparerStub = new HashCompareStub();
   const jwtGeneratorStub = new JWTGeneratorStub();
   const sut = new SignIn(
     loadUserByEmailRepositoryStub,
+    createTokenRepositoryStub,
     hashComparerStub,
     jwtGeneratorStub
   );
@@ -27,6 +31,7 @@ const makesSut = (): SutTypes => {
   return {
     sut,
     loadUserByEmailRepositoryStub,
+    createTokenRepositoryStub,
     hashComparerStub,
     jwtGeneratorStub,
   };
@@ -71,12 +76,30 @@ describe('SignIn', () => {
     expect(response).toEqual(new UnauthorizedError());
   });
 
+  it('should call createTokenRepository with correct data', async () => {
+    const { sut, createTokenRepositoryStub } = makesSut();
+
+    const createTokenRepositorySpy = jest.spyOn(
+      createTokenRepositoryStub,
+      'createToken'
+    );
+    const { email, password } = mockUser();
+    await sut.execute({ email, password });
+
+    expect(createTokenRepositorySpy).toHaveBeenCalledWith(
+      'sample-refresh-token'
+    );
+  });
+
   it('should return jwt token on success', async () => {
     const { sut } = makesSut();
 
     const { email, password } = mockUser();
     const response = await sut.execute({ email, password });
 
-    expect(response).toBe('sample-jwt-token');
+    expect(response).toStrictEqual({
+      accessToken: 'sample-access-token',
+      refreshToken: 'sample-refresh-token',
+    });
   });
 });

@@ -6,12 +6,14 @@ import { AddPageIdToFavoritesByWorkspaceIdInterface } from '@application/interfa
 import { AddWorkspaceByUserIdInterface } from '@application/interfaces/use-cases/users/AddWorkspaceByUserIdInterface';
 import { AuthenticateInterface } from '@application/interfaces/use-cases/users/AuthenticateInterface';
 import { DeleteUserInterface } from '@application/interfaces/use-cases/users/DeleteUserInterface';
+import { GetAccessTokenInterface } from '@application/interfaces/use-cases/users/GetAccessTokenInterface';
 import { GetFavoritesByWorkspaceIdInterface } from '@application/interfaces/use-cases/users/GetFavoritesByWorkspaceIdInterface';
 import { GetUserByIdInterface } from '@application/interfaces/use-cases/users/GetUserByIdInterface';
 import { GetWorkspacesByUserIdInterface } from '@application/interfaces/use-cases/users/GetWorkspacesByUserIdInterface';
 import { RemovePageIdFromFavoritesByWorkspaceIdInterface } from '@application/interfaces/use-cases/users/RemovePageIdFromFavoritesByWorkspaceIdInterface';
 import { RemoveWorkspaceByUserIdInterface } from '@application/interfaces/use-cases/users/RemoveWorkspaceByUserIdInterface';
 import { SignInInterface } from '@application/interfaces/use-cases/users/SignInInterface';
+import { SignOutInterface } from '@application/interfaces/use-cases/users/SignOutInterface';
 import { SignUpInterface } from '@application/interfaces/use-cases/users/SignUpInterface';
 import { UpdateUserInterface } from '@application/interfaces/use-cases/users/UpdateUserInterface';
 import { UpdateUserProfilePictureInterface } from '@application/interfaces/use-cases/users/UpdateUserProfilePictureInterface';
@@ -29,7 +31,10 @@ export class SignInStub implements SignInInterface {
   async execute(
     _credentials: SignInInterface.Request
   ): Promise<SignInInterface.Response> {
-    return 'sample-jwt-token';
+    return {
+      accessToken: 'sample-access-token',
+      refreshToken: 'sample-refresh-token',
+    };
   }
 }
 
@@ -39,6 +44,22 @@ export class SignUpStub implements SignUpInterface {
   ): Promise<SignUpInterface.Response> {
     const { id } = mockUser();
     return id;
+  }
+}
+
+export class SignOutStub implements SignOutInterface {
+  async execute(
+    _token: SignOutInterface.Request
+  ): Promise<SignOutInterface.Response> {}
+}
+
+export class GetAccessTokenStub implements GetAccessTokenInterface {
+  async execute(
+    _token: GetAccessTokenInterface.Request
+  ): Promise<GetAccessTokenInterface.Response> {
+    return {
+      accessToken: 'sample-access-token',
+    };
   }
 }
 

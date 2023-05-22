@@ -18,13 +18,21 @@ export class HashGeneratorStub implements HashGenerator {
 }
 
 export class JWTGeneratorStub implements JWTGenerator {
-  async generate(_payload: string): Promise<string> {
-    return 'sample-jwt-token';
+  async generateAccessToken(_payload: string): Promise<string> {
+    return 'sample-access-token';
+  }
+
+  async generateRefreshToken(_payload: string): Promise<string> {
+    return 'sample-refresh-token';
   }
 }
 
 export class JWTVerifierStub implements JWTVerifier {
-  async verify(_jwt: string): Promise<string | null> {
+  async verifyAccessToken(_jwt: string): Promise<string | null> {
+    return 'sample-user';
+  }
+
+  async verifyRefreshToken(_jwt: string): Promise<string | null> {
     return 'sample-user';
   }
 }

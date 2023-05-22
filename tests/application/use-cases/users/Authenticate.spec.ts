@@ -20,7 +20,7 @@ const makesSut = (): SutTypes => {
 describe('Authenticate', () => {
   it('should call Authenticate with correct data', async () => {
     const { sut, jwtVerifierStub } = makesSut();
-    const jwtVerifierSpy = jest.spyOn(jwtVerifierStub, 'verify');
+    const jwtVerifierSpy = jest.spyOn(jwtVerifierStub, 'verifyAccessToken');
     const authToken = 'sample-auth-token';
     await sut.execute(authToken);
 

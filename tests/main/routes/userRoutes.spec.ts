@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import dbConnection from '@infrastructure/db/mongodb/helpers/db-connection';
 import { UserRepository } from '@infrastructure/db/mongodb/repositories/UserRepository';
 import setupApp from '@main/config/app';
@@ -5,10 +6,12 @@ import env from '@main/config/env';
 import { Collection } from 'mongodb';
 import request from 'supertest';
 import bcrypt from 'bcrypt';
+import { TokenRepository } from '@infrastructure/db/mongodb/repositories/TokenRepository';
 
 describe('user routes', () => {
   const app = setupApp();
   let userCollection: Collection;
+  let tokenCollection: Collection;
 
   beforeAll(async () => {
     await dbConnection.connect(env.mongoUrl);
@@ -21,9 +24,15 @@ describe('user routes', () => {
   beforeEach(async () => {
     userCollection = await UserRepository.getCollection();
     await userCollection.deleteMany({});
+
+    tokenCollection = await TokenRepository.getCollection();
+    await tokenCollection.deleteMany({});
   });
 
-  const getToken = async (): Promise<string> => {
+  const getTokens = async (): Promise<{
+    accessToken: string;
+    refreshToken: string;
+  }> => {
     const hashedPassword = await bcrypt.hash('any-password', env.bcryptSalt);
     await userCollection.insertOne({
       name: 'any-name',
@@ -50,9 +59,25 @@ describe('user routes', () => {
       password: 'any-password',
     });
 
-    const token = response.body.authenticationToken;
+    const cookiesArray = response.headers['set-cookie'];
+    const cookies: { [key: string]: string } = {};
 
-    return token;
+    cookiesArray.forEach((cookieString: string) => {
+      const cookieParts = cookieString.split(';');
+      const [cookieName, cookieValue] = cookieParts[0].trim().split('=');
+      cookies[cookieName] = cookieValue;
+    });
+
+    const { token_v1 } = cookies;
+
+    const { accessToken } = response.body;
+
+    const tokens = {
+      accessToken,
+      refreshToken: token_v1,
+    };
+
+    return tokens;
   };
 
   describe('POST /register', () => {
@@ -153,16 +178,77 @@ describe('user routes', () => {
     });
   });
 
+  describe('POST /logout', () => {
+    it('should return 200 on sign out success', async () => {
+      const tokens = await getTokens();
+      const { refreshToken } = tokens;
+      const { accessToken } = tokens;
+
+      const hashedPassword = await bcrypt.hash('any-password', env.bcryptSalt);
+      await userCollection.insertOne({
+        name: 'any-name',
+        email: 'any@email.com',
+        password: hashedPassword,
+        isDarkMode: true,
+        profilePicture: {
+          url: 'any-url',
+        },
+        workspaces: [
+          {
+            workspaceId: 'any-workspaceId',
+            favorites: ['any-page-1'],
+          },
+        ],
+      });
+
+      await request(app)
+        .post('/v1/logout')
+        .set('Cookie', `token_v1=${refreshToken}`)
+        .set('Authorization', `Bearer ${accessToken}`)
+        .expect(200);
+    });
+  });
+
+  describe('GET /token', () => {
+    it('should return 401 if cookie is not found', async () => {
+      await request(app).get('/v1/token').expect(401);
+    });
+
+    it('should return 401 if token is not found', async () => {
+      await request(app)
+        .get('/v1/token')
+        .set('Cookie', `token_v1=sample.refresh.token`)
+        .expect(401);
+    });
+
+    it('should return 200 on success', async () => {
+      const tokens = await getTokens();
+      const { refreshToken } = tokens;
+
+      await tokenCollection.insertOne({
+        token: refreshToken,
+      });
+
+      await request(app)
+        .get('/v1/token')
+        .set('Cookie', `token_v1=${refreshToken}`)
+        .expect(200);
+    });
+  });
+
   describe('GET /users/:userId/workspaces-access', () => {
     it('should return 200 on success and list of workspaces', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
 
       const response = await request(app)
         .get(`/v1/users/${userId}/workspaces-access`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(200);
 
       const workspaces = response.body;
@@ -174,17 +260,19 @@ describe('user routes', () => {
 
   describe('GET /users/:userId/workspaces-access/:workspaceId/favorites', () => {
     it('should return 200 on success and list of favorites pageId', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
 
-      const userId = atob(jwtPayload);
+      const { userId } = decodedPayload;
 
       const workspaceId = 'another-workspaceId';
 
       const response = await request(app)
         .get(`/v1/users/${userId}/workspaces-access/${workspaceId}/favorites`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(200);
 
       const favorites = response.body;
@@ -194,30 +282,36 @@ describe('user routes', () => {
     });
 
     it('should return 403 if workspaceId is not in workspace access', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
 
       const workspaceId = 'error-workspaceId';
 
       await request(app)
         .get(`/v1/users/${userId}/workspaces-access/${workspaceId}/favorites`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(403);
     });
   });
 
   describe('GET /users/:userId', () => {
     it('should return 200 on success and user', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
 
       await request(app)
         .get(`/v1/users/${userId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect('Content-Type', /json/)
         .expect(200);
     });
@@ -225,39 +319,44 @@ describe('user routes', () => {
 
   describe('POST /users/:userId/workspaces-access/:workspaceId', () => {
     it('should return 204 on success and add workspaceId and favorites', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
 
+      const { userId } = decodedPayload;
       const workspaceId = 'new-workspaceId';
 
       await request(app)
         .post(`/v1/users/${userId}/workspaces-access/${workspaceId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(204);
     });
 
     it('should return 404 if user is not found', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
 
       const userId = 'no-user';
       const workspaceId = 'new-workspaceId';
 
       await request(app)
         .post(`/v1/users/${userId}/workspaces-access/${workspaceId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(404);
     });
   });
 
   describe('POST /users/:userId/workspaces-access/:workspaceId/favorites/:pageId', () => {
     it('should return 204 on success and add pageId to favorites', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
 
+      const { userId } = decodedPayload;
       const workspaceId = 'any-workspaceId';
       const pageId = 'sample-new-page';
 
@@ -265,16 +364,18 @@ describe('user routes', () => {
         .post(
           `/v1/users/${userId}/workspaces-access/${workspaceId}/favorites/${pageId}`
         )
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(204);
     });
 
     it('should return 403 if workspace is not found', async () => {
-      const token = await getToken();
-
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
 
       const workspaceId = 'non-existing-workspaceId';
       const pageId = 'sample-new-page';
@@ -283,30 +384,34 @@ describe('user routes', () => {
         .post(
           `/v1/users/${userId}/workspaces-access/${workspaceId}/favorites/${pageId}`
         )
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(403);
     });
   });
 
   describe('PATCH /users/:userId', () => {
     it('should return 200 on success and user', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
 
       await request(app)
         .patch(`/v1/users/${userId}`)
         .send({
           name: 'v2-upadated-name',
         })
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect('Content-Type', /json/)
         .expect(200);
     });
 
     it('should return 404 if user is not found', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
 
       const userId = 'no-user';
 
@@ -315,29 +420,32 @@ describe('user routes', () => {
         .send({
           name: 'upadated-name',
         })
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(404);
     });
   });
 
   describe('PATCH /users/:userId/profile-picture', () => {
     it('should return 204 on success', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
 
+      const { userId } = decodedPayload;
       await request(app)
         .patch(`/v1/users/${userId}/profile-picture`)
         .send({
           url: 'updated-sample-url',
         })
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(204);
     });
 
     it('should return 404 if user is not found', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
 
       const userId = 'no-user';
 
@@ -346,46 +454,54 @@ describe('user routes', () => {
         .send({
           url: 'updated-sample-url',
         })
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(404);
     });
   });
 
   describe('DELETE /users/:userId/workspaces-access/:workspaceId', () => {
     it('should return 204 on success', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
       const workspaceId = 'any-workspaceId';
 
       await request(app)
         .delete(`/v1/users/${userId}/workspaces-access/${workspaceId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(204);
     });
 
     it('should return 403 if workspace is not found in users workspaces-access', async () => {
-      const token = await getToken();
-
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
       const workspaceId = 'other-workspace-id';
 
       await request(app)
         .delete(`/v1/users/${userId}/workspaces-access/${workspaceId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(403);
     });
   });
 
   describe('DELETE /users/:userId/workspaces-access/:workspaceId/favorites/:pageId', () => {
     it('should return 204 on success', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
       const workspaceId = 'another-workspaceId';
       const pageId = 'another-page-2';
 
@@ -393,16 +509,18 @@ describe('user routes', () => {
         .delete(
           `/v1/users/${userId}/workspaces-access/${workspaceId}/favorites/${pageId}`
         )
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(204);
     });
 
     it('should return 403 if workspace is not found in users workspaces-access', async () => {
-      const token = await getToken();
-
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
       const workspaceId = 'other-workspace-id';
       const pageId = 'another-page-2';
 
@@ -410,21 +528,24 @@ describe('user routes', () => {
         .delete(
           `/v1/users/${userId}/workspaces-access/${workspaceId}/favorites/${pageId}`
         )
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(403);
     });
   });
 
   describe('DELETE /users/:userId', () => {
     it('should return 204 on success', async () => {
-      const token = await getToken();
+      const tokens = await getTokens();
+      const { accessToken } = tokens;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [jwtHeader, jwtPayload, jwtSignature] = token.split('.');
-      const userId = atob(jwtPayload);
+      const [jwtHeader, jwtPayload, jwtSignature] = accessToken.split('.');
+      const decodedPayload = JSON.parse(atob(jwtPayload));
+
+      const { userId } = decodedPayload;
 
       await request(app)
         .delete(`/v1/users/${userId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .expect(204);
     });
   });

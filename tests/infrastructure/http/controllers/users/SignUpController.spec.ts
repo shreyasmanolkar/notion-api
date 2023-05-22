@@ -89,8 +89,17 @@ describe('SignUpController', () => {
 
     const httpResponse = await sut.handle(makeFakeHttpRequest());
 
+    const refreshCookie = {
+      token: 'sample-refresh-token',
+    };
+
     expect(httpResponse).toEqual(
-      ok({ authenticationToken: 'sample-jwt-token' })
+      ok(
+        {
+          accessToken: 'sample-access-token',
+        },
+        refreshCookie
+      )
     );
   });
 });
