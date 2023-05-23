@@ -1,6 +1,6 @@
 export namespace GetAllMembersByWorkspaceIdRepository {
   export type Request = string;
-  export type Response = string[];
+  export type Response = string[] | null;
 }
 
 export interface GetAllMembersByWorkspaceIdRepository {

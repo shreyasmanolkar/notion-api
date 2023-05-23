@@ -24,7 +24,7 @@ export class AddPage implements AddPageInterface {
 
     const updated = await this.addPageRepository.addPage({
       workspaceId,
-      ...pageData,
+      pageData,
     });
 
     return updated;

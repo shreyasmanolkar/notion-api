@@ -1,12 +1,9 @@
-import { Workspace } from '@domain/entities/Workspace';
+import { PageType, Workspace } from '@domain/entities/Workspace';
 
 export namespace AddPageRepository {
   export type Request = {
     workspaceId: string;
-    id: string;
-    reference: string;
-    path: string | null;
-    icon: string;
+    pageData: PageType;
   };
   export type Response = Workspace;
 }
