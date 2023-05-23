@@ -7,6 +7,6 @@ export namespace GetChildrensByPageIdRepository {
 
 export interface GetChildrensByPageIdRepository {
   getChildrensByPageId(
-    pageId: GetChildrensByPageIdRepository.Request
+    params: GetChildrensByPageIdRepository.Request
   ): Promise<GetChildrensByPageIdRepository.Response>;
 }

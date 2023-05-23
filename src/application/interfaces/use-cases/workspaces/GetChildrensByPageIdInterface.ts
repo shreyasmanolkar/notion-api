@@ -7,7 +7,7 @@ export namespace GetChildrensByPageIdInterface {
     workspaceId: string;
     pageId: string;
   };
-  export type Response = PageType[] | WorkspaceNotFoundError;
+  export type Response = PageType[] | null | WorkspaceNotFoundError;
 }
 
 export interface GetChildrensByPageIdInterface
