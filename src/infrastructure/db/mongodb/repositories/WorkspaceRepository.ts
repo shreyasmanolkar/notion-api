@@ -11,7 +11,7 @@ import { AddMemberByWorkspaceIdRepository } from '@application/interfaces/reposi
 import { AddPageRepository } from '@application/interfaces/repositories/workspaces/addPageRepository';
 import { GetAllMembersByWorkspaceIdRepository } from '@application/interfaces/repositories/workspaces/getAllMembersByWorkspaceIdRepository';
 import { GetAllRootPagesRepository } from '@application/interfaces/repositories/workspaces/getAllRootPagesRepository';
-import { GetChildrensByPageIdRepository } from '@application/interfaces/repositories/workspaces/getChildrensByPageRepsoitory';
+import { GetChildrensByPageReferenceRepository } from '@application/interfaces/repositories/workspaces/getChildrensByPageReferenceRepsoitory';
 import { GetWorkspaceByIdRepository } from '@application/interfaces/repositories/workspaces/getWorkspaceByIdRepository';
 import { UpdateWorkspaceRepository } from '@application/interfaces/repositories/workspaces/updateWorkspaceRepository';
 import { RemoveMemberByWorkspaceIdRepository } from '@application/interfaces/repositories/workspaces/removeMemberByWorkspaceIdRepository';
@@ -25,7 +25,7 @@ export class WorkspaceRepository
     AddPageRepository,
     GetAllMembersByWorkspaceIdRepository,
     GetAllRootPagesRepository,
-    GetChildrensByPageIdRepository,
+    GetChildrensByPageReferenceRepository,
     GetWorkspaceByIdRepository,
     UpdateWorkspaceRepository,
     RemoveMemberByWorkspaceIdRepository,
@@ -104,43 +104,54 @@ export class WorkspaceRepository
     }
 
     const collection = await WorkspaceRepository.getCollection();
-    const rawPages = await collection.findOne(
-      { _id: stringToObjectId(workspaceId), 'pages.path': null },
-      { projection: { pages: 1 } }
-    );
+    const rawPages = await collection
+      .aggregate([
+        {
+          $match: {
+            _id: stringToObjectId(workspaceId),
+            'pages.path': null,
+          },
+        },
+        {
+          $project: {
+            pages: {
+              $filter: {
+                input: '$pages',
+                as: 'page',
+                cond: { $eq: ['$$page.path', null] },
+              },
+            },
+          },
+        },
+      ])
+      .toArray();
 
-    if (rawPages) {
-      return rawPages.pages;
+    if (rawPages[0]) {
+      return rawPages[0].pages;
     }
 
     return null;
   }
 
   async getChildrensByPageId(
-    params: GetChildrensByPageIdRepository.Request
-  ): Promise<GetChildrensByPageIdRepository.Response> {
+    params: GetChildrensByPageReferenceRepository.Request
+  ): Promise<GetChildrensByPageReferenceRepository.Response> {
     const collection = await WorkspaceRepository.getCollection();
-    const { workspaceId, pageId } = params;
-    let pageReference = '';
-    const rawPageReference = await collection.findOne(
-      { _id: stringToObjectId(workspaceId), 'pages.id': pageId },
-      { projection: { pages: 1 } }
-    );
+    const { workspaceId, pageReference } = params;
 
-    if (!rawPageReference) {
-      return null;
-    }
+    const pathQuery = `,${pageReference},`;
 
-    pageReference = rawPageReference.pages[0].reference;
-    const pathQuery = `/,${pageReference},/`;
+    const rawChildrens = await collection
+      .aggregate([
+        { $match: { _id: stringToObjectId(workspaceId) } },
+        { $unwind: '$pages' },
+        { $match: { 'pages.path': { $regex: pathQuery } } },
+        { $group: { _id: '$_id', pages: { $push: '$pages' } } },
+      ])
+      .toArray();
 
-    const rawChildrens = await collection.findOne(
-      { _id: stringToObjectId(workspaceId), 'pages.path': pathQuery },
-      { projection: { pages: 1 } }
-    );
-
-    if (rawChildrens) {
-      return rawChildrens.pages;
+    if (rawChildrens[0]) {
+      return rawChildrens[0].pages;
     }
 
     return null;
@@ -184,7 +195,7 @@ export class WorkspaceRepository
 
     const { value: rawWorkspace } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(workspaceId) },
-      { $pull: { members: { memberId } } } as SetFields<Document>,
+      { $pull: { members: memberId } } as SetFields<Document>,
       { returnDocument: 'after' }
     );
     return mapDocument(rawWorkspace);
@@ -198,7 +209,7 @@ export class WorkspaceRepository
 
     const { value: rawWorkspace } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(workspaceId) },
-      { $pull: { pages: { pageId } } } as SetFields<Document>,
+      { $pull: { pages: { id: pageId } } } as SetFields<Document>,
       { returnDocument: 'after' }
     );
     return mapDocument(rawWorkspace);

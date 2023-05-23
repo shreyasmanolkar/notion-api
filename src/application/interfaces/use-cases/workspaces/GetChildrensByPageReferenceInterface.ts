@@ -2,20 +2,20 @@ import { WorkspaceNotFoundError } from '@application/errors/WorkspaceNotFoundErr
 import { UseCase } from '@application/interfaces/use-cases/UseCase';
 import { PageType } from '@domain/entities/Workspace';
 
-export namespace GetChildrensByPageIdInterface {
+export namespace GetChildrensByPageReferenceInterface {
   export type Request = {
     workspaceId: string;
-    pageId: string;
+    pageReference: string;
   };
   export type Response = PageType[] | null | WorkspaceNotFoundError;
 }
 
-export interface GetChildrensByPageIdInterface
+export interface GetChildrensByPageReferenceInterface
   extends UseCase<
-    GetChildrensByPageIdInterface.Request,
-    GetChildrensByPageIdInterface.Response
+    GetChildrensByPageReferenceInterface.Request,
+    GetChildrensByPageReferenceInterface.Response
   > {
   execute(
-    params: GetChildrensByPageIdInterface.Request
-  ): Promise<GetChildrensByPageIdInterface.Response>;
+    params: GetChildrensByPageReferenceInterface.Request
+  ): Promise<GetChildrensByPageReferenceInterface.Response>;
 }
