@@ -14,7 +14,9 @@ import { RemovePageByPageIdRepository } from '@application/interfaces/repositori
 import { UpdateWorkspaceRepository } from '@application/interfaces/repositories/workspaces/updateWorkspaceRepository';
 import mockWorkspace from '@tests/domain/mock-workspace';
 
-export class CreateWorkspaceStub implements CreateWorkspaceRepository {
+export class CreateWorkspaceRepositoryStub
+  implements CreateWorkspaceRepository
+{
   async createWorkspace(
     _workspaceData: CreateWorkspaceRepository.Request
   ): Promise<CreateWorkspaceRepository.Response> {
@@ -23,7 +25,7 @@ export class CreateWorkspaceStub implements CreateWorkspaceRepository {
   }
 }
 
-export class AddMemberByWorkspaceIdStub
+export class AddMemberByWorkspaceIdRepositoryStub
   implements AddMemberByWorkspaceIdRepository
 {
   async addMemberByWorkspaceId(
@@ -33,7 +35,7 @@ export class AddMemberByWorkspaceIdStub
   }
 }
 
-export class AddPageStub implements AddPageRepository {
+export class AddPageRepositoryStub implements AddPageRepository {
   async addPage(
     _params: AddPageRepository.Request
   ): Promise<AddPageRepository.Response> {
@@ -41,7 +43,7 @@ export class AddPageStub implements AddPageRepository {
   }
 }
 
-export class GetAllMembersByWorkspaceIdStub
+export class GetAllMembersByWorkspaceIdRepositoryStub
   implements GetAllMembersByWorkspaceIdRepository
 {
   async getAllMembersByWorkspaceId(
@@ -51,7 +53,9 @@ export class GetAllMembersByWorkspaceIdStub
   }
 }
 
-export class GetAllRootPagesStub implements GetAllRootPagesRepository {
+export class GetAllRootPagesRepositoryStub
+  implements GetAllRootPagesRepository
+{
   async getAllRootPages(
     _workspaceId: GetAllRootPagesRepository.Request
   ): Promise<GetAllRootPagesRepository.Response> {
@@ -78,7 +82,7 @@ export class GetAllRootPagesStub implements GetAllRootPagesRepository {
   }
 }
 
-export class GetChildrensByPageReferenceStub
+export class GetChildrensByPageReferenceRepositoryStub
   implements GetChildrensByPageReferenceRepository
 {
   async getChildrensByPageId(
@@ -101,7 +105,9 @@ export class GetChildrensByPageReferenceStub
   }
 }
 
-export class GetWorkspaceByIdStub implements GetWorkspaceByIdRepository {
+export class GetWorkspaceByIdRepositoryStub
+  implements GetWorkspaceByIdRepository
+{
   async getWorkspaceById(
     _workspaceId: GetWorkspaceByIdRepository.Request
   ): Promise<GetWorkspaceByIdRepository.Response> {
@@ -109,7 +115,9 @@ export class GetWorkspaceByIdStub implements GetWorkspaceByIdRepository {
   }
 }
 
-export class UpdateWorkspaceStub implements UpdateWorkspaceRepository {
+export class UpdateWorkspaceRepositoryStub
+  implements UpdateWorkspaceRepository
+{
   async updateWorkspace(
     _params: UpdateWorkspaceRepository.Request
   ): Promise<UpdateWorkspaceRepository.Response> {
@@ -117,7 +125,7 @@ export class UpdateWorkspaceStub implements UpdateWorkspaceRepository {
   }
 }
 
-export class RemoveMemberByWorkspaceIdStub
+export class RemoveMemberByWorkspaceIdRepositoryStub
   implements RemoveMemberByWorkspaceIdRepository
 {
   async removeMemberByWorkspaceId(
@@ -127,7 +135,9 @@ export class RemoveMemberByWorkspaceIdStub
   }
 }
 
-export class RemovePageByPageIdStub implements RemovePageByPageIdRepository {
+export class RemovePageByPageIdRepositoryStub
+  implements RemovePageByPageIdRepository
+{
   async removePageByPageId(
     _params: RemovePageByPageIdRepository.Request
   ): Promise<RemovePageByPageIdRepository.Response> {
@@ -135,6 +145,8 @@ export class RemovePageByPageIdStub implements RemovePageByPageIdRepository {
   }
 }
 
-export class DeleteWorkspaceStub implements DeleteWorkspaceRepository {
+export class DeleteWorkspaceRepositoryStub
+  implements DeleteWorkspaceRepository
+{
   async deleteWorkspace(_workspaceId: string): Promise<void> {}
 }

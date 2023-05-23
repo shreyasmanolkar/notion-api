@@ -8,10 +8,8 @@ export class GetWorkspaceById implements GetWorkspaceByIdInterface {
   ) {}
 
   async execute(
-    params: GetWorkspaceByIdInterface.Request
+    workspaceId: GetWorkspaceByIdInterface.Request
   ): Promise<GetWorkspaceByIdInterface.Response> {
-    const { workspaceId } = params;
-
     const workspace = await this.getWorkspaceByIdRepository.getWorkspaceById(
       workspaceId
     );

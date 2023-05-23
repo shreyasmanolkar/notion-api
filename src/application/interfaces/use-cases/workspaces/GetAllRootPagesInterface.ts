@@ -3,10 +3,8 @@ import { UseCase } from '@application/interfaces/use-cases/UseCase';
 import { PageType } from '@domain/entities/Workspace';
 
 export namespace GetAllRootPagesInterface {
-  export type Request = {
-    workspaceId: string;
-  };
-  export type Response = PageType[] | WorkspaceNotFoundError;
+  export type Request = string;
+  export type Response = PageType[] | WorkspaceNotFoundError | null;
 }
 
 export interface GetAllRootPagesInterface

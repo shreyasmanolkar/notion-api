@@ -10,10 +10,8 @@ export class GetAllRootPages implements GetAllRootPagesInterface {
   ) {}
 
   async execute(
-    params: GetAllRootPagesInterface.Request
+    workspaceId: GetAllRootPagesInterface.Request
   ): Promise<GetAllRootPagesInterface.Response> {
-    const { workspaceId } = params;
-
     const workspace = await this.getWorkspaceByIdRepository.getWorkspaceById(
       workspaceId
     );

@@ -3,12 +3,12 @@ import { GetChildrensByPageReferenceRepository } from '@application/interfaces/r
 import { GetWorkspaceByIdRepository } from '@application/interfaces/repositories/workspaces/getWorkspaceByIdRepository';
 import { GetChildrensByPageReferenceInterface } from '@application/interfaces/use-cases/workspaces/GetChildrensByPageReferenceInterface';
 
-export class GetChildrensByPageId
+export class GetChildrensByPageReference
   implements GetChildrensByPageReferenceInterface
 {
   constructor(
     private readonly getWorkspaceByIdRepository: GetWorkspaceByIdRepository,
-    private readonly getChildrensByPageIdRepository: GetChildrensByPageReferenceRepository
+    private readonly getChildrensByPageReferenceRepository: GetChildrensByPageReferenceRepository
   ) {}
 
   async execute(
@@ -24,7 +24,7 @@ export class GetChildrensByPageId
       return new WorkspaceNotFoundError();
     }
 
-    return this.getChildrensByPageIdRepository.getChildrensByPageId({
+    return this.getChildrensByPageReferenceRepository.getChildrensByPageId({
       workspaceId,
       pageReference,
     });

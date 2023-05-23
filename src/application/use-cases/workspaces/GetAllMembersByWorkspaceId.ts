@@ -12,10 +12,8 @@ export class GetAllMembersByWorkspaceId
   ) {}
 
   async execute(
-    params: GetAllMembersByWorkspaceIdInterface.Request
+    workspaceId: GetAllMembersByWorkspaceIdInterface.Request
   ): Promise<GetAllMembersByWorkspaceIdInterface.Response> {
-    const { workspaceId } = params;
-
     const workspace = await this.getWorkspaceByIdRepository.getWorkspaceById(
       workspaceId
     );

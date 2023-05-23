@@ -7,7 +7,7 @@ import { CreateWorkspaceInterface } from '@application/interfaces/use-cases/work
 import { DeleteWorkspaceInterface } from '@application/interfaces/use-cases/workspaces/DeleteWorkspaceInterface';
 import { GetAllMembersByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/GetAllMembersByWorkspaceIdInterface';
 import { GetAllRootPagesInterface } from '@application/interfaces/use-cases/workspaces/GetAllRootPagesInterface';
-import { GetChildrensByPageIdInterface } from '@application/interfaces/use-cases/workspaces/GetChildrensByPageIdInterface';
+import { GetChildrensByPageReferenceInterface } from '@application/interfaces/use-cases/workspaces/GetChildrensByPageReferenceInterface';
 import { GetWorkspaceByIdInterface } from '@application/interfaces/use-cases/workspaces/GetWorkspaceByIdInterface';
 import { RemoveMemberByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/RemoveMemberByWorkspaceIdInterface';
 import { RemovePageByPageIdInterface } from '@application/interfaces/use-cases/workspaces/RemovePageByPageIdInterface';
@@ -84,10 +84,12 @@ export class GetAllRootPagesStub implements GetAllRootPagesInterface {
   }
 }
 
-export class GetChildrensByPageIdStub implements GetChildrensByPageIdInterface {
+export class GetChildrensByPageReferenceStub
+  implements GetChildrensByPageReferenceInterface
+{
   async execute(
-    _params: GetChildrensByPageIdInterface.Request
-  ): Promise<GetChildrensByPageIdInterface.Response> {
+    _params: GetChildrensByPageReferenceInterface.Request
+  ): Promise<GetChildrensByPageReferenceInterface.Response> {
     return [
       {
         id: 'page-id-2',

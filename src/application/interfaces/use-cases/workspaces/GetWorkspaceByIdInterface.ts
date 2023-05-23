@@ -3,9 +3,7 @@ import { UseCase } from '@application/interfaces/use-cases/UseCase';
 import { Workspace } from '@domain/entities/Workspace';
 
 export namespace GetWorkspaceByIdInterface {
-  export type Request = {
-    workspaceId: string;
-  };
+  export type Request = string;
   export type Response = Workspace | WorkspaceNotFoundError;
 }
 
@@ -15,6 +13,6 @@ export interface GetWorkspaceByIdInterface
     GetWorkspaceByIdInterface.Response
   > {
   execute(
-    params: GetWorkspaceByIdInterface.Request
+    workspaceId: GetWorkspaceByIdInterface.Request
   ): Promise<GetWorkspaceByIdInterface.Response>;
 }

@@ -29,7 +29,7 @@ const makesSut = (): SutTypes => {
   };
 };
 
-describe('AddPageIdToFavoritesByWorkspaceId', () => {
+describe('RemovePageIdFromFavoritesByWorkspaceId', () => {
   it('should call removePageIdFromFavoritesByWorkspaceIdRepository with correct data', async () => {
     const { sut, removePageIdFromFavoritesByWorkspaceIdRepositoryStub } =
       makesSut();
