@@ -3,7 +3,7 @@ import { CreateWorkspaceInterface } from '@application/interfaces/use-cases/work
 import { HttpResponse } from '@infrastructure/http/interfaces/HttpResponse';
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
 import { Validation } from '@infrastructure/http/interfaces/Validation';
-import { ok } from '@infrastructure/http/helpers/http';
+import { created } from '@infrastructure/http/helpers/http';
 
 export namespace CreateWorkspaceController {
   export type Request = HttpRequest<CreateWorkspaceInterface.Request>;
@@ -40,6 +40,6 @@ export class CreateWorkspaceController extends BaseController {
       pages,
     });
 
-    return ok({ id });
+    return created({ id });
   }
 }
