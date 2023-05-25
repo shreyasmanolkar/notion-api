@@ -27,15 +27,21 @@ const makeSut = (): SutTypes => {
 };
 
 describe('UpdateUser', () => {
-  it('should call getUserByIdRepository with correct post id', async () => {
-    const { sut, getUserByIdRepositoryStub } = makeSut();
-    const getUserByIdSpy = jest.spyOn(getUserByIdRepositoryStub, 'getUserById');
+  it('should call updateUserRepository with correct post id', async () => {
+    const { sut, updateUserRepositoryStub } = makeSut();
+    const updateUserRepositorySpy = jest.spyOn(
+      updateUserRepositoryStub,
+      'updateUser'
+    );
     const { id, name, email, password, isDarkMode } = mockUser();
     await sut.execute({
       userId: id,
       userData: { name, email, password, isDarkMode },
     });
-    expect(getUserByIdSpy).toHaveBeenCalledWith(id);
+    expect(updateUserRepositorySpy).toHaveBeenCalledWith({
+      userId: id,
+      userData: { name, email, password, isDarkMode },
+    });
   });
 
   it('should return a UserNotFoundError if GetUserByIdRepository returns null', async () => {

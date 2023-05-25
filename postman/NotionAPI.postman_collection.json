@@ -509,6 +509,432 @@
 			]
 		},
 		{
+			"name": "Workspaces",
+			"item": [
+				{
+					"name": "Get Workspace By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb6fae4682ebc5d2ea32d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Workspace Members",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/members",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"members"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb6fae4682ebc5d2ea32d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Workspace Root Pages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/pages/root",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"pages",
+								"root"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb76ee4682ebc5d2ea331"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Children Pages By PageReference",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/pages/:pageReference/childrens",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"pages",
+								":pageReference",
+								"childrens"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb76ee4682ebc5d2ea331"
+								},
+								{
+									"key": "pageReference",
+									"value": "sample-page-title-646fb0c7e4682ebc55555555"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Workspace",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"office-workspace\",\n    \"icon\": \"1F41A\",\n    \"members\": [\"646fb6fae4682ebc5d2ea32e\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Member To Workspaces",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"office-workspace\",\n    \"icon\": \"1F41A\",\n    \"members\": [\"646fb0c7e4682ebc5d2ea329\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/members/:memberId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"members",
+								":memberId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb76ee4682ebc5d2ea331"
+								},
+								{
+									"key": "memberId",
+									"value": "646fbaaaa4682ebcccceaa31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Page To Workspace",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"646fb0c7e44445ac5d2eeeee\",\n    \"icon\": \"1A42A\",\n    \"reference\": \"sample-page-title-two-646fb0c7e4682ebc11223421\",\n    \"path\": \",sample-page-title-646fb0c7e4682ebc55555555,\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/pages",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"pages"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb76ee4682ebc5d2ea331"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Workspace Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"v2-mission-workspace\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb76ee4682ebc5d2ea331"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Page From Workspace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/pages/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"pages",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb76ee4682ebc5d2ea331"
+								},
+								{
+									"key": "pageId",
+									"value": "1685043054782"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Member From Workspace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/members/:memberId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"members",
+								":memberId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb76ee4682ebc5d2ea331"
+								},
+								{
+									"key": "memberId",
+									"value": "646fbaaaa4682ebcccceaa31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Workspace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "646fb76ee4682ebc5d2ea331"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Sample Workspace",
 			"request": {
 				"method": "GET",
