@@ -11,8 +11,9 @@ export namespace GetFavoritesByWorkspaceIdController {
     undefined,
     { userId: string; workspaceId: string }
   >;
-  export type Response =
-    HttpResponse<GetFavoritesByWorkspaceIdInterface.Response>;
+  export type Response = HttpResponse<
+    GetFavoritesByWorkspaceIdInterface.Response | PermissionError
+  >;
 }
 
 export class GetFavoritesByWorkspaceIdController extends BaseController {

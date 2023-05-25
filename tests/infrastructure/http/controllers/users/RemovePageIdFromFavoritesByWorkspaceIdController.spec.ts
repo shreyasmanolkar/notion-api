@@ -34,7 +34,7 @@ const makeFakeHttpRequest = (): HttpRequest => {
   return {
     params: {
       userId: id,
-      workspaceId: 'sample-workspace-id',
+      workspaceId: '112233445566778899bbccaa',
       pageId: 'sample-page-1',
     },
   };

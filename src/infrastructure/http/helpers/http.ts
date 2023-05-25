@@ -13,6 +13,13 @@ export const ok = <T = any>(
   };
 };
 
+export const created = <T = any>(body: T): HttpResponse => {
+  return {
+    statusCode: 201,
+    body,
+  };
+};
+
 export const noContent = (): HttpResponse => ({
   statusCode: 204,
 });

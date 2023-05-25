@@ -6,6 +6,8 @@ import { BaseController } from '@infrastructure/http/controllers/BaseController'
 import { Validation } from '@infrastructure/http/interfaces/Validation';
 import { SignInInterface } from '@application/interfaces/use-cases/users/SignInInterface';
 import { forbidden, ok, unauthorized } from '@infrastructure/http/helpers/http';
+import { CreateWorkspaceInterface } from '@application/interfaces/use-cases/workspaces/CreateWorkspaceInterface';
+import { AddMemberByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/AddMemberByWorkspaceIdInterface';
 
 export namespace SignUpController {
   export type Request = HttpRequest<SignUpInterface.Request>;
@@ -18,7 +20,9 @@ export class SignUpController extends BaseController {
   constructor(
     private readonly signUpValidation: Validation,
     private readonly signUp: SignUpInterface,
-    private readonly signIn: SignInInterface
+    private readonly signIn: SignInInterface,
+    private readonly createWorkspace: CreateWorkspaceInterface,
+    private readonly addMemberByWorkspaceId: AddMemberByWorkspaceIdInterface
   ) {
     super(signUpValidation);
   }
@@ -29,10 +33,25 @@ export class SignUpController extends BaseController {
     const { name, email, password, isDarkMode, profilePicture } =
       httpRequest.body!;
 
-    // TODO: create new workspace and provide it's id in workspaces in this format { workspaceId: <workspaceId>, favorites: [] }
+    // TODO: create new page and provide it's id , reference, icon and path in workspaces
+
+    const workspaceId = await this.createWorkspace.execute({
+      name: 'home-workspace',
+      icon: '1F3C7',
+      members: [],
+      pages: [
+        {
+          id: Date.now().toString(),
+          reference: `introduction-09871237456`,
+          icon: '1F607',
+          path: null,
+        },
+      ],
+    });
+
     const workspaces = [
       {
-        workspaceId: Date.now().toString(),
+        workspaceId,
         favorites: [],
       },
     ];
@@ -49,6 +68,11 @@ export class SignUpController extends BaseController {
     if (idOrError instanceof EmailInUseError) {
       return forbidden(idOrError);
     }
+
+    await this.addMemberByWorkspaceId.execute({
+      workspaceId,
+      memberId: idOrError,
+    });
 
     const authenticationTokensOrError = await this.signIn.execute({
       email,
