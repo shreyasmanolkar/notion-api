@@ -44,11 +44,11 @@ describe('user routes', () => {
       },
       workspaces: [
         {
-          workspaceId: 'any-workspaceId',
+          workspaceId: '112233445566778899bbccaa',
           favorites: ['any-page-1'],
         },
         {
-          workspaceId: 'another-workspaceId',
+          workspaceId: '112233445566778899bbccab',
           favorites: ['another-page-1', 'another-page-2', 'another-page-3'],
         },
       ],
@@ -268,7 +268,7 @@ describe('user routes', () => {
 
       const { userId } = decodedPayload;
 
-      const workspaceId = 'another-workspaceId';
+      const workspaceId = '112233445566778899bbccab';
 
       const response = await request(app)
         .get(`/v1/users/${userId}/workspaces-access/${workspaceId}/favorites`)
@@ -357,7 +357,7 @@ describe('user routes', () => {
       const decodedPayload = JSON.parse(atob(jwtPayload));
 
       const { userId } = decodedPayload;
-      const workspaceId = 'any-workspaceId';
+      const workspaceId = '112233445566778899bbccaa';
       const pageId = 'sample-new-page';
 
       await request(app)
@@ -468,7 +468,7 @@ describe('user routes', () => {
       const decodedPayload = JSON.parse(atob(jwtPayload));
 
       const { userId } = decodedPayload;
-      const workspaceId = 'any-workspaceId';
+      const workspaceId = '112233445566778899bbccab';
 
       await request(app)
         .delete(`/v1/users/${userId}/workspaces-access/${workspaceId}`)
@@ -502,7 +502,7 @@ describe('user routes', () => {
       const decodedPayload = JSON.parse(atob(jwtPayload));
 
       const { userId } = decodedPayload;
-      const workspaceId = 'another-workspaceId';
+      const workspaceId = '112233445566778899bbccab';
       const pageId = 'another-page-2';
 
       await request(app)

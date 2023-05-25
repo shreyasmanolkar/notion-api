@@ -5,16 +5,27 @@ import { HttpResponse } from '@infrastructure/http/interfaces/HttpResponse';
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
 import { DeleteUserInterface } from '@application/interfaces/use-cases/users/DeleteUserInterface';
 import { noContent } from '@infrastructure/http/helpers/http';
+import { GetWorkspacesByUserIdInterface } from '@application/interfaces/use-cases/users/GetWorkspacesByUserIdInterface';
+import { GetAllMembersByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/GetAllMembersByWorkspaceIdInterface';
+import { RemoveMemberByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/RemoveMemberByWorkspaceIdInterface';
+import { DeleteWorkspaceInterface } from '@application/interfaces/use-cases/workspaces/DeleteWorkspaceInterface';
+import { WorkspaceNotFoundError } from '@application/errors/WorkspaceNotFoundError';
 
 export namespace DeleteUserController {
   export type Request = HttpRequest<undefined, { userId: string }>;
   export type Response = HttpResponse<
-    undefined | UserNotFoundError | PermissionError
+    undefined | UserNotFoundError | PermissionError | WorkspaceNotFoundError
   >;
 }
 
 export class DeleteUserController extends BaseController {
-  constructor(private readonly deleteUser: DeleteUserInterface) {
+  constructor(
+    private readonly deleteUser: DeleteUserInterface,
+    private readonly getWorkspacesByUserId: GetWorkspacesByUserIdInterface,
+    private readonly getAllMembersByWorkspaceId: GetAllMembersByWorkspaceIdInterface,
+    private readonly removeMemberByWorkspaceId: RemoveMemberByWorkspaceIdInterface,
+    private readonly deleteWorkspace: DeleteWorkspaceInterface
+  ) {
     super();
   }
 
@@ -23,7 +34,24 @@ export class DeleteUserController extends BaseController {
   ): Promise<DeleteUserController.Response> {
     const { userId } = httpRequest.params!;
 
-    // TODO: delete workspaces corresponding to userId if workspace is not shared else delete user
+    const workspaces = await this.getWorkspacesByUserId.execute(userId);
+
+    const workspaceIds = workspaces.map(workspace => workspace.workspaceId);
+
+    workspaceIds.forEach(async workspaceId => {
+      const workspaceMembers = await this.getAllMembersByWorkspaceId.execute(
+        workspaceId
+      );
+
+      if ((workspaceMembers as string[]).length > 1) {
+        await this.removeMemberByWorkspaceId.execute({
+          workspaceId,
+          memberId: userId,
+        });
+      } else {
+        await this.deleteWorkspace.execute(workspaceId);
+      }
+    });
 
     await this.deleteUser.execute(userId);
     return noContent();

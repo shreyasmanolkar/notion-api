@@ -90,7 +90,7 @@ export class GetWorkspacesByUserIdStub
   ): Promise<GetWorkspacesByUserIdInterface.Response> {
     return [
       {
-        workspaceId: 'sample-workspace-id',
+        workspaceId: '112233445566778899bbccaa',
         favorites: ['sample-page-id'],
       },
     ];
