@@ -8,10 +8,10 @@ import { makeGetWorkspaceByIdController } from '@main/factories/controllers/work
 import { makeAddMemberByWorkspaceIdController } from '@main/factories/controllers/workspaces/add-member-by-workspace-id/controller-factory';
 import { makeGetAllMembersByWorkspaceIdController } from '@main/factories/controllers/workspaces/get-all-members-by-workspace-id/controller-factory';
 import { makeGetChildrensByPageReferenceController } from '@main/factories/controllers/workspaces/get-childrens-by-page-reference/controller-factory';
-import { makeUpdateUserController } from '@main/factories/controllers/users/update-user/controller-factory';
 import { makeDeleteWorkspaceController } from '@main/factories/controllers/workspaces/delete-workspace/controller-factory';
 import { makeRemovePageByPageIdController } from '@main/factories/controllers/workspaces/remove-page-by-page-id/controller-factory';
 import { makeRemoveMemberByWorkspaceIdController } from '@main/factories/controllers/workspaces/remove-member-by-workspace-id/controller-factory';
+import { makeUpdateWorkspaceController } from '@main/factories/controllers/workspaces/update-workspace/controller-factory';
 
 export default (router: Router): void => {
   router.get(
@@ -45,14 +45,14 @@ export default (router: Router): void => {
     expressRouteAdapter(makeAddPageController())
   );
   router.post(
-    '/workspaces/:workspaceId/members',
+    '/workspaces/:workspaceId/members/:memberId',
     authMiddleware,
     expressRouteAdapter(makeAddMemberByWorkspaceIdController())
   );
   router.patch(
     '/workspaces/:workspaceId',
     authMiddleware,
-    expressRouteAdapter(makeUpdateUserController())
+    expressRouteAdapter(makeUpdateWorkspaceController())
   );
   router.delete(
     '/workspaces/:workspaceId/pages/:pageId',

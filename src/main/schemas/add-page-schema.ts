@@ -11,7 +11,7 @@ export const addPageSchema = {
       type: 'string',
     },
     path: {
-      type: 'string',
+      type: ['string', 'null'],
     },
   },
   required: ['id', 'reference', 'icon', 'path'],

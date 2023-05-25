@@ -26,14 +26,14 @@ export class GetChildrensByPageReferenceController extends BaseController {
   ): Promise<GetChildrensByPageReferenceController.Response> {
     const { workspaceId, pageReference } = httpRequest.params!;
 
-    const childrendOrError = await this.getChildrensByPageReference.execute({
+    const childrenOrError = await this.getChildrensByPageReference.execute({
       workspaceId,
       pageReference,
     });
 
-    if (childrendOrError instanceof WorkspaceNotFoundError) {
-      return notFound(childrendOrError);
+    if (childrenOrError instanceof WorkspaceNotFoundError) {
+      return notFound(childrenOrError);
     }
-    return ok(childrendOrError);
+    return ok(childrenOrError);
   }
 }

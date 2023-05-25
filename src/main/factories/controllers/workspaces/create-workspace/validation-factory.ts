@@ -1,8 +1,8 @@
 import { PayloadValidator } from '@infrastructure/http/validations/PayloadValidator';
-import { addPageSchema } from '@main/schemas/add-page-schema';
+import { createWorkspaceSchema } from '@main/schemas/create-workspace-schema';
 
 export const makeCreateWorkspaceValidation = (): PayloadValidator => {
-  const schema = addPageSchema;
+  const schema = createWorkspaceSchema;
 
   return new PayloadValidator(schema, 'body');
 };
