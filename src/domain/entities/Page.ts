@@ -23,13 +23,13 @@ export type PageProps = {
   content: ContentType;
   favorite: string[];
   pageSettings: PageSettingsType;
-  path: string;
+  path: string | null;
   workspaceId: string;
   createdAt: Date;
   updatedAt?: Date;
 };
 
-export class User {
+export class Page {
   public readonly id: string;
 
   public readonly reference: string;
@@ -46,7 +46,7 @@ export class User {
 
   public readonly pageSettings: PageSettingsType;
 
-  public readonly path: string;
+  public readonly path: string | null;
 
   public readonly workspaceId: string;
 
