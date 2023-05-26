@@ -2,7 +2,10 @@ import { UseCase } from '@application/interfaces/use-cases/UseCase';
 import { PageProps } from '@domain/entities/Page';
 
 export namespace CreatePageInterface {
-  export type Request = Omit<PageProps, 'id' | 'createdAt' | 'updatedAt'>;
+  export type Request = Omit<
+    PageProps,
+    'id' | 'createdAt' | 'updatedAt' | 'reference'
+  >;
   export type Response = string;
 }
 
