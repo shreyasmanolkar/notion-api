@@ -5,7 +5,7 @@ import { Page } from '@domain/entities/Page';
 export namespace UpdatePageTitleByPageIdInterface {
   export type Request = {
     pageId: string;
-    content: string;
+    title: string;
   };
   export type Response = Page | PageNotFoundError;
 }
