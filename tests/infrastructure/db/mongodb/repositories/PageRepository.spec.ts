@@ -34,12 +34,10 @@ describe('Page Repository', () => {
         pageSettings,
         path,
         workspaceId,
-        reference,
       } = mockPage();
 
       const response = await pageRepository.createPage({
         title,
-        reference,
         icon,
         coverPicture,
         content,

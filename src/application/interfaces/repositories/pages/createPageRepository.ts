@@ -1,7 +1,10 @@
 import { PageProps } from '@domain/entities/Page';
 
 export namespace CreatePageRepository {
-  export type Request = Omit<PageProps, 'id' | 'createdAt' | 'updatedAt'>;
+  export type Request = Omit<
+    PageProps,
+    'id' | 'createdAt' | 'updatedAt' | 'reference'
+  >;
   export type Response = string;
 }
 
