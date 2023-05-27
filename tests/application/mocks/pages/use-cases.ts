@@ -54,7 +54,7 @@ export class GetPageByIdStub implements GetPageByIdInterface {
   }
 }
 
-export class GetPageContentByPageInStub
+export class GetPageContentByPageIdStub
   implements GetPageContentByPageIdInterface
 {
   async execute(
