@@ -3,10 +3,7 @@ import dbConnection from '@infrastructure/db/mongodb/helpers/db-connection';
 import env from '@main/config/env';
 import { PageRepository } from '@infrastructure/db/mongodb/repositories/PageRepository';
 import mockPage from '@tests/domain/mock-page';
-import {
-  objectIdToString,
-  stringToObjectId,
-} from '@infrastructure/db/mongodb/helpers/mapper';
+import { objectIdToString } from '@infrastructure/db/mongodb/helpers/mapper';
 
 describe('Page Repository', () => {
   let pageCollection: Collection;
