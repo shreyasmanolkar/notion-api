@@ -8,7 +8,7 @@ export namespace UpdatePageSettingsByPageIdInterface {
 
   export type Request = {
     pageId: pageIdType;
-    settings: PageSettingsType;
+    settings: Partial<PageSettingsType>;
   };
   export type Response = Page | PageNotFoundError;
 }
