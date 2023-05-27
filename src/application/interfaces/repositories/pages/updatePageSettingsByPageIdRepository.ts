@@ -3,7 +3,7 @@ import { Page, PageSettingsType } from '@domain/entities/Page';
 export namespace UpdatePageSettingsByPageIdRepository {
   export type Request = {
     pageId: string;
-    settings: PageSettingsType;
+    settings: Partial<PageSettingsType>;
   };
   export type Response = Page;
 }

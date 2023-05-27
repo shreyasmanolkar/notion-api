@@ -1,5 +1,5 @@
 export type PageSettingsType = {
-  font: 'sans-serif' | 'serif' | 'monospace';
+  font: string;
   smallText: boolean;
   fullWidth: boolean;
   lock: boolean;

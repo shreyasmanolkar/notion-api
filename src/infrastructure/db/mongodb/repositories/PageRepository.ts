@@ -150,7 +150,7 @@ export class PageRepository
 
     const { value: rawPageContent } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(pageId) },
-      { $set: { content } },
+      { $set: { content, updatedAt: new Date() } },
       { upsert: true, returnDocument: 'after' }
     );
 
@@ -195,7 +195,7 @@ export class PageRepository
 
     const { value: rawPageContent } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(pageId) },
-      { $set: { settings } },
+      { $set: { pageSettings: { ...settings } } },
       { upsert: true, returnDocument: 'after' }
     );
 
@@ -239,7 +239,7 @@ export class PageRepository
 
     const { value: rawPage } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(pageId) },
-      { $pull: { favorite: { userId } } } as SetFields<Document>,
+      { $pull: { favorite: userId } } as SetFields<Document>,
       { returnDocument: 'after' }
     );
     return mapDocument(rawPage);
@@ -256,6 +256,8 @@ export class PageRepository
     workspaceId: DeletePagesByWorkspaceIdRepository.Request
   ): Promise<DeletePagesByWorkspaceIdRepository.Response> {
     const collection = await PageRepository.getCollection();
-    await collection.deleteMany({ workspaceId: stringToObjectId(workspaceId) });
+    await collection.deleteMany({
+      workspaceId,
+    });
   }
 }
