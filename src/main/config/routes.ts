@@ -4,7 +4,7 @@ import workspaceRoutes from '@main/routes/workspace-routes';
 
 export default (app: Express): void => {
   const router = Router();
-  app.get('/workspace', (req, res) => {
+  app.get('/test', (req, res) => {
     res.status(200).json({ message: 'ok' });
   });
 

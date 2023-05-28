@@ -3,7 +3,7 @@ import { RemoveFromFavoriteController } from '@infrastructure/http/controllers/p
 import { makeGetPageById } from '@main/factories/use-cases/pages/get-page-by-id-factory';
 import { makeRemoveFromFavorite } from '@main/factories/use-cases/pages/remove-from-favorite-factory';
 
-export const makeRemovePageByPageIdController = (): BaseController => {
+export const makeRemoveFromFavoriteController = (): BaseController => {
   const getPageByIdUseCase = makeGetPageById();
   const removeFromFavoriteUseCase = makeRemoveFromFavorite();
 
