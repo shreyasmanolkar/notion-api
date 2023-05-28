@@ -40,6 +40,8 @@ export class AddToFavoriteController extends BaseController {
       userId,
     });
 
+    // TODO: add pageId to user's favorite list with workspaceId
+
     return noContent();
   }
 }

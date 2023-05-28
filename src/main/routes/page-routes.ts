@@ -1,3 +1,4 @@
+import { Router } from 'express';
 import { expressRouteAdapter } from '@main/adapters/express-route-adapter';
 import { makeAddToFavoriteController } from '@main/factories/controllers/pages/add-to-favorite/controller-factory';
 import { makeCreatePageController } from '@main/factories/controllers/pages/create-page/controller-factory';
@@ -13,7 +14,6 @@ import { makeUpdatePageIconByPageIdController } from '@main/factories/controller
 import { makeUpdatePageSettingsByPageIdController } from '@main/factories/controllers/pages/update-page-settings-by-page-id/controller-factory';
 import { makeUpdatePageTitleByPageIdController } from '@main/factories/controllers/pages/update-page-title-by-page-id/controller-factory';
 import { authMiddleware } from '@main/middlewares/auth-middleware';
-import { Router } from 'express';
 
 export default (router: Router): void => {
   router.get(
@@ -72,13 +72,13 @@ export default (router: Router): void => {
     expressRouteAdapter(makeRemoveFromFavoriteController())
   );
   router.delete(
-    '/pages/:workspaceId',
-    authMiddleware,
-    expressRouteAdapter(makeDeletePagesByWorkspaceIdController())
-  );
-  router.delete(
     '/pages/:pageId',
     authMiddleware,
     expressRouteAdapter(makeDeletePageController())
+  );
+  router.delete(
+    '/pages/all/:workspaceId',
+    authMiddleware,
+    expressRouteAdapter(makeDeletePagesByWorkspaceIdController())
   );
 };

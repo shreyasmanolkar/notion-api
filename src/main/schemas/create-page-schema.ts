@@ -47,7 +47,7 @@ export const createPageSchema = {
           type: 'boolean',
         },
         lock: {
-          type: 'bollean',
+          type: 'boolean',
         },
       },
       required: ['font', 'smallText', 'fullWidth', 'lock'],

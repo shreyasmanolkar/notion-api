@@ -1,7 +1,7 @@
 export const updatePageSettingsSchema = {
   type: 'object',
   properties: {
-    pageSettings: {
+    settings: {
       type: 'object',
       properties: {
         font: {
@@ -14,11 +14,11 @@ export const updatePageSettingsSchema = {
           type: 'boolean',
         },
         lock: {
-          type: 'bollean',
+          type: 'boolean',
         },
       },
       required: [],
     },
   },
-  required: ['pageSettings'],
+  required: ['settings'],
 };
