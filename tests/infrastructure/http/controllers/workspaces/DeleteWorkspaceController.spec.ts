@@ -2,6 +2,7 @@ import { WorkspaceNotFoundError } from '@application/errors/WorkspaceNotFoundErr
 import { DeleteWorkspaceController } from '@infrastructure/http/controllers/workspaces/DeleteWorkspaceController';
 import { notFound } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
+import { DeletePagesByWorkspaceIdStub } from '@tests/application/mocks/pages/use-cases';
 import {
   DeleteWorkspaceStub,
   GetWorkspaceByIdStub,
@@ -11,20 +12,24 @@ import mockWorkspace from '@tests/domain/mock-workspace';
 type SutTypes = {
   sut: DeleteWorkspaceController;
   getWorkspaceByIdStub: GetWorkspaceByIdStub;
+  deletePagesByWorkspaceIdStub: DeletePagesByWorkspaceIdStub;
   deleteWorkspaceStub: DeleteWorkspaceStub;
 };
 
 const makeSut = (): SutTypes => {
   const getWorkspaceByIdStub = new GetWorkspaceByIdStub();
+  const deletePagesByWorkspaceIdStub = new DeletePagesByWorkspaceIdStub();
   const deleteWorkspaceStub = new DeleteWorkspaceStub();
   const sut = new DeleteWorkspaceController(
     getWorkspaceByIdStub,
+    deletePagesByWorkspaceIdStub,
     deleteWorkspaceStub
   );
 
   return {
     sut,
     getWorkspaceByIdStub,
+    deletePagesByWorkspaceIdStub,
     deleteWorkspaceStub,
   };
 };
@@ -39,7 +44,7 @@ const makeFakeHttpRequest = (): HttpRequest => {
 };
 
 describe('DeleteWorkspaceController', () => {
-  it('should call deleteUser with correct id', async () => {
+  it('should call deleteWorkspace with correct id', async () => {
     const { sut, deleteWorkspaceStub } = makeSut();
 
     const deleteWorkspaceSpy = jest.spyOn(deleteWorkspaceStub, 'execute');
@@ -47,6 +52,21 @@ describe('DeleteWorkspaceController', () => {
     await sut.handle(httpRequest);
 
     expect(deleteWorkspaceSpy).toHaveBeenCalledWith(
+      httpRequest.params.workspaceId
+    );
+  });
+
+  it('should call deletePagesByWorkspaceId with correct id', async () => {
+    const { sut, deletePagesByWorkspaceIdStub } = makeSut();
+
+    const deletePagesByWorkspaceIdSpy = jest.spyOn(
+      deletePagesByWorkspaceIdStub,
+      'execute'
+    );
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(deletePagesByWorkspaceIdSpy).toHaveBeenCalledWith(
       httpRequest.params.workspaceId
     );
   });
