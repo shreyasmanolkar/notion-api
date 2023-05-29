@@ -3,17 +3,24 @@ import { CreateWorkspaceInterface } from '@application/interfaces/use-cases/work
 import { HttpResponse } from '@infrastructure/http/interfaces/HttpResponse';
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
 import { Validation } from '@infrastructure/http/interfaces/Validation';
-import { created } from '@infrastructure/http/helpers/http';
+import { created, forbidden } from '@infrastructure/http/helpers/http';
+import { CreatePageInterface } from '@application/interfaces/use-cases/pages/createPageInterface';
+import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
+import { PageNotFoundError } from '@application/errors/PageNotFoundError';
+import { AddPageInterface } from '@application/interfaces/use-cases/workspaces/AddPageInterface';
 
 export namespace CreateWorkspaceController {
   export type Request = HttpRequest<CreateWorkspaceInterface.Request>;
-  export type Response = HttpResponse<{ id: string }>;
+  export type Response = HttpResponse<{ id: string } | PageNotFoundError>;
 }
 
 export class CreateWorkspaceController extends BaseController {
   constructor(
     private readonly createWorkspaceValidation: Validation,
-    private readonly createWorkspace: CreateWorkspaceInterface
+    private readonly createWorkspace: CreateWorkspaceInterface,
+    private readonly createPage: CreatePageInterface,
+    private readonly getPageById: GetPageByIdInterface,
+    private readonly addPage: AddPageInterface
   ) {
     super(createWorkspaceValidation);
   }
@@ -23,23 +30,52 @@ export class CreateWorkspaceController extends BaseController {
   ): Promise<CreateWorkspaceController.Response> {
     const { name, icon, members } = httpRequest.body!;
 
-    // TODO: create new page and provide it's  id, reference, icon and path
-    const pages = [
-      {
-        id: Date.now().toString(),
-        reference: `introduction-09871237456`,
-        icon: '1F607',
-        path: null,
-      },
-    ];
-
-    const id = await this.createWorkspace.execute({
+    const workspaceId = await this.createWorkspace.execute({
       name,
       icon,
       members,
-      pages,
+      pages: [],
     });
 
-    return created({ id });
+    const pageId = await this.createPage.execute({
+      title: 'notion clone project',
+      icon: '1F575',
+      coverPicture: {
+        url: 'http://cover-picture.com',
+      },
+      content: {
+        type: 'doc',
+        content: [],
+      },
+      favorite: [],
+      pageSettings: {
+        font: 'serif',
+        smallText: true,
+        fullWidth: true,
+        lock: false,
+      },
+      path: null,
+      workspaceId,
+    });
+
+    const pageOrError = await this.getPageById.execute(pageId);
+
+    if (pageOrError instanceof PageNotFoundError) {
+      return forbidden(pageOrError);
+    }
+
+    const { reference, path, icon: pageIcon } = pageOrError;
+
+    await this.addPage.execute({
+      workspaceId,
+      pageData: {
+        id: pageId,
+        reference,
+        path,
+        icon: pageIcon,
+      },
+    });
+
+    return created({ workspaceId });
   }
 }

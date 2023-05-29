@@ -5,6 +5,8 @@ import { BaseController } from '@infrastructure/http/controllers/BaseController'
 import { Validation } from '@infrastructure/http/interfaces/Validation';
 import { created } from '@infrastructure/http/helpers/http';
 
+// TODO: adde page to workspaceId
+
 export namespace CreatePageController {
   export type Request = HttpRequest<CreatePageInterface.Request>;
   export type Response = HttpResponse<{ id: string }>;
