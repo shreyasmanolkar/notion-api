@@ -101,7 +101,9 @@ describe('page routes', () => {
     return objectIdToString(insertedId);
   };
 
-  const getTokens = async (): Promise<{
+  const getTokens = async (
+    workspaceId?: string
+  ): Promise<{
     accessToken: string;
     refreshToken: string;
   }> => {
@@ -116,7 +118,7 @@ describe('page routes', () => {
       },
       workspaces: [
         {
-          workspaceId: 'any-workspaceId',
+          workspaceId: workspaceId || 'any-workspaceId',
           favorites: ['any-page-1'],
         },
         {
@@ -154,10 +156,11 @@ describe('page routes', () => {
 
   describe('GET /pages/:pageId', () => {
     it('should return 200 on success and return page', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
 
       await request(app)
         .get(`/v1/pages/${pageId}`)
@@ -166,8 +169,9 @@ describe('page routes', () => {
         .expect(200);
     });
 
-    it('should return 404 if page is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if page is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'new-page-Id';
@@ -175,16 +179,17 @@ describe('page routes', () => {
       await request(app)
         .get(`/v1/pages/${pageId}`)
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
   describe('GET /pages/:pageId/content', () => {
     it('should return 200 on success and return page content', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
 
       await request(app)
         .get(`/v1/pages/${pageId}/content`)
@@ -193,8 +198,9 @@ describe('page routes', () => {
         .expect(200);
     });
 
-    it('should return 404 if page is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if page is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'new-page-Id';
@@ -202,16 +208,17 @@ describe('page routes', () => {
       await request(app)
         .get(`/v1/pages/${pageId}/content`)
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
   describe('GET /pages/:pageId/settings', () => {
     it('should return 200 on success and return page settings', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
 
       await request(app)
         .get(`/v1/pages/${pageId}/settings`)
@@ -220,8 +227,9 @@ describe('page routes', () => {
         .expect(200);
     });
 
-    it('should return 404 if page is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if page is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'new-page-Id';
@@ -229,7 +237,7 @@ describe('page routes', () => {
       await request(app)
         .get(`/v1/pages/${pageId}/settings`)
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
@@ -299,10 +307,11 @@ describe('page routes', () => {
 
   describe('POST /pages/:pageId/favorites/:userId', () => {
     it('should return 204 on success and user to favorite', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
       const userId = 'new-user-id';
 
       await request(app)
@@ -311,8 +320,9 @@ describe('page routes', () => {
         .expect(204);
     });
 
-    it('should return 404 if workspace is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if workspace is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'new-workspaceId';
@@ -321,16 +331,17 @@ describe('page routes', () => {
       await request(app)
         .post(`/v1/pages/${pageId}/favorites/${userId}`)
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
   describe('PATCH /pages/:pageId/content', () => {
     it('should return 204 on success', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
 
       await request(app)
         .patch(`/v1/pages/${pageId}/content`)
@@ -362,8 +373,9 @@ describe('page routes', () => {
         .expect(204);
     });
 
-    it('should return 404 if page is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if page is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'no-user';
@@ -395,16 +407,17 @@ describe('page routes', () => {
           },
         })
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
   describe('PATCH /pages/:pageId/cover', () => {
     it('should return 204 on success', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
 
       await request(app)
         .patch(`/v1/pages/${pageId}/cover`)
@@ -415,8 +428,9 @@ describe('page routes', () => {
         .expect(204);
     });
 
-    it('should return 404 if page is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if page is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'no-user';
@@ -427,16 +441,17 @@ describe('page routes', () => {
           url: 'http://new-sample-url.com',
         })
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
   describe('PATCH /pages/:pageId/icon', () => {
     it('should return 204 on success', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
 
       await request(app)
         .patch(`/v1/pages/${pageId}/icon`)
@@ -447,8 +462,9 @@ describe('page routes', () => {
         .expect(204);
     });
 
-    it('should return 404 if page is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if page is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'no-user';
@@ -459,16 +475,17 @@ describe('page routes', () => {
           icon: 'sample-hex',
         })
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
   describe('PATCH /pages/:pageId/settings', () => {
     it('should return 204 on success', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
 
       await request(app)
         .patch(`/v1/pages/${pageId}/settings`)
@@ -481,8 +498,9 @@ describe('page routes', () => {
         .expect(204);
     });
 
-    it('should return 404 if page is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if page is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'no-user';
@@ -495,16 +513,17 @@ describe('page routes', () => {
           },
         })
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
   describe('PATCH /pages/:pageId/title', () => {
     it('should return 204 on success', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
 
       await request(app)
         .patch(`/v1/pages/${pageId}/title`)
@@ -515,8 +534,9 @@ describe('page routes', () => {
         .expect(204);
     });
 
-    it('should return 404 if page is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if page is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'no-user';
@@ -527,16 +547,17 @@ describe('page routes', () => {
           title: 'sample-new-title',
         })
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
   describe('DELETE /pages/:pageId/favorites/:userId', () => {
     it('should return 204 on success and remove member', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
       const userId = 'new-sample-user';
 
       await request(app)
@@ -545,8 +566,9 @@ describe('page routes', () => {
         .expect(204);
     });
 
-    it('should return 404 if workspace is not found', async () => {
-      const tokens = await getTokens();
+    it('should return 403 if workspace is not found', async () => {
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = 'non-existing-id';
@@ -555,16 +577,17 @@ describe('page routes', () => {
       await request(app)
         .delete(`/v1/pages/${pageId}/favorites/${userId}`)
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(403);
     });
   });
 
   describe('DELETE /pages/:pageId', () => {
     it('should return 204 on success', async () => {
-      const tokens = await getTokens();
+      const workspaceId = await getWorkspace();
+      const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
-      const pageId = await getPage();
+      const pageId = await getPage(workspaceId);
 
       await request(app)
         .delete(`/v1/pages/${pageId}`)

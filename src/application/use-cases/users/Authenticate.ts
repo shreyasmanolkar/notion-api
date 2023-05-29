@@ -11,9 +11,15 @@ export class Authenticate implements AuthenticateInterface {
     const decodedToken = await this.jwtVerifier.verifyAccessToken(
       authenticationToken
     );
+
     if (!decodedToken) {
       return new ForbiddenError();
     }
-    return decodedToken;
+
+    const decodedTokenString = JSON.stringify(decodedToken);
+
+    const decodedTokenObject = JSON.parse(decodedTokenString);
+
+    return decodedTokenObject.userId;
   }
 }

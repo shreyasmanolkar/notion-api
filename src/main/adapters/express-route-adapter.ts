@@ -9,6 +9,7 @@ export const expressRouteAdapter =
       params: req.params,
       headers: req.headers,
       userId: req.userId,
+      workspaceId: req.workspaceId,
     };
 
     const httpResponse = await controller.handle(httpRequest);
