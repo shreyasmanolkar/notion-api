@@ -1,14 +1,20 @@
 import { EmailInUseError } from '@application/errors/EmailInUseError';
+import { PageNotFoundError } from '@application/errors/PageNotFoundError';
 import { UnauthorizedError } from '@application/errors/UnauthorizedError';
 import { SignUpController } from '@infrastructure/http/controllers/users/SignUpController';
 import { forbidden, ok, unauthorized } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
+import {
+  CreatePageStub,
+  GetPageByIdStub,
+} from '@tests/application/mocks/pages/use-cases';
 import {
   SignInStub,
   SignUpStub,
 } from '@tests/application/mocks/users/use-cases';
 import {
   AddMemberByWorkspaceIdStub,
+  AddPageStub,
   CreateWorkspaceStub,
 } from '@tests/application/mocks/workspaces/use-cases';
 import mockUser from '@tests/domain/mock-user';
@@ -20,7 +26,10 @@ type SutTypes = {
   signInStub: SignInStub;
   signUpStub: SignUpStub;
   createWorkspaceStub: CreateWorkspaceStub;
+  createPageStub: CreatePageStub;
   addMemberByWorkspaceIdStub: AddMemberByWorkspaceIdStub;
+  addPageStub: AddPageStub;
+  getPageByIdStub: GetPageByIdStub;
 };
 
 const makeSut = (): SutTypes => {
@@ -28,13 +37,20 @@ const makeSut = (): SutTypes => {
   const signInStub = new SignInStub();
   const signUpStub = new SignUpStub();
   const createWorkspaceStub = new CreateWorkspaceStub();
+  const createPageStub = new CreatePageStub();
   const addMemberByWorkspaceIdStub = new AddMemberByWorkspaceIdStub();
+  const addPageStub = new AddPageStub();
+  const getPageByIdStub = new GetPageByIdStub();
+
   const sut = new SignUpController(
     validationStub,
     signUpStub,
     signInStub,
     createWorkspaceStub,
-    addMemberByWorkspaceIdStub
+    createPageStub,
+    addMemberByWorkspaceIdStub,
+    addPageStub,
+    getPageByIdStub
   );
 
   return {
@@ -43,7 +59,10 @@ const makeSut = (): SutTypes => {
     signUpStub,
     signInStub,
     createWorkspaceStub,
+    createPageStub,
     addMemberByWorkspaceIdStub,
+    addPageStub,
+    getPageByIdStub,
   };
 };
 
@@ -88,16 +107,89 @@ describe('SignUpController', () => {
         name: 'home-workspace',
         icon: '1F3C7',
         members: [],
-        pages: [
-          {
-            id: Date.now().toString(),
-            reference: `introduction-09871237456`,
-            icon: '1F607',
-            path: null,
-          },
-        ],
+        pages: [],
       })
     );
+  });
+
+  it('should call CreatePage with given params', async () => {
+    const { sut, createPageStub } = makeSut();
+
+    const createPageSpy = jest.spyOn(createPageStub, 'execute');
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(createPageSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        title: 'notion clone project',
+        icon: '1F575',
+        coverPicture: {
+          url: 'http://cover-picture.com',
+        },
+        content: {
+          type: 'doc',
+          content: [
+            {
+              type: 'dBlock',
+              content: [
+                {
+                  type: 'heading',
+                  attrs: {
+                    level: 1,
+                  },
+                  content: [
+                    {
+                      type: 'text',
+                      text: 'About Notion Clone Project',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        favorite: [],
+        pageSettings: {
+          font: 'serif',
+          smallText: true,
+          fullWidth: true,
+          lock: false,
+        },
+        path: null,
+      })
+    );
+  });
+
+  it('should call getPageById with given params', async () => {
+    const { sut, getPageByIdStub } = makeSut();
+
+    const getPageByIdSpy = jest.spyOn(getPageByIdStub, 'execute');
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(getPageByIdSpy).toBeCalled();
+  });
+
+  it('should return 403 if page is not found', async () => {
+    const { sut, getPageByIdStub } = makeSut();
+
+    jest.spyOn(getPageByIdStub, 'execute').mockImplementation(async () => {
+      return new PageNotFoundError();
+    });
+
+    const httpResponse = await sut.handle(makeFakeHttpRequest());
+
+    expect(httpResponse).toEqual(forbidden(new PageNotFoundError()));
+  });
+
+  it('should call addPage with given params', async () => {
+    const { sut, addPageStub } = makeSut();
+
+    const addPageSpy = jest.spyOn(addPageStub, 'execute');
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(addPageSpy).toBeCalled();
   });
 
   it('should call AddMemberByWorkspaceId with given params', async () => {
