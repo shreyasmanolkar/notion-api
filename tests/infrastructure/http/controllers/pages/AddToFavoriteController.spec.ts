@@ -6,21 +6,30 @@ import {
   AddToFavoriteStub,
   GetPageByIdStub,
 } from '@tests/application/mocks/pages/use-cases';
+import { AddPageIdToFavoritesByWorkspaceIdStub } from '@tests/application/mocks/users/use-cases';
 import mockPage from '@tests/domain/mock-page';
 
 type SutTypes = {
   sut: AddToFavoriteController;
   getPageByIdStub: GetPageByIdStub;
   addToFavoriteStub: AddToFavoriteStub;
+  addPageIdToFavoritesByWorkspaceIdStub: AddPageIdToFavoritesByWorkspaceIdStub;
 };
 
 const makeSut = (): SutTypes => {
   const getPageByIdStub = new GetPageByIdStub();
   const addToFavoriteStub = new AddToFavoriteStub();
-  const sut = new AddToFavoriteController(getPageByIdStub, addToFavoriteStub);
+  const addPageIdToFavoritesByWorkspaceIdStub =
+    new AddPageIdToFavoritesByWorkspaceIdStub();
+  const sut = new AddToFavoriteController(
+    getPageByIdStub,
+    addToFavoriteStub,
+    addPageIdToFavoritesByWorkspaceIdStub
+  );
   return {
     getPageByIdStub,
     addToFavoriteStub,
+    addPageIdToFavoritesByWorkspaceIdStub,
     sut,
   };
 };
@@ -47,6 +56,20 @@ describe('AddToFavoriteController', () => {
     expect(addToFavoriteSpy).toHaveBeenCalledWith({
       ...httpRequest.params,
     });
+  });
+
+  it('should call AddToFavorite with correct params', async () => {
+    const { sut, addPageIdToFavoritesByWorkspaceIdStub } = makeSut();
+
+    const addPageIdToFavoritesByWorkspaceIdSpy = jest.spyOn(
+      addPageIdToFavoritesByWorkspaceIdStub,
+      'execute'
+    );
+
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(addPageIdToFavoritesByWorkspaceIdSpy).toHaveBeenCalled();
   });
 
   it('should return 404 if workspace is not found', async () => {

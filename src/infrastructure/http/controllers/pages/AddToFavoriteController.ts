@@ -1,6 +1,7 @@
 import { PageNotFoundError } from '@application/errors/PageNotFoundError';
 import { AddToFavoriteInterface } from '@application/interfaces/use-cases/pages/addToFavoriteInterface';
 import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
+import { AddPageIdToFavoritesByWorkspaceIdInterface } from '@application/interfaces/use-cases/users/AddPageIdToFavoritesByWorkspaceIdInterface';
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
@@ -10,7 +11,7 @@ export namespace AddToFavoriteController {
   export type Request = HttpRequest<
     undefined,
     { pageId: string; userId: string }
-  >;
+  > & { workspaceId: string };
   export type Response = HttpResponse<
     AddToFavoriteInterface.Response | PageNotFoundError
   >;
@@ -19,7 +20,8 @@ export namespace AddToFavoriteController {
 export class AddToFavoriteController extends BaseController {
   constructor(
     private readonly getPageById: GetPageByIdInterface,
-    private readonly addToFavorite: AddToFavoriteInterface
+    private readonly addToFavorite: AddToFavoriteInterface,
+    private readonly addPageIdToFavoritesByWorkspaceId: AddPageIdToFavoritesByWorkspaceIdInterface
   ) {
     super();
   }
@@ -28,6 +30,7 @@ export class AddToFavoriteController extends BaseController {
     httpRequest: AddToFavoriteController.Request
   ): Promise<AddToFavoriteController.Response> {
     const { pageId, userId } = httpRequest.params!;
+    const workspaceId = httpRequest.workspaceId!;
 
     const pageOrError = await this.getPageById.execute(pageId);
 
@@ -40,7 +43,11 @@ export class AddToFavoriteController extends BaseController {
       userId,
     });
 
-    // TODO: add pageId to user's favorite list with workspaceId
+    await this.addPageIdToFavoritesByWorkspaceId.execute({
+      userId,
+      workspaceId,
+      pageId,
+    });
 
     return noContent();
   }
