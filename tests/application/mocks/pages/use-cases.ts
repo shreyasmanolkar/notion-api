@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { AddToFavoriteInterface } from '@application/interfaces/use-cases/pages/addToFavoriteInterface';
+import { AuthorizationInterface } from '@application/interfaces/use-cases/pages/authorizationInterface';
 import { CreatePageInterface } from '@application/interfaces/use-cases/pages/createPageInterface';
 import { DeletePageInterface } from '@application/interfaces/use-cases/pages/deletePageInterface';
 import { DeletePagesByWorkspaceIdInterface } from '@application/interfaces/use-cases/pages/deletePagesByWorkspaceIdInterface';
@@ -15,6 +16,14 @@ import { UpdatePageIconByPageIdInterface } from '@application/interfaces/use-cas
 import { UpdatePageSettingsByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageSettingsByPageIdInterface';
 import { UpdatePageTitleByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageTitleByPageIdInterface';
 import mockPage from '@tests/domain/mock-page';
+
+export class AuthorizationStub implements AuthorizationInterface {
+  async execute(
+    _params: AuthorizationInterface.Request
+  ): Promise<AuthorizationInterface.Response> {
+    return 'sample-workspace-id';
+  }
+}
 
 export class AddToFavoriteStub implements AddToFavoriteInterface {
   async execute(

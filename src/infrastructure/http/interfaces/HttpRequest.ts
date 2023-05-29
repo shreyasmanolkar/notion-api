@@ -4,4 +4,5 @@ export type HttpRequest<TBody = any, TParams = any, THeaders = any> = {
   params?: TParams;
   headers?: THeaders;
   userId?: string;
+  workspaceId?: string;
 };
