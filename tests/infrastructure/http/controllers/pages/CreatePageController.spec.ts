@@ -1,6 +1,10 @@
 import { CreatePageController } from '@infrastructure/http/controllers/pages/CreatePageController';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
-import { CreatePageStub } from '@tests/application/mocks/pages/use-cases';
+import {
+  CreatePageStub,
+  GetPageByIdStub,
+} from '@tests/application/mocks/pages/use-cases';
+import { AddPageStub } from '@tests/application/mocks/workspaces/use-cases';
 import mockPage from '@tests/domain/mock-page';
 import { ValidationStub } from '@tests/infrastructure/mocks/validators';
 
@@ -8,16 +12,27 @@ type SutTypes = {
   sut: CreatePageController;
   validationStub: ValidationStub;
   createPageStub: CreatePageStub;
+  getPageByIdStub: GetPageByIdStub;
+  addPageStub: AddPageStub;
 };
 
 const makeSut = (): SutTypes => {
   const validationStub = new ValidationStub();
   const createPageStub = new CreatePageStub();
-  const sut = new CreatePageController(validationStub, createPageStub);
+  const getPageByIdStub = new GetPageByIdStub();
+  const addPageStub = new AddPageStub();
+  const sut = new CreatePageController(
+    validationStub,
+    createPageStub,
+    getPageByIdStub,
+    addPageStub
+  );
   return {
     sut,
     validationStub,
     createPageStub,
+    getPageByIdStub,
+    addPageStub,
   };
 };
 
@@ -57,6 +72,28 @@ describe('CreatePageController', () => {
     await sut.handle(httpRequest);
 
     expect(createPageSpy).toHaveBeenCalled();
+  });
+
+  it('should call createPage with correct params', async () => {
+    const { sut, createPageStub } = makeSut();
+
+    const createPageSpy = jest.spyOn(createPageStub, 'execute');
+
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(createPageSpy).toHaveBeenCalled();
+  });
+
+  it('should call createPage with correct params', async () => {
+    const { sut, addPageStub } = makeSut();
+
+    const addPageSpy = jest.spyOn(addPageStub, 'execute');
+
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(addPageSpy).toHaveBeenCalled();
   });
 
   it('should return 201 on success', async () => {
