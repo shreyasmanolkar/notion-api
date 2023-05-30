@@ -8,9 +8,12 @@ import { CreatePageInterface } from '@application/interfaces/use-cases/pages/cre
 import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
 import { PageNotFoundError } from '@application/errors/PageNotFoundError';
 import { AddPageInterface } from '@application/interfaces/use-cases/workspaces/AddPageInterface';
+import { AddWorkspaceByUserIdInterface } from '@application/interfaces/use-cases/users/AddWorkspaceByUserIdInterface';
 
 export namespace CreateWorkspaceController {
-  export type Request = HttpRequest<CreateWorkspaceInterface.Request>;
+  export type Request = HttpRequest<CreateWorkspaceInterface.Request> & {
+    userId: string;
+  };
   export type Response = HttpResponse<{ id: string } | PageNotFoundError>;
 }
 
@@ -20,7 +23,8 @@ export class CreateWorkspaceController extends BaseController {
     private readonly createWorkspace: CreateWorkspaceInterface,
     private readonly createPage: CreatePageInterface,
     private readonly getPageById: GetPageByIdInterface,
-    private readonly addPage: AddPageInterface
+    private readonly addPage: AddPageInterface,
+    private readonly addWorkspaceByUserId: AddWorkspaceByUserIdInterface
   ) {
     super(createWorkspaceValidation);
   }
@@ -28,13 +32,19 @@ export class CreateWorkspaceController extends BaseController {
   async execute(
     httpRequest: CreateWorkspaceController.Request
   ): Promise<CreateWorkspaceController.Response> {
-    const { name, icon, members } = httpRequest.body!;
+    const { name, icon } = httpRequest.body!;
+    const userId = httpRequest.userId!;
 
     const workspaceId = await this.createWorkspace.execute({
       name,
       icon,
-      members,
+      members: [userId],
       pages: [],
+    });
+
+    await this.addWorkspaceByUserId.execute({
+      userId,
+      workspaceId,
     });
 
     const pageId = await this.createPage.execute({

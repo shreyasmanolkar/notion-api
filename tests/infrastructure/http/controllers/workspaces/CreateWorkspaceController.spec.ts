@@ -4,6 +4,7 @@ import {
   CreatePageStub,
   GetPageByIdStub,
 } from '@tests/application/mocks/pages/use-cases';
+import { AddWorkspaceByUserIdStub } from '@tests/application/mocks/users/use-cases';
 import {
   AddPageStub,
   CreateWorkspaceStub,
@@ -18,6 +19,7 @@ type SutTypes = {
   createPageStub: CreatePageStub;
   getPageByIdStub: GetPageByIdStub;
   addPageStub: AddPageStub;
+  addWorkspaceByUserIdStub: AddWorkspaceByUserIdStub;
 };
 
 const makeSut = (): SutTypes => {
@@ -26,13 +28,15 @@ const makeSut = (): SutTypes => {
   const createPageStub = new CreatePageStub();
   const getPageByIdStub = new GetPageByIdStub();
   const addPageStub = new AddPageStub();
+  const addWorkspaceByUserIdStub = new AddWorkspaceByUserIdStub();
 
   const sut = new CreateWorkspaceController(
     validationStub,
     createWorkspaceStub,
     createPageStub,
     getPageByIdStub,
-    addPageStub
+    addPageStub,
+    addWorkspaceByUserIdStub
   );
   return {
     sut,
@@ -41,6 +45,7 @@ const makeSut = (): SutTypes => {
     createPageStub,
     getPageByIdStub,
     addPageStub,
+    addWorkspaceByUserIdStub,
   };
 };
 
@@ -65,6 +70,20 @@ describe('CreateWorkspaceController', () => {
     await sut.handle(httpRequest);
 
     expect(createWorkspaceSpy).toHaveBeenCalled();
+  });
+
+  it('should call addWorkspaceByUserId with correct params', async () => {
+    const { sut, addWorkspaceByUserIdStub } = makeSut();
+
+    const addWorkspaceByUserIdSpy = jest.spyOn(
+      addWorkspaceByUserIdStub,
+      'execute'
+    );
+
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(addWorkspaceByUserIdSpy).toHaveBeenCalled();
   });
 
   it('should call CreatePage with given params', async () => {

@@ -5,6 +5,7 @@ import { makeCreateWorkspaceValidation } from '@main/factories/controllers/works
 import { makeCreatePage } from '@main/factories/use-cases/pages/create-page-factory';
 import { makeGetPageById } from '@main/factories/use-cases/pages/get-page-by-id-factory';
 import { makeAddPage } from '@main/factories/use-cases/workspaces/add-page-factory';
+import { makeAddWorkspaceByUserId } from '@main/factories/use-cases/users/add-workspace-by-user-id-factory';
 
 export const makeCreateWorkspaceController = (): BaseController => {
   const validation = makeCreateWorkspaceValidation();
@@ -12,12 +13,14 @@ export const makeCreateWorkspaceController = (): BaseController => {
   const createPageUseCase = makeCreatePage();
   const getPageByIdUseCase = makeGetPageById();
   const addPageUseCase = makeAddPage();
+  const addWorkspaceByUserIdUseCase = makeAddWorkspaceByUserId();
 
   return new CreateWorkspaceController(
     validation,
     createWorkspaceUseCase,
     createPageUseCase,
     getPageByIdUseCase,
-    addPageUseCase
+    addPageUseCase,
+    addWorkspaceByUserIdUseCase
   );
 };
