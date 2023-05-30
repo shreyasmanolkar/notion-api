@@ -71,7 +71,7 @@ export class PageRepository
     const { value: rawPage } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(pageId) },
       {
-        $addToSet: { favorite: { userId } },
+        $addToSet: { favorite: userId },
       } as SetFields<Document>,
       { upsert: true, returnDocument: 'after' }
     );

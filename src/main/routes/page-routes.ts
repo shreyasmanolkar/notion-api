@@ -41,7 +41,7 @@ export default (router: Router): void => {
     expressRouteAdapter(makeCreatePageController())
   );
   router.post(
-    '/pages/:pageId/favorites/:userId',
+    '/pages/:pageId/favorites',
     authMiddleware,
     authorizationMiddleware,
     expressRouteAdapter(makeAddToFavoriteController())

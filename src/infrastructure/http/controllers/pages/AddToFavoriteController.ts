@@ -8,10 +8,9 @@ import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
 import { HttpResponse } from '@infrastructure/http/interfaces/HttpResponse';
 
 export namespace AddToFavoriteController {
-  export type Request = HttpRequest<
-    undefined,
-    { pageId: string; userId: string }
-  > & { workspaceId: string };
+  export type Request = HttpRequest<undefined, { pageId: string }> & {
+    userId: string;
+  } & { workspaceId: string };
   export type Response = HttpResponse<
     AddToFavoriteInterface.Response | PageNotFoundError
   >;
@@ -29,7 +28,8 @@ export class AddToFavoriteController extends BaseController {
   async execute(
     httpRequest: AddToFavoriteController.Request
   ): Promise<AddToFavoriteController.Response> {
-    const { pageId, userId } = httpRequest.params!;
+    const { pageId } = httpRequest.params!;
+    const userId = httpRequest.userId!;
     const workspaceId = httpRequest.workspaceId!;
 
     const pageOrError = await this.getPageById.execute(pageId);
