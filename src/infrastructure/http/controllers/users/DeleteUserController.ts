@@ -10,6 +10,7 @@ import { GetAllMembersByWorkspaceIdInterface } from '@application/interfaces/use
 import { RemoveMemberByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/RemoveMemberByWorkspaceIdInterface';
 import { DeleteWorkspaceInterface } from '@application/interfaces/use-cases/workspaces/DeleteWorkspaceInterface';
 import { WorkspaceNotFoundError } from '@application/errors/WorkspaceNotFoundError';
+import { DeletePagesByWorkspaceIdInterface } from '@application/interfaces/use-cases/pages/deletePagesByWorkspaceIdInterface';
 
 export namespace DeleteUserController {
   export type Request = HttpRequest<undefined, { userId: string }>;
@@ -24,6 +25,7 @@ export class DeleteUserController extends BaseController {
     private readonly getWorkspacesByUserId: GetWorkspacesByUserIdInterface,
     private readonly getAllMembersByWorkspaceId: GetAllMembersByWorkspaceIdInterface,
     private readonly removeMemberByWorkspaceId: RemoveMemberByWorkspaceIdInterface,
+    private readonly deletePagesByWorkspaceId: DeletePagesByWorkspaceIdInterface,
     private readonly deleteWorkspace: DeleteWorkspaceInterface
   ) {
     super();
@@ -49,6 +51,7 @@ export class DeleteUserController extends BaseController {
           memberId: userId,
         });
       } else {
+        await this.deletePagesByWorkspaceId.execute(workspaceId);
         await this.deleteWorkspace.execute(workspaceId);
       }
     });
