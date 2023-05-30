@@ -28,11 +28,13 @@ describe('Authenticate', () => {
   });
 
   it('should return ForbiddenError if auth token is not verified', async () => {
-    const { sut } = makesSut();
+    const { sut, jwtVerifierStub } = makesSut();
 
-    jest.spyOn(sut, 'execute').mockImplementation(async () => {
-      return new ForbiddenError();
-    });
+    jest
+      .spyOn(jwtVerifierStub, 'verifyAccessToken')
+      .mockImplementation(async () => {
+        return null;
+      });
 
     const authToken = 'sample-auth-token';
     const response = await sut.execute(authToken);
