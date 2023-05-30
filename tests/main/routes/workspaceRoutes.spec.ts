@@ -7,10 +7,7 @@ import env from '@main/config/env';
 import { Collection } from 'mongodb';
 import request from 'supertest';
 import bcrypt from 'bcrypt';
-import {
-  objectIdToString,
-  stringToObjectId,
-} from '@infrastructure/db/mongodb/helpers/mapper';
+import { objectIdToString } from '@infrastructure/db/mongodb/helpers/mapper';
 import { UserRepository } from '@infrastructure/db/mongodb/repositories/UserRepository';
 
 describe('workspace routes', () => {

@@ -8,11 +8,15 @@ import { SignInInterface } from '@application/interfaces/use-cases/users/SignInI
 import { forbidden, ok, unauthorized } from '@infrastructure/http/helpers/http';
 import { CreateWorkspaceInterface } from '@application/interfaces/use-cases/workspaces/CreateWorkspaceInterface';
 import { AddMemberByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/AddMemberByWorkspaceIdInterface';
+import { CreatePageInterface } from '@application/interfaces/use-cases/pages/createPageInterface';
+import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
+import { PageNotFoundError } from '@application/errors/PageNotFoundError';
+import { AddPageInterface } from '@application/interfaces/use-cases/workspaces/AddPageInterface';
 
 export namespace SignUpController {
   export type Request = HttpRequest<SignUpInterface.Request>;
   export type Response = HttpResponse<
-    { accessToken: string } | EmailInUseError
+    { accessToken: string } | EmailInUseError | PageNotFoundError
   >;
 }
 
@@ -22,7 +26,10 @@ export class SignUpController extends BaseController {
     private readonly signUp: SignUpInterface,
     private readonly signIn: SignInInterface,
     private readonly createWorkspace: CreateWorkspaceInterface,
-    private readonly addMemberByWorkspaceId: AddMemberByWorkspaceIdInterface
+    private readonly createPage: CreatePageInterface,
+    private readonly addMemberByWorkspaceId: AddMemberByWorkspaceIdInterface,
+    private readonly addPage: AddPageInterface,
+    private readonly getPageById: GetPageByIdInterface
   ) {
     super(signUpValidation);
   }
@@ -33,20 +40,68 @@ export class SignUpController extends BaseController {
     const { name, email, password, isDarkMode, profilePicture } =
       httpRequest.body!;
 
-    // TODO: create new page and provide it's id , reference, icon and path in workspaces
-
     const workspaceId = await this.createWorkspace.execute({
       name: 'home-workspace',
       icon: '1F3C7',
       members: [],
-      pages: [
-        {
-          id: Date.now().toString(),
-          reference: `introduction-09871237456`,
-          icon: '1F607',
-          path: null,
-        },
-      ],
+      pages: [],
+    });
+
+    const pageId = await this.createPage.execute({
+      title: 'notion clone project',
+      icon: '1F575',
+      coverPicture: {
+        url: 'http://cover-picture.com',
+      },
+      content: {
+        type: 'doc',
+        content: [
+          {
+            type: 'dBlock',
+            content: [
+              {
+                type: 'heading',
+                attrs: {
+                  level: 1,
+                },
+                content: [
+                  {
+                    type: 'text',
+                    text: 'About Notion Clone Project',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      favorite: [],
+      pageSettings: {
+        font: 'serif',
+        smallText: true,
+        fullWidth: true,
+        lock: false,
+      },
+      path: null,
+      workspaceId,
+    });
+
+    const pageOrError = await this.getPageById.execute(pageId);
+
+    if (pageOrError instanceof PageNotFoundError) {
+      return forbidden(pageOrError);
+    }
+
+    const { reference, path, icon } = pageOrError;
+
+    await this.addPage.execute({
+      workspaceId,
+      pageData: {
+        id: pageId,
+        reference,
+        path,
+        icon,
+      },
     });
 
     const workspaces = [

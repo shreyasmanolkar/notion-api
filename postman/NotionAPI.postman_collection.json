@@ -93,7 +93,7 @@
 							"variable": [
 								{
 									"key": "workspaceId",
-									"value": "1684520270462"
+									"value": "647645f49407e3558f3b8b25"
 								}
 							]
 						}
@@ -537,7 +537,7 @@
 							"variable": [
 								{
 									"key": "workspaceId",
-									"value": "646fb6fae4682ebc5d2ea32d"
+									"value": "647645f49407e3558f3b8b25"
 								}
 							]
 						}
@@ -571,7 +571,7 @@
 							"variable": [
 								{
 									"key": "workspaceId",
-									"value": "646fb6fae4682ebc5d2ea32d"
+									"value": "6475e569ac2ecf7193fe66d7"
 								}
 							]
 						}
@@ -666,7 +666,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"office-workspace\",\n    \"icon\": \"1F41A\",\n    \"members\": [\"646fb6fae4682ebc5d2ea32e\"]\n}",
+							"raw": "{\n    \"name\": \"office-workspace\",\n    \"icon\": \"1F41A\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -935,19 +935,515 @@
 			]
 		},
 		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Get Page By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "647645f49407e3558f3b8b26"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page Content",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/content",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"content"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "6475ed0c999639108e85a60f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page Settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/settings",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"settings"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "6475ed0c999639108e85a60f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Page",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"about notion clone\",\n    \"icon\": \"1F41A\",\n    \"coverPicture\": {\n        \"url\": \"http://sample-url.com\"\n    },\n    \"content\": {\n        \"type\": \"doc\",\n        \"content\": [\n            {\n                \"type\": \"dBlock\",\n                \"content\": [\n                    {\n                        \"type\": \"heading\",\n                        \"attrs\": {\n                            \"level\": 1\n                        },\n                        \"content\": [\n                            {\n                                \"type\": \"text\",\n                                \"text\": \"Welcome to notion clone\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        ]\n    },\n    \"favorite\": [],\n    \"pageSettings\": {\n      \"font\": \"serif\",\n      \"smallText\": true,\n      \"fullWidth\": true,\n      \"lock\": false\n    },\n    \"path\": null,\n    \"workspaceId\": \"6475ed0c999639108e85a60e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Page To Favorite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/favorites",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"favorites"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64763b2a92730dac4dc761ff"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Page Content",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": {\n      \"type\": \"doc\",\n      \"content\": [\n        {\n          \"type\": \"dBlock\",\n          \"content\": [\n            {\n              \"type\": \"heading\",\n              \"attrs\": {\n                \"level\": 1\n              },\n              \"content\": [\n                {\n                  \"type\": \"text\",\n                  \"text\": \"updated notion clone content\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/content",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"content"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "647645f49407e3558f3b8b26"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Page Cover",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://updated-cover-picture.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/cover",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"cover"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "6475ed76999639108e85a613"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Page Icon",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"icon\": \"A45F1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/icon",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"icon"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "6475ed76999639108e85a613"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Page Settings",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"settings\": {\n        \"font\": \"monospace\",\n        \"smallText\": false,\n        \"fullWidth\": true,\n        \"lock\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/settings",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"settings"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64763b2a92730dac4dc761ff"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Page Title",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"new updated page title\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/title",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"title"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "6475ed76999639108e85a613"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Page From Favorite",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/favorites",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"favorites"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "6475ed76999639108e85a613"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Page",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "6475ed76999639108e85a613"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pages By WorkspaceId",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/all/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"all",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": null
+								},
+								{
+									"key": "workspaceId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Sample Workspace",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}:{{port}}/workspace",
+					"raw": "{{protocol}}://{{host}}:{{port}}/test",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"workspace"
+						"test"
 					]
 				}
 			},

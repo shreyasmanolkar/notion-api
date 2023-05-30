@@ -1,5 +1,6 @@
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
 import { DeleteUserController } from '@infrastructure/http/controllers/users/DeleteUserController';
+import { makeDeletePagesByWorkspaceId } from '@main/factories/use-cases/pages/delete-pages-by-workspace-id-factory';
 import { makeDeleteUser } from '@main/factories/use-cases/users/delete-user-factory';
 import { makeGetWorkspacesByUserId } from '@main/factories/use-cases/users/get-workspaces-by-user-id-factory';
 import { makeDeleteWorkspace } from '@main/factories/use-cases/workspaces/delete-workspace-factory';
@@ -11,6 +12,7 @@ export const makeDeleteUserController = (): BaseController => {
   const getWorkspacesByUserIdUseCase = makeGetWorkspacesByUserId();
   const getAllMembersByWorkspaceIdUseCase = makeGetAllMembersByWorkspaceId();
   const removeMemberByWorkspaceIdUseCase = makeRemoveMemberByWorkspaceId();
+  const deletePagesByWorkspaceIdUseCase = makeDeletePagesByWorkspaceId();
   const deleteWorkspaceUseCase = makeDeleteWorkspace();
 
   return new DeleteUserController(
@@ -18,6 +20,7 @@ export const makeDeleteUserController = (): BaseController => {
     getWorkspacesByUserIdUseCase,
     getAllMembersByWorkspaceIdUseCase,
     removeMemberByWorkspaceIdUseCase,
+    deletePagesByWorkspaceIdUseCase,
     deleteWorkspaceUseCase
   );
 };

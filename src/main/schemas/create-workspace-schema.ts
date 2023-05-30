@@ -7,12 +7,6 @@ export const createWorkspaceSchema = {
     icon: {
       type: 'string',
     },
-    members: {
-      type: 'array',
-      items: {
-        type: 'string',
-      },
-    },
   },
-  required: ['name', 'icon', 'members'],
+  required: ['name', 'icon'],
 };
