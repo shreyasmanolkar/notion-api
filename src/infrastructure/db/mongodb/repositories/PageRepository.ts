@@ -20,7 +20,6 @@ import { UpdatePageTitleByPageIdRepository } from '@application/interfaces/repos
 import { RemoveFromFavoriteRepository } from '@application/interfaces/repositories/pages/removeFromFavoriteRepository';
 import { DeletePageRepository } from '@application/interfaces/repositories/pages/deletePageRepository';
 import { DeletePagesByWorkspaceIdRepository } from '@application/interfaces/repositories/pages/deletePagesByWorkspaceIdRepository';
-import { PageSettingsType } from '@domain/entities/Page';
 
 export class PageRepository
   implements

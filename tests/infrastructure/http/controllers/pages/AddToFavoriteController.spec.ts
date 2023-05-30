@@ -39,8 +39,9 @@ const makeFakeHttpRequest = (): HttpRequest => {
   return {
     params: {
       pageId: id,
-      userId: 'sample-user-id-2',
     },
+    userId: 'sample-user-id-2',
+    workspaceId: 'sample-workspace-id-2',
   };
 };
 
@@ -54,7 +55,8 @@ describe('AddToFavoriteController', () => {
     await sut.handle(httpRequest);
 
     expect(addToFavoriteSpy).toHaveBeenCalledWith({
-      ...httpRequest.params,
+      pageId: httpRequest.params.pageId,
+      userId: httpRequest.userId,
     });
   });
 
@@ -69,7 +71,11 @@ describe('AddToFavoriteController', () => {
     const httpRequest = makeFakeHttpRequest();
     await sut.handle(httpRequest);
 
-    expect(addPageIdToFavoritesByWorkspaceIdSpy).toHaveBeenCalled();
+    expect(addPageIdToFavoritesByWorkspaceIdSpy).toHaveBeenCalledWith({
+      userId: httpRequest.userId,
+      workspaceId: httpRequest.workspaceId,
+      pageId: httpRequest.params.pageId,
+    });
   });
 
   it('should return 404 if workspace is not found', async () => {

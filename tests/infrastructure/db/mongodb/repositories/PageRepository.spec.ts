@@ -427,12 +427,14 @@ describe('Page Repository', () => {
 
       const updatedSettings = {
         font: 'monospace',
+        smallText: true,
+        fullWidth: false,
         lock: false,
       };
 
       const updatedPage = await pageRepository.updatePageSettingsByPageId({
         pageId: objectIdToString(insertedId),
-        settings: updatedSettings,
+        pageSettings: updatedSettings,
       });
 
       expect(updatedPage.pageSettings.lock).toBe(false);

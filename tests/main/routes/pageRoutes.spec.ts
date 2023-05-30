@@ -305,17 +305,16 @@ describe('page routes', () => {
     });
   });
 
-  describe('POST /pages/:pageId/favorites/:userId', () => {
+  describe('POST /pages/:pageId/favorites', () => {
     it('should return 204 on success and user to favorite', async () => {
       const workspaceId = await getWorkspace();
       const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = await getPage(workspaceId);
-      const userId = 'new-user-id';
 
       await request(app)
-        .post(`/v1/pages/${pageId}/favorites/${userId}`)
+        .post(`/v1/pages/${pageId}/favorites`)
         .set('Authorization', `Bearer ${accessToken}`)
         .expect(204);
     });
@@ -326,10 +325,9 @@ describe('page routes', () => {
       const { accessToken } = tokens;
 
       const pageId = 'new-workspaceId';
-      const userId = 'new-user-id';
 
       await request(app)
-        .post(`/v1/pages/${pageId}/favorites/${userId}`)
+        .post(`/v1/pages/${pageId}/favorites`)
         .set('Authorization', `Bearer ${accessToken}`)
         .expect(403);
     });
@@ -491,6 +489,9 @@ describe('page routes', () => {
         .patch(`/v1/pages/${pageId}/settings`)
         .send({
           settings: {
+            font: 'monospace',
+            smallText: true,
+            fullWidth: true,
             lock: false,
           },
         })
@@ -551,17 +552,16 @@ describe('page routes', () => {
     });
   });
 
-  describe('DELETE /pages/:pageId/favorites/:userId', () => {
+  describe('DELETE /pages/:pageId/favorites', () => {
     it('should return 204 on success and remove member', async () => {
       const workspaceId = await getWorkspace();
       const tokens = await getTokens(workspaceId);
       const { accessToken } = tokens;
 
       const pageId = await getPage(workspaceId);
-      const userId = 'new-sample-user';
 
       await request(app)
-        .delete(`/v1/pages/${pageId}/favorites/${userId}`)
+        .delete(`/v1/pages/${pageId}/favorites`)
         .set('Authorization', `Bearer ${accessToken}`)
         .expect(204);
     });
@@ -572,10 +572,9 @@ describe('page routes', () => {
       const { accessToken } = tokens;
 
       const pageId = 'non-existing-id';
-      const userId = 'new-sample-user';
 
       await request(app)
-        .delete(`/v1/pages/${pageId}/favorites/${userId}`)
+        .delete(`/v1/pages/${pageId}/favorites`)
         .set('Authorization', `Bearer ${accessToken}`)
         .expect(403);
     });

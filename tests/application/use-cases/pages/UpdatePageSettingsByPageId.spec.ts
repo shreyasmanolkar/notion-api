@@ -41,7 +41,7 @@ describe('updatePageSettingsByPageId', () => {
     });
     expect(updatePageSettingsByPageIdRepositorySpy).toHaveBeenCalledWith({
       pageId: id,
-      settings: pageSettings,
+      pageSettings,
     });
   });
 

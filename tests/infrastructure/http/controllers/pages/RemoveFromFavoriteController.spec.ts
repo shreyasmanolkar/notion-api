@@ -40,8 +40,9 @@ const makeFakeHttpRequest = (): HttpRequest => {
   return {
     params: {
       pageId: id,
-      userId: 'sample-user-id-1',
     },
+    userId: 'sample-user-id-1',
+    workspaceId: 'sample-workspace-id',
   };
 };
 
@@ -55,7 +56,8 @@ describe('RemoveFromFavoriteController', () => {
     await sut.handle(httpRequest);
 
     expect(removeFromFavoriteSpy).toHaveBeenCalledWith({
-      ...httpRequest.params,
+      pageId: httpRequest.params.pageId,
+      userId: httpRequest.userId,
     });
   });
 
@@ -70,7 +72,11 @@ describe('RemoveFromFavoriteController', () => {
     const httpRequest = makeFakeHttpRequest();
     await sut.handle(httpRequest);
 
-    expect(removePageIdFromFavoritesByWorkspaceIdSpy).toHaveBeenCalled();
+    expect(removePageIdFromFavoritesByWorkspaceIdSpy).toHaveBeenCalledWith({
+      userId: httpRequest.userId,
+      workspaceId: httpRequest.workspaceId,
+      pageId: httpRequest.params.pageId,
+    });
   });
 
   it('should return 404 if page is not found', async () => {
