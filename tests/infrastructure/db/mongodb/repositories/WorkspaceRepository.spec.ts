@@ -22,7 +22,7 @@ describe('Workspace Repository', () => {
   });
 
   describe('CreateWorkspace', () => {
-    it('should create a new user and return an id on success', async () => {
+    it('should create a new workspace and return an id on success', async () => {
       const workspaceRepository = new WorkspaceRepository();
 
       const { name, icon, members, pages } = mockWorkspace();

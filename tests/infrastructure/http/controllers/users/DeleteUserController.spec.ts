@@ -10,6 +10,7 @@ import {
   GetAllMembersByWorkspaceIdStub,
   RemoveMemberByWorkspaceIdStub,
 } from '@tests/application/mocks/workspaces/use-cases';
+import { DeletePagesByWorkspaceIdStub } from '@tests/application/mocks/pages/use-cases';
 
 type SutTypes = {
   sut: DeleteUserController;
@@ -17,6 +18,7 @@ type SutTypes = {
   getWorkspaceByUserIdStub: GetWorkspacesByUserIdStub;
   getAllMembersByWorkspaceIdStub: GetAllMembersByWorkspaceIdStub;
   removeMemberByWorkspaceIdStub: RemoveMemberByWorkspaceIdStub;
+  deletePagesByWorkspaceIdStub: DeletePagesByWorkspaceIdStub;
   deleteWorkspaceStub: DeleteWorkspaceStub;
 };
 
@@ -25,12 +27,15 @@ const makeSut = (): SutTypes => {
   const getWorkspaceByUserIdStub = new GetWorkspacesByUserIdStub();
   const getAllMembersByWorkspaceIdStub = new GetAllMembersByWorkspaceIdStub();
   const removeMemberByWorkspaceIdStub = new RemoveMemberByWorkspaceIdStub();
+  const deletePagesByWorkspaceIdStub = new DeletePagesByWorkspaceIdStub();
   const deleteWorkspaceStub = new DeleteWorkspaceStub();
+
   const sut = new DeleteUserController(
     deleteUserStub,
     getWorkspaceByUserIdStub,
     getAllMembersByWorkspaceIdStub,
     removeMemberByWorkspaceIdStub,
+    deletePagesByWorkspaceIdStub,
     deleteWorkspaceStub
   );
 
@@ -40,6 +45,7 @@ const makeSut = (): SutTypes => {
     getWorkspaceByUserIdStub,
     getAllMembersByWorkspaceIdStub,
     removeMemberByWorkspaceIdStub,
+    deletePagesByWorkspaceIdStub,
     deleteWorkspaceStub,
   };
 };
@@ -102,6 +108,21 @@ describe('DeleteUserController', () => {
     await sut.handle(httpRequest);
 
     expect(deleteWorkspaceSpy).toHaveBeenCalledWith('112233445566778899bbccaa');
+  });
+
+  it('should call deleteWorkspace with given params', async () => {
+    const { sut, deletePagesByWorkspaceIdStub } = makeSut();
+
+    const deletePagesByWorkspaceIdSpy = jest.spyOn(
+      deletePagesByWorkspaceIdStub,
+      'execute'
+    );
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(deletePagesByWorkspaceIdSpy).toHaveBeenCalledWith(
+      '112233445566778899bbccaa'
+    );
   });
 
   it('should call removeMemberByWorkspaceId with given params', async () => {
