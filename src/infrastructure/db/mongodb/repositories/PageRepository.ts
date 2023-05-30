@@ -20,6 +20,7 @@ import { UpdatePageTitleByPageIdRepository } from '@application/interfaces/repos
 import { RemoveFromFavoriteRepository } from '@application/interfaces/repositories/pages/removeFromFavoriteRepository';
 import { DeletePageRepository } from '@application/interfaces/repositories/pages/deletePageRepository';
 import { DeletePagesByWorkspaceIdRepository } from '@application/interfaces/repositories/pages/deletePagesByWorkspaceIdRepository';
+import { PageSettingsType } from '@domain/entities/Page';
 
 export class PageRepository
   implements
@@ -191,11 +192,11 @@ export class PageRepository
     params: UpdatePageSettingsByPageIdRepository.Request
   ): Promise<UpdatePageSettingsByPageIdRepository.Response> {
     const collection = await PageRepository.getCollection();
-    const { pageId, settings } = params;
+    const { pageId, pageSettings } = params;
 
     const { value: rawPageContent } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(pageId) },
-      { $set: { pageSettings: { ...settings } } },
+      { $set: { pageSettings: { ...pageSettings } } },
       { upsert: true, returnDocument: 'after' }
     );
 

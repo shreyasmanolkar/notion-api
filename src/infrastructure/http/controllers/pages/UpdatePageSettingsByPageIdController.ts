@@ -10,7 +10,7 @@ import { noContent, notFound } from '@infrastructure/http/helpers/http';
 
 export namespace UpdatePageSettingsByPageIdController {
   export type Request = HttpRequest<
-    { settings: Partial<PageSettingsType> },
+    { settings: PageSettingsType },
     { pageId: string }
   >;
   export type Response = HttpResponse<undefined | PageNotFoundError>;

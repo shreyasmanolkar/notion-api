@@ -11,7 +11,7 @@ export namespace RemoveFromFavoriteController {
   export type Request = HttpRequest<
     undefined,
     { pageId: string; userId: string }
-  > & { workspaceId: string };
+  > & { userId: string } & { workspaceId: string };
   export type Response = HttpResponse<undefined | PageNotFoundError>;
 }
 
@@ -27,7 +27,8 @@ export class RemoveFromFavoriteController extends BaseController {
   async execute(
     httpRequest: RemoveFromFavoriteController.Request
   ): Promise<RemoveFromFavoriteController.Response> {
-    const { pageId, userId } = httpRequest.params!;
+    const { pageId } = httpRequest.params!;
+    const userId = httpRequest.userId!;
     const workspaceId = httpRequest.workspaceId!;
 
     const pageOrError = await this.getPageById.execute(pageId);

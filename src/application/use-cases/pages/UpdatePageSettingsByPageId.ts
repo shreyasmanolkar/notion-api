@@ -26,7 +26,7 @@ export class UpdatePageSettingsByPageId
       await this.updatePageSettingsByPageIdRepository.updatePageSettingsByPageId(
         {
           pageId,
-          settings,
+          pageSettings: settings,
         }
       );
 

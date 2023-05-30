@@ -77,7 +77,7 @@ export default (router: Router): void => {
     expressRouteAdapter(makeUpdatePageTitleByPageIdController())
   );
   router.delete(
-    '/pages/:pageId/favorites/:userId',
+    '/pages/:pageId/favorites',
     authMiddleware,
     authorizationMiddleware,
     expressRouteAdapter(makeRemoveFromFavoriteController())

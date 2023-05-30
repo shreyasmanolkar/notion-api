@@ -17,7 +17,7 @@ export const updatePageSettingsSchema = {
           type: 'boolean',
         },
       },
-      required: [],
+      required: ['font', 'smallText', 'fullWidth', 'lock'],
     },
   },
   required: ['settings'],
