@@ -6,24 +6,31 @@ import {
   GetPageByIdStub,
   RemoveFromFavoriteStub,
 } from '@tests/application/mocks/pages/use-cases';
+import { RemovePageIdFromFavoritesByWorkspaceIdStub } from '@tests/application/mocks/users/use-cases';
 import mockPage from '@tests/domain/mock-page';
 
 type SutTypes = {
   sut: RemoveFromFavoriteController;
   getPageByIdStub: GetPageByIdStub;
   removeFromFavoriteStub: RemoveFromFavoriteStub;
+  removePageIdFromFavoritesByWorkspaceIdStub: RemovePageIdFromFavoritesByWorkspaceIdStub;
 };
 
 const makeSut = (): SutTypes => {
   const getPageByIdStub = new GetPageByIdStub();
   const removeFromFavoriteStub = new RemoveFromFavoriteStub();
+  const removePageIdFromFavoritesByWorkspaceIdStub =
+    new RemovePageIdFromFavoritesByWorkspaceIdStub();
+
   const sut = new RemoveFromFavoriteController(
     getPageByIdStub,
-    removeFromFavoriteStub
+    removeFromFavoriteStub,
+    removePageIdFromFavoritesByWorkspaceIdStub
   );
   return {
     getPageByIdStub,
     removeFromFavoriteStub,
+    removePageIdFromFavoritesByWorkspaceIdStub,
     sut,
   };
 };
@@ -50,6 +57,20 @@ describe('RemoveFromFavoriteController', () => {
     expect(removeFromFavoriteSpy).toHaveBeenCalledWith({
       ...httpRequest.params,
     });
+  });
+
+  it('should call removePageIdFromFavoritesByWorkspaceId with correct params', async () => {
+    const { sut, removePageIdFromFavoritesByWorkspaceIdStub } = makeSut();
+
+    const removePageIdFromFavoritesByWorkspaceIdSpy = jest.spyOn(
+      removePageIdFromFavoritesByWorkspaceIdStub,
+      'execute'
+    );
+
+    const httpRequest = makeFakeHttpRequest();
+    await sut.handle(httpRequest);
+
+    expect(removePageIdFromFavoritesByWorkspaceIdSpy).toHaveBeenCalled();
   });
 
   it('should return 404 if page is not found', async () => {

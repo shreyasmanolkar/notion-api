@@ -5,19 +5,21 @@ import { BaseController } from '@infrastructure/http/controllers/BaseController'
 import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
 import { RemoveFromFavoriteInterface } from '@application/interfaces/use-cases/pages/removeFromFavoriteInterface';
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
+import { RemovePageIdFromFavoritesByWorkspaceIdInterface } from '@application/interfaces/use-cases/users/RemovePageIdFromFavoritesByWorkspaceIdInterface';
 
 export namespace RemoveFromFavoriteController {
   export type Request = HttpRequest<
     undefined,
     { pageId: string; userId: string }
-  >;
+  > & { workspaceId: string };
   export type Response = HttpResponse<undefined | PageNotFoundError>;
 }
 
 export class RemoveFromFavoriteController extends BaseController {
   constructor(
     private readonly getPageById: GetPageByIdInterface,
-    private readonly removeFromFavorite: RemoveFromFavoriteInterface
+    private readonly removeFromFavorite: RemoveFromFavoriteInterface,
+    private readonly removePageIdFromFavoritesByWorkspaceId: RemovePageIdFromFavoritesByWorkspaceIdInterface
   ) {
     super();
   }
@@ -26,12 +28,19 @@ export class RemoveFromFavoriteController extends BaseController {
     httpRequest: RemoveFromFavoriteController.Request
   ): Promise<RemoveFromFavoriteController.Response> {
     const { pageId, userId } = httpRequest.params!;
+    const workspaceId = httpRequest.workspaceId!;
 
     const pageOrError = await this.getPageById.execute(pageId);
 
     if (pageOrError instanceof PageNotFoundError) {
       return notFound(pageOrError);
     }
+
+    await this.removePageIdFromFavoritesByWorkspaceId.execute({
+      userId,
+      workspaceId,
+      pageId,
+    });
 
     await this.removeFromFavorite.execute({
       pageId,
