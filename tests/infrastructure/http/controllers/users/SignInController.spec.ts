@@ -1,6 +1,5 @@
 import { InvalidPasswordError } from '@application/errors/InvalidPasswordError';
 import { InvalidUserError } from '@application/errors/InvalidUserError';
-import { UnauthorizedError } from '@application/errors/UnauthorizedError';
 import { SignInController } from '@infrastructure/http/controllers/users/SignInController';
 import { ok, unauthorized } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
