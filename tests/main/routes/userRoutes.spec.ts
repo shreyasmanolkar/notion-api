@@ -128,7 +128,7 @@ describe('user routes', () => {
             url: 'sample-url',
           },
         })
-        .expect(403);
+        .expect(409);
     });
 
     it('should return 400 on not passing required fields', async () => {

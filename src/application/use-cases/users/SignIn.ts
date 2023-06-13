@@ -1,4 +1,5 @@
-import { UnauthorizedError } from '@application/errors/UnauthorizedError';
+import { InvalidPasswordError } from '@application/errors/InvalidPasswordError';
+import { InvalidUserError } from '@application/errors/InvalidUserError';
 import { HashComparer } from '@application/interfaces/cryptography/HashCompare';
 import { JWTGenerator } from '@application/interfaces/cryptography/JWTGenerator';
 import { CreateTokenRepository } from '@application/interfaces/repositories/tokens/createTokenRepository';
@@ -20,7 +21,7 @@ export class SignIn implements SignInInterface {
     const user = await this.loadUserByEmailRepository.loadUserByEmail(email);
 
     if (!user) {
-      return new UnauthorizedError();
+      return new InvalidUserError();
     }
 
     const isPasswordValid = await this.hashComparer.compare(
@@ -29,7 +30,7 @@ export class SignIn implements SignInInterface {
     );
 
     if (!isPasswordValid) {
-      return new UnauthorizedError();
+      return new InvalidPasswordError();
     }
 
     const accessToken = await this.jwtGenerator.generateAccessToken(user.id);

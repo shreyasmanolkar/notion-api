@@ -5,7 +5,12 @@ import { HttpResponse } from '@infrastructure/http/interfaces/HttpResponse';
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
 import { Validation } from '@infrastructure/http/interfaces/Validation';
 import { SignInInterface } from '@application/interfaces/use-cases/users/SignInInterface';
-import { forbidden, ok, unauthorized } from '@infrastructure/http/helpers/http';
+import {
+  conflict,
+  forbidden,
+  ok,
+  unauthorized,
+} from '@infrastructure/http/helpers/http';
 import { CreateWorkspaceInterface } from '@application/interfaces/use-cases/workspaces/CreateWorkspaceInterface';
 import { AddMemberByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/AddMemberByWorkspaceIdInterface';
 import { CreatePageInterface } from '@application/interfaces/use-cases/pages/createPageInterface';
@@ -121,7 +126,7 @@ export class SignUpController extends BaseController {
     });
 
     if (idOrError instanceof EmailInUseError) {
-      return forbidden(idOrError);
+      return conflict(idOrError);
     }
 
     await this.addMemberByWorkspaceId.execute({

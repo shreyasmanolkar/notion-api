@@ -2,7 +2,12 @@ import { EmailInUseError } from '@application/errors/EmailInUseError';
 import { PageNotFoundError } from '@application/errors/PageNotFoundError';
 import { UnauthorizedError } from '@application/errors/UnauthorizedError';
 import { SignUpController } from '@infrastructure/http/controllers/users/SignUpController';
-import { forbidden, ok, unauthorized } from '@infrastructure/http/helpers/http';
+import {
+  conflict,
+  forbidden,
+  ok,
+  unauthorized,
+} from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
 import {
   CreatePageStub,
@@ -205,7 +210,7 @@ describe('SignUpController', () => {
     expect(addMemberByWorkspaceIdSpy).toBeCalled();
   });
 
-  it('should return 403 if email is in use', async () => {
+  it('should return 409 if email is in use', async () => {
     const { sut, signUpStub } = makeSut();
 
     jest.spyOn(signUpStub, 'execute').mockImplementation(async () => {
@@ -214,7 +219,7 @@ describe('SignUpController', () => {
 
     const httpResponse = await sut.handle(makeFakeHttpRequest());
 
-    expect(httpResponse).toEqual(forbidden(new EmailInUseError()));
+    expect(httpResponse).toEqual(conflict(new EmailInUseError()));
   });
 
   it('should return 403 if authentication fails', async () => {
