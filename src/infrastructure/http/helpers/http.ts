@@ -39,6 +39,11 @@ export const forbidden = (error: Error): HttpResponse<Error> => ({
   body: error,
 });
 
+export const conflict = (error: Error): HttpResponse<Error> => ({
+  statusCode: 409,
+  body: error,
+});
+
 export const notFound = (error: Error): HttpResponse<Error> => ({
   statusCode: 404,
   body: error,

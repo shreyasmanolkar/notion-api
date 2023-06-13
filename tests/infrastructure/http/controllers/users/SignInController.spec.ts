@@ -1,4 +1,5 @@
-import { UnauthorizedError } from '@application/errors/UnauthorizedError';
+import { InvalidPasswordError } from '@application/errors/InvalidPasswordError';
+import { InvalidUserError } from '@application/errors/InvalidUserError';
 import { SignInController } from '@infrastructure/http/controllers/users/SignInController';
 import { ok, unauthorized } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
@@ -51,12 +52,24 @@ describe('SignInController', () => {
     const { sut, signInStub } = makeSut();
 
     jest.spyOn(signInStub, 'execute').mockImplementation(async () => {
-      return new UnauthorizedError();
+      return new InvalidUserError();
     });
 
     const httpResponse = await sut.handle(makeFakeHttpRequest());
 
-    expect(httpResponse).toEqual(unauthorized(new UnauthorizedError()));
+    expect(httpResponse).toEqual(unauthorized(new InvalidUserError()));
+  });
+
+  it('should return 403 if authentication fails', async () => {
+    const { sut, signInStub } = makeSut();
+
+    jest.spyOn(signInStub, 'execute').mockImplementation(async () => {
+      return new InvalidPasswordError();
+    });
+
+    const httpResponse = await sut.handle(makeFakeHttpRequest());
+
+    expect(httpResponse).toEqual(unauthorized(new InvalidPasswordError()));
   });
 
   it('should return 200 on success', async () => {
