@@ -41,7 +41,11 @@ export default (router: Router): void => {
     authMiddleware,
     expressRouteRemoveCookieAdapter(makeSignOutController())
   );
-  router.post('/register', expressRouteAdapter(makeSignUpController()));
+  // router.post('/register', expressRouteAdapter(makeSignUpController()));
+  router.post(
+    '/register',
+    expressRouteSetCookieAdapter(makeSignUpController())
+  );
   router.post(
     '/users/:userId/workspaces-access/:workspaceId',
     authMiddleware,

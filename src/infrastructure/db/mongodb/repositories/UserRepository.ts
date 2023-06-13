@@ -97,9 +97,12 @@ export class UserRepository
     }
 
     const collection = await UserRepository.getCollection();
-    const rawUser = await collection.findOne({
-      _id: stringToObjectId(userId),
-    });
+    const rawUser = await collection.findOne(
+      {
+        _id: stringToObjectId(userId),
+      },
+      { projection: { password: 0 } }
+    );
     return rawUser && mapDocument(rawUser);
   }
 

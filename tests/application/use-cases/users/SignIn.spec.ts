@@ -1,4 +1,5 @@
-import { UnauthorizedError } from '@application/errors/UnauthorizedError';
+import { InvalidPasswordError } from '@application/errors/InvalidPasswordError';
+import { InvalidUserError } from '@application/errors/InvalidUserError';
 import { SignIn } from '@application/use-cases/users/SignIn';
 import mockUser from '@tests/domain/mock-user';
 import { CreateTokenRepositoryStub } from '@tests/infrastructure/mocks/tokens/repositories';
@@ -60,7 +61,7 @@ describe('SignIn', () => {
     const { email, password } = mockUser();
     const response = await sut.execute({ email, password });
 
-    expect(response).toEqual(new UnauthorizedError());
+    expect(response).toEqual(new InvalidUserError());
   });
 
   it('should return UnauthorizedError if password is not valid', async () => {
@@ -73,7 +74,7 @@ describe('SignIn', () => {
     const { email, password } = mockUser();
     const response = await sut.execute({ email, password });
 
-    expect(response).toEqual(new UnauthorizedError());
+    expect(response).toEqual(new InvalidPasswordError());
   });
 
   it('should call createTokenRepository with correct data', async () => {
