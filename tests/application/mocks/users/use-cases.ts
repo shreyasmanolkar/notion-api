@@ -91,6 +91,8 @@ export class GetWorkspacesByUserIdStub
     return [
       {
         workspaceId: '112233445566778899bbccaa',
+        workspaceName: 'sample-name',
+        workspaceIcon: '1F3C7',
         favorites: ['sample-page-id'],
       },
     ];

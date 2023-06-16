@@ -36,6 +36,10 @@ const makeFakeHttpRequest = (): HttpRequest => {
       userId: id,
       workspaceId: 'sample-workspace-id-2',
     },
+    body: {
+      workspaceName: 'sample-workspace',
+      workspaceIcon: '1f30e',
+    },
   };
 };
 
@@ -54,6 +58,7 @@ describe('AddWorkspaceByUserIdController', () => {
 
     expect(addWorkspaceByUserIdSpy).toHaveBeenCalledWith({
       ...httpRequest.params,
+      ...httpRequest.body,
     });
   });
 

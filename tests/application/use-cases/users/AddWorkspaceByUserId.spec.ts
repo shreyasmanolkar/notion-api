@@ -36,19 +36,26 @@ describe('AddWorkspaceByUserId', () => {
       'addWorkspaceByUserId'
     );
     const { id, workspaces } = mockUser();
-    const { workspaceId } = workspaces[0];
-    await sut.execute({ userId: id, workspaceId });
+    const { workspaceId, workspaceName, workspaceIcon } = workspaces[0];
+    await sut.execute({
+      userId: id,
+      workspaceId,
+      workspaceName,
+      workspaceIcon,
+    });
 
     expect(addWorkspaceByUserIdRepositorySpy).toHaveBeenCalledWith({
       userId: id,
       workspaceId,
+      workspaceName,
+      workspaceIcon,
     });
   });
 
   it('should return user not found error if user is not found', async () => {
     const { sut, getUserByIdRepositoryStub } = makesSut();
     const { workspaces } = mockUser();
-    const { workspaceId } = workspaces[0];
+    const { workspaceId, workspaceName, workspaceIcon } = workspaces[0];
 
     jest
       .spyOn(getUserByIdRepositoryStub, 'getUserById')
@@ -57,6 +64,8 @@ describe('AddWorkspaceByUserId', () => {
     const response = await sut.execute({
       userId: 'other_user_id',
       workspaceId,
+      workspaceName,
+      workspaceIcon,
     });
 
     expect(response).toEqual(new UserNotFoundError());

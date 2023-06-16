@@ -110,7 +110,7 @@ describe('SignUpController', () => {
     expect(createWorkspaceSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         name: 'home-workspace',
-        icon: '1F3C7',
+        icon: '1f30e',
         members: [],
         pages: [],
       })

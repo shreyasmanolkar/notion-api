@@ -53,11 +53,18 @@ export class UserRepository
     params: AddWorkspaceByUserIdRepository.Request
   ): Promise<AddWorkspaceByUserIdRepository.Response> {
     const collection = await UserRepository.getCollection();
-    const { userId, workspaceId } = params;
+    const { userId, workspaceId, workspaceName, workspaceIcon } = params;
     const { value: rawUser } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(userId) },
       {
-        $addToSet: { workspaces: { workspaceId, favorites: [] } },
+        $addToSet: {
+          workspaces: {
+            workspaceId,
+            workspaceName,
+            workspaceIcon,
+            favorites: [],
+          },
+        },
       } as SetFields<Document>,
       { upsert: true, returnDocument: 'after' }
     );

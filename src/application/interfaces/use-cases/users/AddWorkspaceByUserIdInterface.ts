@@ -5,6 +5,8 @@ export namespace AddWorkspaceByUserIdInterface {
   export type Request = {
     userId: string;
     workspaceId: string;
+    workspaceName: string;
+    workspaceIcon: string;
   };
   export type Response = void | UserNotFoundError;
 }
