@@ -12,7 +12,7 @@ export class AddWorkspaceByUserId implements AddWorkspaceByUserIdInterface {
   async execute(
     params: AddWorkspaceByUserIdInterface.Request
   ): Promise<AddWorkspaceByUserIdInterface.Response> {
-    const { userId, workspaceId } = params;
+    const { userId, workspaceId, workspaceName, workspaceIcon } = params;
 
     const user = await this.getUserByIdRepository.getUserById(userId);
 
@@ -23,6 +23,8 @@ export class AddWorkspaceByUserId implements AddWorkspaceByUserIdInterface {
     await this.addWorkspaceByUserIdRepository.addWorkspaceByUserId({
       userId,
       workspaceId,
+      workspaceName,
+      workspaceIcon,
     });
   }
 }

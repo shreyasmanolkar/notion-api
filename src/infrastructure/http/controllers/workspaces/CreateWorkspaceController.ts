@@ -45,6 +45,8 @@ export class CreateWorkspaceController extends BaseController {
     await this.addWorkspaceByUserId.execute({
       userId,
       workspaceId,
+      workspaceName: name,
+      workspaceIcon: icon,
     });
 
     const pageId = await this.createPage.execute({

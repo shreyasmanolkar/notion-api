@@ -45,7 +45,7 @@ describe('User Repository', () => {
   });
 
   describe('AddWorkspaceByUserId', () => {
-    it('should add provided workspaceId in users workspaces along with favorites empty array and return user', async () => {
+    it('should add provided workspaceId in users workspaces along with favorites, worksapaceIcon and WorkspaceName and return user', async () => {
       const userRepository = new UserRepository();
 
       const { name, email, password, isDarkMode, profilePicture, workspaces } =
@@ -61,10 +61,14 @@ describe('User Repository', () => {
       });
 
       const workspaceId = 'sample-workspaceId-2';
+      const workspaceName = 'sample-workspace';
+      const workspaceIcon = 'ICON';
 
       const updatedUser = await userRepository.addWorkspaceByUserId({
         userId: objectIdToString(insertedId),
         workspaceId,
+        workspaceName,
+        workspaceIcon,
       });
 
       expect(updatedUser.workspaces).toHaveLength(2);
