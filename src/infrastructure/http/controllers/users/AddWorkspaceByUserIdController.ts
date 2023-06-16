@@ -28,6 +28,7 @@ export class AddWorkspaceByUserIdController extends BaseController {
     httpRequest: AddWorkspaceByUserIdController.Request
   ): Promise<AddWorkspaceByUserIdController.Response> {
     const { userId, workspaceId } = httpRequest.params!;
+    const { workspaceName, workspaceIcon } = httpRequest.body!;
 
     const userOrError = await this.getUserById.execute(userId);
 
@@ -38,6 +39,8 @@ export class AddWorkspaceByUserIdController extends BaseController {
     await this.addWorkspaceByUserId.execute({
       userId,
       workspaceId,
+      workspaceName,
+      workspaceIcon,
     });
 
     return noContent();

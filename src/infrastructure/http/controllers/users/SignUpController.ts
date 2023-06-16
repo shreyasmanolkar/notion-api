@@ -45,12 +45,14 @@ export class SignUpController extends BaseController {
     const { name, email, password, isDarkMode, profilePicture } =
       httpRequest.body!;
 
-    const workspaceId = await this.createWorkspace.execute({
+    const workspace = {
       name: 'home-workspace',
-      icon: '1F3C7',
+      icon: '1f30e',
       members: [],
       pages: [],
-    });
+    };
+
+    const workspaceId = await this.createWorkspace.execute(workspace);
 
     const pageId = await this.createPage.execute({
       title: 'notion clone project',
@@ -112,6 +114,8 @@ export class SignUpController extends BaseController {
     const workspaces = [
       {
         workspaceId,
+        workspaceName: workspace.name,
+        workspaceIcon: workspace.icon,
         favorites: [],
       },
     ];

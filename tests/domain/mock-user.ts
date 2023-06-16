@@ -13,6 +13,8 @@ const mockUser = (): User => {
     workspaces: [
       {
         workspaceId: '112233445566778899bbccaa',
+        workspaceName: 'sample-name',
+        workspaceIcon: '1f30e',
         favorites: ['sample-page-1'],
       },
     ],
