@@ -27,8 +27,11 @@ export class GetAccessToken implements GetAccessTokenInterface {
       return new ForbiddenError();
     }
 
+    const stringifyDecodedToken = JSON.stringify(decodedToken);
+    const parsedDecodedToken = JSON.parse(stringifyDecodedToken);
+
     const accessToken = await this.jwtGenerator.generateAccessToken(
-      decodedToken
+      parsedDecodedToken.userId
     );
 
     return {
