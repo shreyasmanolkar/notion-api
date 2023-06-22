@@ -12,6 +12,7 @@ import { RemovePageIdFromFavoritesByWorkspaceIdRepository } from '@application/i
 import { RemoveWorkspaceByUserIdRepository } from '@application/interfaces/repositories/users/removeWorkspaceByUserIdRepository';
 import { UpdateUserProfilePictureRepository } from '@application/interfaces/repositories/users/updateUserProfilePictureRepository';
 import { UpdateUserRepository } from '@application/interfaces/repositories/users/updateUserRepository';
+import { UpdateUserWorkspaceMetaDataByWorkspaceIdRepository } from '@application/interfaces/repositories/users/updateUserWorkspaceMetaDataByWorkspaceIdRepository';
 import mockUser from '@tests/domain/mock-user';
 
 export class CreateUserRepositoryStub implements CreateUserRepository {
@@ -100,6 +101,15 @@ export class UpdateUserProfilePictureRepositoryStub
   ): Promise<UpdateUserProfilePictureRepository.Response> {
     return mockUser();
   }
+}
+
+export class UpdateUserWorkspaceMetaDataByWorkspaceIdRepositoryStub
+  implements UpdateUserWorkspaceMetaDataByWorkspaceIdRepository
+{
+  async updateUserWorkspaceMetaDataByWorkspaceId(
+    _params: UpdateUserWorkspaceMetaDataByWorkspaceIdRepository.Request
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+  ): Promise<UpdateUserWorkspaceMetaDataByWorkspaceIdRepository.Response> {}
 }
 
 export class RemoveWorkspaceByUserIdRepositoryStub
