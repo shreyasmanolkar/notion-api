@@ -6,6 +6,8 @@ import { noContent, notFound } from '@infrastructure/http/helpers/http';
 import { GetWorkspaceByIdInterface } from '@application/interfaces/use-cases/workspaces/GetWorkspaceByIdInterface';
 import { DeleteWorkspaceInterface } from '@application/interfaces/use-cases/workspaces/DeleteWorkspaceInterface';
 import { DeletePagesByWorkspaceIdInterface } from '@application/interfaces/use-cases/pages/deletePagesByWorkspaceIdInterface';
+import { RemoveWorkspaceByUserIdInterface } from '@application/interfaces/use-cases/users/RemoveWorkspaceByUserIdInterface';
+import { GetAllMembersByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/GetAllMembersByWorkspaceIdInterface';
 
 export namespace DeleteWorkspaceController {
   export type Request = HttpRequest<undefined, { workspaceId: string }>;
@@ -16,7 +18,9 @@ export class DeleteWorkspaceController extends BaseController {
   constructor(
     private readonly getWorkspaceById: GetWorkspaceByIdInterface,
     private readonly deletePagesByWorkspaceId: DeletePagesByWorkspaceIdInterface,
-    private readonly deleteWorkspace: DeleteWorkspaceInterface
+    private readonly deleteWorkspace: DeleteWorkspaceInterface,
+    private readonly getAllMembersByWorkspaceId: GetAllMembersByWorkspaceIdInterface,
+    private readonly removeWorkspaceByUserId: RemoveWorkspaceByUserIdInterface
   ) {
     super();
   }
@@ -35,6 +39,21 @@ export class DeleteWorkspaceController extends BaseController {
     await this.deletePagesByWorkspaceId.execute(workspaceId);
 
     await this.deleteWorkspace.execute(workspaceId);
+
+    const membersOrError = await this.getAllMembersByWorkspaceId.execute(
+      workspaceId
+    );
+
+    if (membersOrError instanceof WorkspaceNotFoundError) {
+      return notFound(membersOrError);
+    }
+
+    membersOrError?.forEach(member => {
+      this.removeWorkspaceByUserId.execute({
+        userId: member,
+        workspaceId,
+      });
+    });
 
     return noContent();
   }
