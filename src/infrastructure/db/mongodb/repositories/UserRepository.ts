@@ -15,6 +15,7 @@ import { GetWorkspacesByUserIdRepository } from '@application/interfaces/reposit
 import { GetFavoritesByWorkspaceIdRepository } from '@application/interfaces/repositories/users/getFavoritesByWorkspaceIdRepository';
 import { UpdateUserRepository } from '@application/interfaces/repositories/users/updateUserRepository';
 import { UpdateUserProfilePictureRepository } from '@application/interfaces/repositories/users/updateUserProfilePictureRepository';
+import { UpdateUserWorkspaceMetaDataByWorkspaceIdRepository } from '@application/interfaces/repositories/users/updateUserWorkspaceMetaDataByWorkspaceIdRepository';
 import { RemoveWorkspaceByUserIdRepository } from '@application/interfaces/repositories/users/removeWorkspaceByUserIdRepository';
 import { RemovePageIdFromFavoritesByWorkspaceIdRepository } from '@application/interfaces/repositories/users/removePageIdFromFavoritesByWorkspaceIdRepository';
 import { DeleteUserRepository } from '@application/interfaces/repositories/users/deleteUserRepository';
@@ -30,6 +31,7 @@ export class UserRepository
     GetFavoritesByWorkspaceIdRepository,
     UpdateUserRepository,
     UpdateUserProfilePictureRepository,
+    UpdateUserWorkspaceMetaDataByWorkspaceIdRepository,
     RemoveWorkspaceByUserIdRepository,
     RemovePageIdFromFavoritesByWorkspaceIdRepository,
     DeleteUserRepository
@@ -186,6 +188,29 @@ export class UserRepository
     );
 
     return mapDocument(rawUser);
+  }
+
+  async updateUserWorkspaceMetaDataByWorkspaceId(
+    params: UpdateUserWorkspaceMetaDataByWorkspaceIdRepository.Request
+  ): Promise<UpdateUserWorkspaceMetaDataByWorkspaceIdRepository.Response> {
+    const collection = await UserRepository.getCollection();
+    const { userId, workspaceId, workspaceData } = params;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const updatedFields: Record<string, any> = {};
+
+    if (workspaceData.workspaceName) {
+      updatedFields['workspaces.$.workspaceName'] = workspaceData.workspaceName;
+    }
+
+    if (workspaceData.workspaceIcon) {
+      updatedFields['workspaces.$.workspaceIcon'] = workspaceData.workspaceIcon;
+    }
+
+    await collection.updateOne(
+      { _id: stringToObjectId(userId), 'workspaces.workspaceId': workspaceId },
+      { $set: updatedFields }
+    );
   }
 
   async removeWorkspaceByUserId(
