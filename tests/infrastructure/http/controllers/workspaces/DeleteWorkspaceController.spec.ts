@@ -3,8 +3,10 @@ import { DeleteWorkspaceController } from '@infrastructure/http/controllers/work
 import { notFound } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
 import { DeletePagesByWorkspaceIdStub } from '@tests/application/mocks/pages/use-cases';
+import { RemoveWorkspaceByUserIdStub } from '@tests/application/mocks/users/use-cases';
 import {
   DeleteWorkspaceStub,
+  GetAllMembersByWorkspaceIdStub,
   GetWorkspaceByIdStub,
 } from '@tests/application/mocks/workspaces/use-cases';
 import mockWorkspace from '@tests/domain/mock-workspace';
@@ -14,16 +16,23 @@ type SutTypes = {
   getWorkspaceByIdStub: GetWorkspaceByIdStub;
   deletePagesByWorkspaceIdStub: DeletePagesByWorkspaceIdStub;
   deleteWorkspaceStub: DeleteWorkspaceStub;
+  getAllMembersByWorkspaceIdStub: GetAllMembersByWorkspaceIdStub;
+  removeWorkspaceByUserIdStub: RemoveWorkspaceByUserIdStub;
 };
 
 const makeSut = (): SutTypes => {
   const getWorkspaceByIdStub = new GetWorkspaceByIdStub();
   const deletePagesByWorkspaceIdStub = new DeletePagesByWorkspaceIdStub();
   const deleteWorkspaceStub = new DeleteWorkspaceStub();
+  const getAllMembersByWorkspaceIdStub = new GetAllMembersByWorkspaceIdStub();
+  const removeWorkspaceByUserIdStub = new RemoveWorkspaceByUserIdStub();
+
   const sut = new DeleteWorkspaceController(
     getWorkspaceByIdStub,
     deletePagesByWorkspaceIdStub,
-    deleteWorkspaceStub
+    deleteWorkspaceStub,
+    getAllMembersByWorkspaceIdStub,
+    removeWorkspaceByUserIdStub
   );
 
   return {
@@ -31,6 +40,8 @@ const makeSut = (): SutTypes => {
     getWorkspaceByIdStub,
     deletePagesByWorkspaceIdStub,
     deleteWorkspaceStub,
+    getAllMembersByWorkspaceIdStub,
+    removeWorkspaceByUserIdStub,
   };
 };
 
