@@ -2,7 +2,9 @@ import { WorkspaceNotFoundError } from '@application/errors/WorkspaceNotFoundErr
 import { UpdateWorkspaceController } from '@infrastructure/http/controllers/workspaces/UpdateWorkspaceController';
 import { notFound, ok } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
+import { UpdateUserWorkspaceMetaDataByWorkspaceIdStub } from '@tests/application/mocks/users/use-cases';
 import {
+  GetAllMembersByWorkspaceIdStub,
   GetWorkspaceByIdStub,
   UpdateWorkspaceStub,
 } from '@tests/application/mocks/workspaces/use-cases';
@@ -14,22 +16,33 @@ type SutTypes = {
   validationStub: ValidationStub;
   getWorkspaceByIdStub: GetWorkspaceByIdStub;
   updateWorkspaceStub: UpdateWorkspaceStub;
+  getAllMembersByWorkspaceIdStub: GetAllMembersByWorkspaceIdStub;
+  updateUserWorkspaceMetaDataByWorkspaceIdStub: UpdateUserWorkspaceMetaDataByWorkspaceIdStub;
 };
 
 const makeSut = (): SutTypes => {
   const validationStub = new ValidationStub();
   const getWorkspaceByIdStub = new GetWorkspaceByIdStub();
   const updateWorkspaceStub = new UpdateWorkspaceStub();
+  const getAllMembersByWorkspaceIdStub = new GetAllMembersByWorkspaceIdStub();
+  const updateUserWorkspaceMetaDataByWorkspaceIdStub =
+    new UpdateUserWorkspaceMetaDataByWorkspaceIdStub();
+
   const sut = new UpdateWorkspaceController(
     validationStub,
     getWorkspaceByIdStub,
-    updateWorkspaceStub
+    updateWorkspaceStub,
+    getAllMembersByWorkspaceIdStub,
+    updateUserWorkspaceMetaDataByWorkspaceIdStub
   );
+
   return {
     sut,
     getWorkspaceByIdStub,
     updateWorkspaceStub,
     validationStub,
+    getAllMembersByWorkspaceIdStub,
+    updateUserWorkspaceMetaDataByWorkspaceIdStub,
   };
 };
 

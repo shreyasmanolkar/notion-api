@@ -318,6 +318,42 @@ describe('User Repository', () => {
     });
   });
 
+  describe('updateUserWorkspaceMetaDataByWorkspaceId', () => {
+    it('should updated workspace meta data and return void', async () => {
+      const userRepository = new UserRepository();
+      const { name, email, password, isDarkMode, profilePicture, workspaces } =
+        mockUser();
+
+      const { insertedId } = await userCollection.insertOne({
+        name,
+        email,
+        password,
+        isDarkMode,
+        profilePicture,
+        workspaces,
+      });
+
+      const { workspaceId } = workspaces[0];
+      const workspaceData = {
+        workspaceName: 'sample-second-workspace',
+      };
+
+      await userRepository.updateUserWorkspaceMetaDataByWorkspaceId({
+        userId: objectIdToString(insertedId),
+        workspaceId,
+        workspaceData,
+      });
+
+      const updatedUser = await userCollection.findOne({
+        _id: insertedId,
+      });
+
+      expect(updatedUser?.workspaces[0].workspaceName).toBe(
+        workspaceData.workspaceName
+      );
+    });
+  });
+
   describe('RemoveWorkspaceByUserId', () => {
     it('should remove workspace and return updated user', async () => {
       const userRepository = new UserRepository();

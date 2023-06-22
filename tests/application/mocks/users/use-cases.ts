@@ -17,6 +17,7 @@ import { SignOutInterface } from '@application/interfaces/use-cases/users/SignOu
 import { SignUpInterface } from '@application/interfaces/use-cases/users/SignUpInterface';
 import { UpdateUserInterface } from '@application/interfaces/use-cases/users/UpdateUserInterface';
 import { UpdateUserProfilePictureInterface } from '@application/interfaces/use-cases/users/UpdateUserProfilePictureInterface';
+import { UpdateUserWorkspaceMetaDataByWorkspaceIdInterface } from '@application/interfaces/use-cases/users/UpdateUserWorkspaceMetaDataByWorkspaceIdInterface';
 import mockUser from '@tests/domain/mock-user';
 
 export class AuthenticateStub implements AuthenticateInterface {
@@ -128,6 +129,14 @@ export class UpdateUserProfilePictureStub
   async execute(
     params: UpdateUserProfilePictureInterface.Request
   ): Promise<void> {}
+}
+
+export class UpdateUserWorkspaceMetaDataByWorkspaceIdStub
+  implements UpdateUserWorkspaceMetaDataByWorkspaceIdInterface
+{
+  async execute(
+    params: UpdateUserWorkspaceMetaDataByWorkspaceIdInterface.Request
+  ): Promise<UpdateUserWorkspaceMetaDataByWorkspaceIdInterface.Response> {}
 }
 
 export class RemovePageIdFromFavoritesByWorkspaceIdStub
