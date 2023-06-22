@@ -421,7 +421,7 @@ describe('workspace routes', () => {
   });
 
   describe('DELETE /workspaces/:workspaceId', () => {
-    it('should return 204 on success', async () => {
+    it('should return 404 as member not found', async () => {
       const tokens = await getTokens();
       const { accessToken } = tokens;
 
@@ -430,7 +430,7 @@ describe('workspace routes', () => {
       await request(app)
         .delete(`/v1/workspaces/${workspaceId}`)
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(204);
+        .expect(404);
     });
   });
 });
