@@ -71,7 +71,7 @@ export class UserRepository
       { upsert: true, returnDocument: 'after' }
     );
 
-    return mapDocument(rawUser);
+    return rawUser && mapDocument(rawUser);
   }
 
   async addPageIdToFavoritesByWorkspaceId(
@@ -87,7 +87,7 @@ export class UserRepository
       { upsert: true, returnDocument: 'after' }
     );
 
-    return mapDocument(rawUser);
+    return rawUser && mapDocument(rawUser);
   }
 
   async loadUserByEmail(
@@ -172,7 +172,7 @@ export class UserRepository
       { upsert: true, returnDocument: 'after' }
     );
 
-    return mapDocument(rawUser);
+    return rawUser && mapDocument(rawUser);
   }
 
   async updateUserProfilePicture(
@@ -187,7 +187,7 @@ export class UserRepository
       { upsert: true, returnDocument: 'after' }
     );
 
-    return mapDocument(rawUser);
+    return rawUser && mapDocument(rawUser);
   }
 
   async updateUserWorkspaceMetaDataByWorkspaceId(
@@ -224,7 +224,7 @@ export class UserRepository
       { $pull: { workspaces: { workspaceId } } } as SetFields<Document>,
       { returnDocument: 'after' }
     );
-    return mapDocument(rawUser);
+    return rawUser && mapDocument(rawUser);
   }
 
   async removePageIdFromFavoritesByWorkspaceId(
@@ -243,7 +243,7 @@ export class UserRepository
       { returnDocument: 'after' }
     );
 
-    return mapDocument(rawUser);
+    return rawUser && mapDocument(rawUser);
   }
 
   async deleteUser(

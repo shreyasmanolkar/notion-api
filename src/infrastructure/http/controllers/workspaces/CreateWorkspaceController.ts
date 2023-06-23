@@ -76,7 +76,7 @@ export class CreateWorkspaceController extends BaseController {
       return forbidden(pageOrError);
     }
 
-    const { reference, path, icon: pageIcon } = pageOrError;
+    const { reference, path, icon: pageIcon, title } = pageOrError;
 
     await this.addPage.execute({
       workspaceId,
@@ -85,6 +85,7 @@ export class CreateWorkspaceController extends BaseController {
         reference,
         path,
         icon: pageIcon,
+        title,
       },
     });
 

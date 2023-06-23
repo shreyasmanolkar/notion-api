@@ -67,18 +67,21 @@ export class GetAllRootPagesStub implements GetAllRootPagesInterface {
         reference: 'sample-111',
         icon: 'icon-hex-code',
         path: null,
+        title: 'sample',
       },
       {
         id: 'page-id-2',
         reference: 'sample-222',
         icon: 'icon-hex-code',
         path: null,
+        title: 'sample',
       },
       {
         id: 'page-id-3',
         reference: 'sample-333',
         icon: 'icon-hex-code',
         path: null,
+        title: 'sample',
       },
     ];
   }
@@ -96,12 +99,14 @@ export class GetChildrensByPageReferenceStub
         reference: 'sample-222',
         icon: 'icon-hex-code',
         path: ',sample-111,',
+        title: 'sample',
       },
       {
         id: 'page-id-3',
         reference: 'sample-333',
         icon: 'icon-hex-code',
         path: ',sample-111,',
+        title: 'sample',
       },
     ];
   }

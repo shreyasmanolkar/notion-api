@@ -99,7 +99,7 @@ export class SignUpController extends BaseController {
       return forbidden(pageOrError);
     }
 
-    const { reference, path, icon } = pageOrError;
+    const { reference, path, icon, title } = pageOrError;
 
     await this.addPage.execute({
       workspaceId,
@@ -108,6 +108,7 @@ export class SignUpController extends BaseController {
         reference,
         path,
         icon,
+        title,
       },
     });
 
