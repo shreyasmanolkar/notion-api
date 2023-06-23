@@ -81,12 +81,14 @@ describe('GetChildrensByPageId', () => {
         reference: 'sample-page-reference-1',
         icon: 'icon-hex',
         path: ',sample-page-reference-0,',
+        title: 'sample-page-reference',
       },
       {
         id: 'sample-page-2',
         reference: 'sample-page-reference-2',
         icon: 'icon-hex',
         path: ',sample-page-reference-0,',
+        title: 'sample-page-reference',
       },
     ]);
   });

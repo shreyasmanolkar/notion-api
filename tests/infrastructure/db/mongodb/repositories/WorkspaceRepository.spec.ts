@@ -85,6 +85,7 @@ describe('Workspace Repository', () => {
         reference: 'sample-page-101',
         path: null,
         icon: '1F2F9',
+        title: 'sample-page',
       };
 
       const updatedWorkspace = await workspaceRepository.addPage({

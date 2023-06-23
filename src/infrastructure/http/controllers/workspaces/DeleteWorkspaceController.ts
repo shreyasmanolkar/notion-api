@@ -36,10 +36,6 @@ export class DeleteWorkspaceController extends BaseController {
       return notFound(workspaceOrError);
     }
 
-    await this.deletePagesByWorkspaceId.execute(workspaceId);
-
-    await this.deleteWorkspace.execute(workspaceId);
-
     const membersOrError = await this.getAllMembersByWorkspaceId.execute(
       workspaceId
     );
@@ -54,6 +50,10 @@ export class DeleteWorkspaceController extends BaseController {
         workspaceId,
       });
     });
+
+    await this.deletePagesByWorkspaceId.execute(workspaceId);
+
+    await this.deleteWorkspace.execute(workspaceId);
 
     return noContent();
   }

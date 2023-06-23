@@ -65,18 +65,21 @@ export class GetAllRootPagesRepositoryStub
         reference: 'sample-page-reference',
         icon: 'icon-hex',
         path: null,
+        title: 'sample-page-reference',
       },
       {
         id: 'sample-page-2',
         reference: 'sample-page-reference-2',
         icon: 'icon-hex',
         path: null,
+        title: 'sample-page-reference',
       },
       {
         id: 'sample-page-3',
         reference: 'sample-page-reference-3',
         icon: 'icon-hex',
         path: null,
+        title: 'sample-page-reference',
       },
     ];
   }
@@ -94,12 +97,14 @@ export class GetChildrensByPageReferenceRepositoryStub
         reference: 'sample-page-reference-1',
         icon: 'icon-hex',
         path: ',sample-page-reference-0,',
+        title: 'sample-page-reference',
       },
       {
         id: 'sample-page-2',
         reference: 'sample-page-reference-2',
         icon: 'icon-hex',
         path: ',sample-page-reference-0,',
+        title: 'sample-page-reference',
       },
     ];
   }

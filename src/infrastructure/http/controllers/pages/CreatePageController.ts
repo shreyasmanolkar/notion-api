@@ -63,6 +63,7 @@ export class CreatePageController extends BaseController {
         reference,
         path,
         icon,
+        title,
       },
     });
 
