@@ -42,30 +42,35 @@ describe('workspace routes', () => {
           reference: 'sample-page-007',
           path: null,
           icon: '1F3F9',
+          title: 'sample-page',
         },
         {
           id: 'sample-page-id-1',
           reference: 'sample-page-123',
           path: null,
           icon: '1F3F9',
+          title: 'sample-page',
         },
         {
           id: 'sample-page-id-2',
           reference: 'sample-page-456',
           path: ',sample-page-123,',
           icon: '1F3F9',
+          title: 'sample-page',
         },
         {
           id: 'sample-page-id-3',
           reference: 'sample-page-789',
           path: ',sample-page-123,',
           icon: '1F3F9',
+          title: 'sample-page',
         },
         {
           id: 'sample-page-id-4',
           reference: 'sample-page-101',
           path: ',sample-page-123,sample-page-789',
           icon: '1F3F9',
+          title: 'sample-page',
         },
       ],
     });
@@ -421,7 +426,7 @@ describe('workspace routes', () => {
   });
 
   describe('DELETE /workspaces/:workspaceId', () => {
-    it('should return 404 as member not found', async () => {
+    it('should return 204', async () => {
       const tokens = await getTokens();
       const { accessToken } = tokens;
 
@@ -430,7 +435,7 @@ describe('workspace routes', () => {
       await request(app)
         .delete(`/v1/workspaces/${workspaceId}`)
         .set('Authorization', `Bearer ${accessToken}`)
-        .expect(404);
+        .expect(204);
     });
   });
 });
