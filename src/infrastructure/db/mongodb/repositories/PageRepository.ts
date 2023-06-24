@@ -220,7 +220,11 @@ export class PageRepository
 
     const previousReferenceArray = previousReference.split('-');
     const uniqueId = previousReferenceArray.pop();
-    const reference = `${title}-${uniqueId}`;
+
+    const titleArray = title.split(' ');
+    const kebebTitle = titleArray.join('-');
+
+    const reference = `${kebebTitle}-${uniqueId}`;
 
     const { value: rawPageContent } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(pageId) },

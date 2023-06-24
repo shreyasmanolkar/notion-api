@@ -6,23 +6,32 @@ import {
   DeletePageStub,
   GetPageByIdStub,
 } from '@tests/application/mocks/pages/use-cases';
+import { RemovePageByPageIdStub } from '@tests/application/mocks/workspaces/use-cases';
 import mockPage from '@tests/domain/mock-page';
 
 type SutTypes = {
   sut: DeletePageController;
   getPageByIdStub: GetPageByIdStub;
   deletePageStub: DeletePageStub;
+  removePageByPageIdStub: RemovePageByPageIdStub;
 };
 
 const makeSut = (): SutTypes => {
   const getPageByIdStub = new GetPageByIdStub();
   const deletePageStub = new DeletePageStub();
-  const sut = new DeletePageController(getPageByIdStub, deletePageStub);
+  const removePageByPageIdStub = new RemovePageByPageIdStub();
+
+  const sut = new DeletePageController(
+    getPageByIdStub,
+    deletePageStub,
+    removePageByPageIdStub
+  );
 
   return {
     sut,
     getPageByIdStub,
     deletePageStub,
+    removePageByPageIdStub,
   };
 };
 
