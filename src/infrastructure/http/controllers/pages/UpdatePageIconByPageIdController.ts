@@ -1,6 +1,7 @@
 import { PageNotFoundError } from '@application/errors/PageNotFoundError';
 import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
 import { UpdatePageIconByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageIconByPageIdInterface';
+import { UpdateWorkspacePagesMetaDataByPageIdInterface } from '@application/interfaces/use-cases/workspaces/UpdateWorkspacePagesMetaDataByPageIdInterface';
 import { BaseController } from '@infrastructure/http/controllers/BaseController';
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
@@ -16,7 +17,8 @@ export class UpdatePageIconByPageIdController extends BaseController {
   constructor(
     private readonly updatePageIconByPageIdValidation: Validation,
     private readonly getPageById: GetPageByIdInterface,
-    private readonly updatePageIconByPageId: UpdatePageIconByPageIdInterface
+    private readonly updatePageIconByPageId: UpdatePageIconByPageIdInterface,
+    private readonly updateWorkspacePagesMetaDataByPageIdInterface: UpdateWorkspacePagesMetaDataByPageIdInterface
   ) {
     super(updatePageIconByPageIdValidation);
   }
@@ -36,6 +38,14 @@ export class UpdatePageIconByPageIdController extends BaseController {
     await this.updatePageIconByPageId.execute({
       pageId,
       icon,
+    });
+
+    await this.updateWorkspacePagesMetaDataByPageIdInterface.execute({
+      workspaceId: pageOrError.workspaceId,
+      pageId,
+      pageData: {
+        icon,
+      },
     });
 
     return noContent();

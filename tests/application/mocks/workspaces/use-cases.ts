@@ -12,6 +12,7 @@ import { GetWorkspaceByIdInterface } from '@application/interfaces/use-cases/wor
 import { RemoveMemberByWorkspaceIdInterface } from '@application/interfaces/use-cases/workspaces/RemoveMemberByWorkspaceIdInterface';
 import { RemovePageByPageIdInterface } from '@application/interfaces/use-cases/workspaces/RemovePageByPageIdInterface';
 import { UpdateWorkspaceInterface } from '@application/interfaces/use-cases/workspaces/UpdateWorkspaceInterface';
+import { UpdateWorkspacePagesMetaDataByPageIdInterface } from '@application/interfaces/use-cases/workspaces/UpdateWorkspacePagesMetaDataByPageIdInterface';
 import mockWorkspace from '@tests/domain/mock-workspace';
 
 export class AddMemberByWorkspaceIdStub
@@ -143,4 +144,12 @@ export class UpdateWorkspaceStub implements UpdateWorkspaceInterface {
     const workspace = mockWorkspace();
     return workspace;
   }
+}
+
+export class UpdateWorkspacePagesMetaDataByPageIdStub
+  implements UpdateWorkspacePagesMetaDataByPageIdInterface
+{
+  async execute(
+    params: UpdateWorkspacePagesMetaDataByPageIdInterface.Request
+  ): Promise<UpdateWorkspacePagesMetaDataByPageIdInterface.Response> {}
 }

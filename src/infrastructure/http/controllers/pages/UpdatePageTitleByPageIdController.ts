@@ -6,6 +6,7 @@ import { Validation } from '@infrastructure/http/interfaces/Validation';
 import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
 import { UpdatePageTitleByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageTitleByPageIdInterface';
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
+import { UpdateWorkspacePagesMetaDataByPageIdInterface } from '@application/interfaces/use-cases/workspaces/UpdateWorkspacePagesMetaDataByPageIdInterface';
 
 export namespace UpdatePageTitleByPageIdController {
   export type Request = HttpRequest<{ title: string }, { pageId: string }>;
@@ -16,7 +17,8 @@ export class UpdatePageTitleByPageIdController extends BaseController {
   constructor(
     private readonly updatePageTitleByPageIdValidation: Validation,
     private readonly getPageById: GetPageByIdInterface,
-    private readonly updatePageTitleByPageId: UpdatePageTitleByPageIdInterface
+    private readonly updatePageTitleByPageId: UpdatePageTitleByPageIdInterface,
+    private readonly updateWorkspacePagesMetaDataByPageIdInterface: UpdateWorkspacePagesMetaDataByPageIdInterface
   ) {
     super(updatePageTitleByPageIdValidation);
   }
@@ -36,6 +38,25 @@ export class UpdatePageTitleByPageIdController extends BaseController {
     await this.updatePageTitleByPageId.execute({
       pageId,
       title,
+    });
+
+    const previousReference = pageOrError.reference;
+
+    const previousReferenceArray = previousReference.split('-');
+    const uniqueId = previousReferenceArray.pop();
+
+    const titleArray = title.split(' ');
+    const kebebTitle = titleArray.join('-');
+
+    const reference = `${kebebTitle}-${uniqueId}`;
+
+    await this.updateWorkspacePagesMetaDataByPageIdInterface.execute({
+      workspaceId: pageOrError.workspaceId,
+      pageId,
+      pageData: {
+        title,
+        reference,
+      },
     });
 
     return noContent();

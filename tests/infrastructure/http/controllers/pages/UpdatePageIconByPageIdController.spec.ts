@@ -6,6 +6,7 @@ import {
   GetPageByIdStub,
   UpdatePageIconByPageIdStub,
 } from '@tests/application/mocks/pages/use-cases';
+import { UpdateWorkspacePagesMetaDataByPageIdStub } from '@tests/application/mocks/workspaces/use-cases';
 import mockPage from '@tests/domain/mock-page';
 import { ValidationStub } from '@tests/infrastructure/mocks/validators';
 
@@ -14,21 +15,27 @@ type SutTypes = {
   validationStub: ValidationStub;
   getPageByIdStub: GetPageByIdStub;
   updatePageIconByPageIdStub: UpdatePageIconByPageIdStub;
+  updateWorkspacePagesMetaDataByPageIdStub: UpdateWorkspacePagesMetaDataByPageIdStub;
 };
 
 const makeSut = (): SutTypes => {
   const validationStub = new ValidationStub();
   const getPageByIdStub = new GetPageByIdStub();
   const updatePageIconByPageIdStub = new UpdatePageIconByPageIdStub();
+  const updateWorkspacePagesMetaDataByPageIdStub =
+    new UpdateWorkspacePagesMetaDataByPageIdStub();
+
   const sut = new UpdatePageIconByPageIdController(
     validationStub,
     getPageByIdStub,
-    updatePageIconByPageIdStub
+    updatePageIconByPageIdStub,
+    updateWorkspacePagesMetaDataByPageIdStub
   );
   return {
     sut,
     getPageByIdStub,
     updatePageIconByPageIdStub,
+    updateWorkspacePagesMetaDataByPageIdStub,
     validationStub,
   };
 };
