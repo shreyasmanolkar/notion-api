@@ -5,6 +5,7 @@ import { BaseController } from '@infrastructure/http/controllers/BaseController'
 import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
 import { DeletePageInterface } from '@application/interfaces/use-cases/pages/deletePageInterface';
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
+import { RemovePageByPageIdInterface } from '@application/interfaces/use-cases/workspaces/RemovePageByPageIdInterface';
 
 export namespace DeletePageController {
   export type Request = HttpRequest<undefined, { pageId: string }>;
@@ -14,7 +15,8 @@ export namespace DeletePageController {
 export class DeletePageController extends BaseController {
   constructor(
     private readonly getPageById: GetPageByIdInterface,
-    private readonly deletePage: DeletePageInterface
+    private readonly deletePage: DeletePageInterface,
+    private readonly removePageByPageId: RemovePageByPageIdInterface
   ) {
     super();
   }
@@ -29,6 +31,11 @@ export class DeletePageController extends BaseController {
     if (pageOrError instanceof PageNotFoundError) {
       return notFound(pageOrError);
     }
+
+    await this.removePageByPageId.execute({
+      workspaceId: pageOrError.workspaceId,
+      pageId,
+    });
 
     await this.deletePage.execute(pageId);
 

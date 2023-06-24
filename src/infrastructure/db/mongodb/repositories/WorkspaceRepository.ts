@@ -17,6 +17,7 @@ import { UpdateWorkspaceRepository } from '@application/interfaces/repositories/
 import { RemoveMemberByWorkspaceIdRepository } from '@application/interfaces/repositories/workspaces/removeMemberByWorkspaceIdRepository';
 import { RemovePageByPageIdRepository } from '@application/interfaces/repositories/workspaces/removePageByPageIdRepository';
 import { DeleteWorkspaceRepository } from '@application/interfaces/repositories/workspaces/deleteWorkspaceRepository';
+import { UpdateWorkspacePagesMetaDataByPageIdRepository } from '@application/interfaces/repositories/workspaces/updateWorkspacePagesMetaDataByPageIdRepository';
 
 export class WorkspaceRepository
   implements
@@ -28,6 +29,7 @@ export class WorkspaceRepository
     GetChildrensByPageReferenceRepository,
     GetWorkspaceByIdRepository,
     UpdateWorkspaceRepository,
+    UpdateWorkspacePagesMetaDataByPageIdRepository,
     RemoveMemberByWorkspaceIdRepository,
     RemovePageByPageIdRepository,
     DeleteWorkspaceRepository
@@ -139,7 +141,7 @@ export class WorkspaceRepository
     const collection = await WorkspaceRepository.getCollection();
     const { workspaceId, pageReference } = params;
 
-    const pathQuery = `,${pageReference},`;
+    const pathQuery = `,${pageReference}\\.`;
 
     const rawChildrens = await collection
       .aggregate([
@@ -185,6 +187,30 @@ export class WorkspaceRepository
     );
 
     return mapDocument(rawWorkspace);
+  }
+
+  async updateWorkspacePagesMetaDataByPageId(
+    params: UpdateWorkspacePagesMetaDataByPageIdRepository.Request
+  ): Promise<UpdateWorkspacePagesMetaDataByPageIdRepository.Response> {
+    const collection = await WorkspaceRepository.getCollection();
+    const { workspaceId, pageId, pageData } = params;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const updatedFields: Record<string, any> = {};
+
+    if (pageData.title) {
+      updatedFields['pages.$.title'] = pageData.title;
+      updatedFields['pages.$.reference'] = pageData.reference;
+    }
+
+    if (pageData.icon) {
+      updatedFields['pages.$.icon'] = pageData.icon;
+    }
+
+    await collection.updateOne(
+      { _id: stringToObjectId(workspaceId), 'pages.id': pageId },
+      { $set: updatedFields }
+    );
   }
 
   async removeMemberByWorkspaceId(
