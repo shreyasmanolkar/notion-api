@@ -141,7 +141,7 @@ export class WorkspaceRepository
     const collection = await WorkspaceRepository.getCollection();
     const { workspaceId, pageReference } = params;
 
-    const pathQuery = `,${pageReference},`;
+    const pathQuery = `,${pageReference}\\.`;
 
     const rawChildrens = await collection
       .aggregate([
