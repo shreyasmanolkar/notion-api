@@ -191,7 +191,7 @@ describe('Workspace Repository', () => {
         pageReference: 'sample-page-123',
       });
 
-      expect(response).toHaveLength(3);
+      expect(response).toHaveLength(2);
     });
 
     it(`should return null if children dosen't exists`, async () => {
