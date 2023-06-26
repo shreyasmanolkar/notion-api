@@ -4,6 +4,7 @@ import {
   CreatePageStub,
   GetPageByIdStub,
 } from '@tests/application/mocks/pages/use-cases';
+import { AddPageIdToFavoritesByWorkspaceIdStub } from '@tests/application/mocks/users/use-cases';
 import { AddPageStub } from '@tests/application/mocks/workspaces/use-cases';
 import mockPage from '@tests/domain/mock-page';
 import { ValidationStub } from '@tests/infrastructure/mocks/validators';
@@ -14,6 +15,7 @@ type SutTypes = {
   createPageStub: CreatePageStub;
   getPageByIdStub: GetPageByIdStub;
   addPageStub: AddPageStub;
+  addPageIdToFavoritesByWorkspaceIdStub: AddPageIdToFavoritesByWorkspaceIdStub;
 };
 
 const makeSut = (): SutTypes => {
@@ -21,11 +23,15 @@ const makeSut = (): SutTypes => {
   const createPageStub = new CreatePageStub();
   const getPageByIdStub = new GetPageByIdStub();
   const addPageStub = new AddPageStub();
+  const addPageIdToFavoritesByWorkspaceIdStub =
+    new AddPageIdToFavoritesByWorkspaceIdStub();
+
   const sut = new CreatePageController(
     validationStub,
     createPageStub,
     getPageByIdStub,
-    addPageStub
+    addPageStub,
+    addPageIdToFavoritesByWorkspaceIdStub
   );
   return {
     sut,
@@ -33,6 +39,7 @@ const makeSut = (): SutTypes => {
     createPageStub,
     getPageByIdStub,
     addPageStub,
+    addPageIdToFavoritesByWorkspaceIdStub,
   };
 };
 

@@ -7,6 +7,7 @@ import { created, forbidden } from '@infrastructure/http/helpers/http';
 import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
 import { PageNotFoundError } from '@application/errors/PageNotFoundError';
 import { AddPageInterface } from '@application/interfaces/use-cases/workspaces/AddPageInterface';
+import { AddPageIdToFavoritesByWorkspaceIdInterface } from '@application/interfaces/use-cases/users/AddPageIdToFavoritesByWorkspaceIdInterface';
 
 export namespace CreatePageController {
   export type Request = HttpRequest<CreatePageInterface.Request>;
@@ -18,7 +19,8 @@ export class CreatePageController extends BaseController {
     private readonly createPageValidation: Validation,
     private readonly createPage: CreatePageInterface,
     private readonly getPageById: GetPageByIdInterface,
-    private readonly addPage: AddPageInterface
+    private readonly addPage: AddPageInterface,
+    private readonly addPageIdToFavoritesByWorkspaceId: AddPageIdToFavoritesByWorkspaceIdInterface
   ) {
     super(createPageValidation);
   }
@@ -36,6 +38,8 @@ export class CreatePageController extends BaseController {
       path,
       workspaceId,
     } = httpRequest.body!;
+
+    const userId = favorite[0];
 
     const id = await this.createPage.execute({
       title,
@@ -66,6 +70,14 @@ export class CreatePageController extends BaseController {
         title,
       },
     });
+
+    if (userId) {
+      await this.addPageIdToFavoritesByWorkspaceId.execute({
+        userId,
+        workspaceId,
+        pageId: id,
+      });
+    }
 
     return created({ id });
   }
