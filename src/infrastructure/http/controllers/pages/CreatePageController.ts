@@ -10,9 +10,7 @@ import { AddPageInterface } from '@application/interfaces/use-cases/workspaces/A
 import { AddPageIdToFavoritesByWorkspaceIdInterface } from '@application/interfaces/use-cases/users/AddPageIdToFavoritesByWorkspaceIdInterface';
 
 export namespace CreatePageController {
-  export type Request = HttpRequest<CreatePageInterface.Request, undefined> & {
-    userId: string;
-  };
+  export type Request = HttpRequest<CreatePageInterface.Request>;
   export type Response = HttpResponse<{ id: string } | PageNotFoundError>;
 }
 
@@ -30,7 +28,6 @@ export class CreatePageController extends BaseController {
   async execute(
     httpRequest: CreatePageController.Request
   ): Promise<CreatePageController.Response> {
-    const userId = httpRequest.userId!;
     const {
       title,
       icon,
@@ -41,6 +38,8 @@ export class CreatePageController extends BaseController {
       path,
       workspaceId,
     } = httpRequest.body!;
+
+    const userId = favorite[0];
 
     const id = await this.createPage.execute({
       title,
@@ -72,11 +71,13 @@ export class CreatePageController extends BaseController {
       },
     });
 
-    await this.addPageIdToFavoritesByWorkspaceId.execute({
-      userId,
-      workspaceId,
-      pageId: id,
-    });
+    if (userId) {
+      await this.addPageIdToFavoritesByWorkspaceId.execute({
+        userId,
+        workspaceId,
+        pageId: id,
+      });
+    }
 
     return created({ id });
   }
