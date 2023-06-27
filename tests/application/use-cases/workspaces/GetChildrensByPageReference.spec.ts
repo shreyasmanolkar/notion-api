@@ -82,6 +82,7 @@ describe('GetChildrensByPageId', () => {
         icon: 'icon-hex',
         path: ',sample-page-reference-0,',
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-2',
@@ -89,6 +90,7 @@ describe('GetChildrensByPageId', () => {
         icon: 'icon-hex',
         path: ',sample-page-reference-0,',
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
     ]);
   });

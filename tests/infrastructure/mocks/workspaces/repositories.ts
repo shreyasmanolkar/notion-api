@@ -66,6 +66,7 @@ export class GetAllRootPagesRepositoryStub
         icon: 'icon-hex',
         path: null,
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-2',
@@ -73,6 +74,7 @@ export class GetAllRootPagesRepositoryStub
         icon: 'icon-hex',
         path: null,
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-3',
@@ -80,6 +82,7 @@ export class GetAllRootPagesRepositoryStub
         icon: 'icon-hex',
         path: null,
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
     ];
   }
@@ -98,6 +101,7 @@ export class GetChildrensByPageReferenceRepositoryStub
         icon: 'icon-hex',
         path: ',sample-page-reference-0,',
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-2',
@@ -105,6 +109,7 @@ export class GetChildrensByPageReferenceRepositoryStub
         icon: 'icon-hex',
         path: ',sample-page-reference-0,',
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
     ];
   }
