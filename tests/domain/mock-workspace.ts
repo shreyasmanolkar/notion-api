@@ -13,6 +13,7 @@ const mockWorkspace = (): Workspace => {
         path: null,
         icon: '1F3F9',
         title: 'sample page',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-id-1',
@@ -20,6 +21,7 @@ const mockWorkspace = (): Workspace => {
         path: null,
         icon: '1F3F9',
         title: 'sample page',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-id-2',
@@ -27,6 +29,7 @@ const mockWorkspace = (): Workspace => {
         path: ',sample-page-123.',
         icon: '1F3F9',
         title: 'sample page',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-id-3',
@@ -34,6 +37,7 @@ const mockWorkspace = (): Workspace => {
         path: ',sample-page-123.',
         icon: '1F3F9',
         title: 'sample page',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-id-4',
@@ -41,6 +45,7 @@ const mockWorkspace = (): Workspace => {
         path: ',sample-page-123,sample-page-789.',
         icon: '1F3F9',
         title: 'sample page',
+        createdAt: new Date(),
       },
     ],
     createdAt: new Date(),

@@ -69,6 +69,7 @@ export class GetAllRootPagesStub implements GetAllRootPagesInterface {
         icon: 'icon-hex-code',
         path: null,
         title: 'sample',
+        createdAt: new Date(),
       },
       {
         id: 'page-id-2',
@@ -76,6 +77,7 @@ export class GetAllRootPagesStub implements GetAllRootPagesInterface {
         icon: 'icon-hex-code',
         path: null,
         title: 'sample',
+        createdAt: new Date(),
       },
       {
         id: 'page-id-3',
@@ -83,6 +85,7 @@ export class GetAllRootPagesStub implements GetAllRootPagesInterface {
         icon: 'icon-hex-code',
         path: null,
         title: 'sample',
+        createdAt: new Date(),
       },
     ];
   }
@@ -101,6 +104,7 @@ export class GetChildrensByPageReferenceStub
         icon: 'icon-hex-code',
         path: ',sample-111,',
         title: 'sample',
+        createdAt: new Date(),
       },
       {
         id: 'page-id-3',
@@ -108,6 +112,7 @@ export class GetChildrensByPageReferenceStub
         icon: 'icon-hex-code',
         path: ',sample-111,',
         title: 'sample',
+        createdAt: new Date(),
       },
     ];
   }

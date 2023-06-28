@@ -61,6 +61,7 @@ describe('GetAllRootPages', () => {
         icon: 'icon-hex',
         path: null,
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-2',
@@ -68,6 +69,7 @@ describe('GetAllRootPages', () => {
         icon: 'icon-hex',
         path: null,
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
       {
         id: 'sample-page-3',
@@ -75,6 +77,7 @@ describe('GetAllRootPages', () => {
         icon: 'icon-hex',
         path: null,
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
     ]);
   });
