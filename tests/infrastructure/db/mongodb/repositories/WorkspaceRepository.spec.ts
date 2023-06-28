@@ -86,6 +86,7 @@ describe('Workspace Repository', () => {
         path: null,
         icon: '1F2F9',
         title: 'sample-page',
+        createdAt: new Date(),
       };
 
       const updatedWorkspace = await workspaceRepository.addPage({

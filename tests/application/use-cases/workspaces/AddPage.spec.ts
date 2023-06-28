@@ -38,6 +38,7 @@ describe('AddPage', () => {
       icon: 'sample-hex',
       path: null,
       title: 'smaple-new-page',
+      createdAt: new Date(),
     };
 
     await sut.execute({
@@ -66,6 +67,7 @@ describe('AddPage', () => {
         icon: 'sample-hex',
         path: null,
         title: 'sample-page-reference',
+        createdAt: new Date(),
       },
     });
 
