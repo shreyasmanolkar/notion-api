@@ -7,6 +7,7 @@ import { DeletePageRepository } from '@application/interfaces/repositories/pages
 import { DeletePagesByWorkspaceIdRepository } from '@application/interfaces/repositories/pages/deletePagesByWorkspaceIdRepository';
 import { GetPageByIdRepository } from '@application/interfaces/repositories/pages/getPageByIdRepository';
 import { GetPageContentByPageIdRepository } from '@application/interfaces/repositories/pages/getPageContentByPageIdRepository';
+import { GetPageIdsByPathRepository } from '@application/interfaces/repositories/pages/getPageIdsByPathRepository';
 import { GetPageSettingsByPageIdRepository } from '@application/interfaces/repositories/pages/getPageSettingsByPageIdRepository';
 import { RemoveFromFavoriteRepository } from '@application/interfaces/repositories/pages/removeFromFavoriteRepository';
 import { UpdatePageContentByPageIdRepository } from '@application/interfaces/repositories/pages/updatePageContentByPageIdRepository';
@@ -63,6 +64,17 @@ export class GetPageSettingsByPageIdRepositoryStub
   ): Promise<GetPageSettingsByPageIdRepository.Response> {
     const { pageSettings } = mockPage();
     return pageSettings;
+  }
+}
+
+export class GetPageIdsByPathRepositoryStub
+  implements GetPageIdsByPathRepository
+{
+  async getPageIdsByPath(
+    _path: GetPageIdsByPathRepository.Request
+  ): Promise<GetPageIdsByPathRepository.Response> {
+    const { id } = mockPage();
+    return [id];
   }
 }
 
