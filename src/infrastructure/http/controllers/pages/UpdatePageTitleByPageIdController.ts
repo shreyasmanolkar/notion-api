@@ -7,6 +7,8 @@ import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/ge
 import { UpdatePageTitleByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageTitleByPageIdInterface';
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
 import { UpdateWorkspacePagesMetaDataByPageIdInterface } from '@application/interfaces/use-cases/workspaces/UpdateWorkspacePagesMetaDataByPageIdInterface';
+import { UpdatePagePathByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePagePathByPageIdInterface';
+import { GetPageIdsByPathInterface } from '@application/interfaces/use-cases/pages/getPageIdsByPathInterface';
 
 export namespace UpdatePageTitleByPageIdController {
   export type Request = HttpRequest<{ title: string }, { pageId: string }>;
@@ -17,7 +19,9 @@ export class UpdatePageTitleByPageIdController extends BaseController {
   constructor(
     private readonly updatePageTitleByPageIdValidation: Validation,
     private readonly getPageById: GetPageByIdInterface,
+    private readonly getPageIdsByPath: GetPageIdsByPathInterface,
     private readonly updatePageTitleByPageId: UpdatePageTitleByPageIdInterface,
+    private readonly updatePagePathByPageId: UpdatePagePathByPageIdInterface,
     private readonly updateWorkspacePagesMetaDataByPageIdInterface: UpdateWorkspacePagesMetaDataByPageIdInterface
   ) {
     super(updatePageTitleByPageIdValidation);
@@ -58,6 +62,27 @@ export class UpdatePageTitleByPageIdController extends BaseController {
         reference,
       },
     });
+
+    const childPageIds = await this.getPageIdsByPath.execute(
+      `,${previousReference}.`
+    );
+
+    if (childPageIds.length > 0) {
+      childPageIds.map(async childPageId => {
+        await this.updatePagePathByPageId.execute({
+          pageId: childPageId,
+          path: `,${reference}.`,
+        });
+
+        await this.updateWorkspacePagesMetaDataByPageIdInterface.execute({
+          workspaceId: pageOrError.workspaceId,
+          pageId: childPageId,
+          pageData: {
+            path: `,${reference}.`,
+          },
+        });
+      });
+    }
 
     return noContent();
   }

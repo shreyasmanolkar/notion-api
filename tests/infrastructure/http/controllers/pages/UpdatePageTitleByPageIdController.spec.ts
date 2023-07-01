@@ -4,6 +4,8 @@ import { noContent, notFound } from '@infrastructure/http/helpers/http';
 import { HttpRequest } from '@infrastructure/http/interfaces/HttpRequest';
 import {
   GetPageByIdStub,
+  GetPageIdsByPathStub,
+  UpdatePagePathByPageIdStub,
   UpdatePageTitleByPageIdStub,
 } from '@tests/application/mocks/pages/use-cases';
 import { UpdateWorkspacePagesMetaDataByPageIdStub } from '@tests/application/mocks/workspaces/use-cases';
@@ -21,14 +23,18 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const validationStub = new ValidationStub();
   const getPageByIdStub = new GetPageByIdStub();
+  const getPageIdsByPathStub = new GetPageIdsByPathStub();
   const updatePageTitleByPageIdStub = new UpdatePageTitleByPageIdStub();
+  const updatePagePathByPageIdStub = new UpdatePagePathByPageIdStub();
   const updateWorkspacePagesMetaDataByPageIdStub =
     new UpdateWorkspacePagesMetaDataByPageIdStub();
 
   const sut = new UpdatePageTitleByPageIdController(
     validationStub,
     getPageByIdStub,
+    getPageIdsByPathStub,
     updatePageTitleByPageIdStub,
+    updatePagePathByPageIdStub,
     updateWorkspacePagesMetaDataByPageIdStub
   );
   return {
