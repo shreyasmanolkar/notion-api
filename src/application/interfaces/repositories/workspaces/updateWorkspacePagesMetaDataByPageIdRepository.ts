@@ -2,6 +2,7 @@ export type updatedPagesDataType = {
   title?: string;
   icon?: string;
   reference?: string;
+  path?: string;
 };
 
 export namespace UpdateWorkspacePagesMetaDataByPageIdRepository {

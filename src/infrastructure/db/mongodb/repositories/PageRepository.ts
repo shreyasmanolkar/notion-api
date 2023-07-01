@@ -20,6 +20,7 @@ import { UpdatePageTitleByPageIdRepository } from '@application/interfaces/repos
 import { RemoveFromFavoriteRepository } from '@application/interfaces/repositories/pages/removeFromFavoriteRepository';
 import { DeletePageRepository } from '@application/interfaces/repositories/pages/deletePageRepository';
 import { DeletePagesByWorkspaceIdRepository } from '@application/interfaces/repositories/pages/deletePagesByWorkspaceIdRepository';
+import { GetPageIdsByPathRepository } from '@application/interfaces/repositories/pages/getPageIdsByPathRepository';
 
 export class PageRepository
   implements
@@ -28,6 +29,7 @@ export class PageRepository
     GetPageByIdRepository,
     GetPageContentByPageIdRepository,
     GetPageSettingsByPageIdRepository,
+    GetPageIdsByPathRepository,
     UpdatePageContentByPageIdRepository,
     UpdatePageCoverByPageIdRepository,
     UpdatePageIconByPageIdRepository,
@@ -140,6 +142,26 @@ export class PageRepository
     }
 
     return null;
+  }
+
+  async getPageIdsByPath(
+    path: GetPageIdsByPathRepository.Request
+  ): Promise<GetPageIdsByPathRepository.Response> {
+    const collection = await PageRepository.getCollection();
+    const rawPages = await collection
+      .find(
+        {
+          path: { $eq: path },
+        },
+        {
+          projection: { id: 1 },
+        }
+      )
+      .toArray();
+
+    // eslint-disable-next-line no-underscore-dangle
+    const pageIds = rawPages.map(page => page._id.toString());
+    return pageIds;
   }
 
   async updatePageContentByPageId(

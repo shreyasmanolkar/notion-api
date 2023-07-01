@@ -207,6 +207,10 @@ export class WorkspaceRepository
       updatedFields['pages.$.icon'] = pageData.icon;
     }
 
+    if (pageData.path) {
+      updatedFields['pages.$.path'] = pageData.path;
+    }
+
     await collection.updateOne(
       { _id: stringToObjectId(workspaceId), 'pages.id': pageId },
       { $set: updatedFields }

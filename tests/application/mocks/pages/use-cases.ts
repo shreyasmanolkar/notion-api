@@ -8,6 +8,7 @@ import { DeletePageInterface } from '@application/interfaces/use-cases/pages/del
 import { DeletePagesByWorkspaceIdInterface } from '@application/interfaces/use-cases/pages/deletePagesByWorkspaceIdInterface';
 import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
 import { GetPageContentByPageIdInterface } from '@application/interfaces/use-cases/pages/getPageContentByPageIdInterface';
+import { GetPageIdsByPathInterface } from '@application/interfaces/use-cases/pages/getPageIdsByPathInterface';
 import { GetPageSettingsByPageIdInterface } from '@application/interfaces/use-cases/pages/getPageSettingsByPageIdInterface';
 import { RemoveFromFavoriteInterface } from '@application/interfaces/use-cases/pages/removeFromFavoriteInterface';
 import { UpdatePageContentByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageContentByPageIdInterface';
@@ -82,6 +83,14 @@ export class GetPageSettingsByPageIdStub
   ): Promise<GetPageSettingsByPageIdInterface.Response> {
     const { pageSettings } = mockPage();
     return pageSettings;
+  }
+}
+
+export class GetPageIdsByPathStub implements GetPageIdsByPathInterface {
+  async execute(
+    _path: GetPageIdsByPathInterface.Request
+  ): Promise<GetPageIdsByPathInterface.Response> {
+    return ['112233445566778899bbccaa'];
   }
 }
 

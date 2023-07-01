@@ -259,6 +259,59 @@ describe('Page Repository', () => {
     });
   });
 
+  describe('GetPageIdsByPath', () => {
+    it('should return all pageIds by path', async () => {
+      const pageRepository = new PageRepository();
+
+      const {
+        title,
+        icon,
+        coverPicture,
+        content,
+        favorite,
+        pageSettings,
+        path,
+        workspaceId,
+        reference,
+      } = mockPage();
+
+      await pageCollection.insertOne({
+        title,
+        icon,
+        coverPicture,
+        content,
+        favorite,
+        pageSettings,
+        path,
+        workspaceId,
+        reference,
+      });
+
+      await pageCollection.insertOne({
+        title: 'new title',
+        icon,
+        coverPicture,
+        content,
+        favorite,
+        pageSettings,
+        path,
+        workspaceId,
+        reference: 'new-title-1234',
+      });
+
+      const pageIds = await pageRepository.getPageIdsByPath(path!);
+
+      expect(pageIds).toHaveLength(2);
+    });
+
+    it(`should return empty array if page ids doesn't exist`, async () => {
+      const pageRepository = new PageRepository();
+      const response = await pageRepository.getPageIdsByPath('invalid-path');
+
+      expect(response).toHaveLength(0);
+    });
+  });
+
   describe('UpdateUserProfilePicture', () => {
     it('should update page content and return updated page', async () => {
       const pageRepository = new PageRepository();
