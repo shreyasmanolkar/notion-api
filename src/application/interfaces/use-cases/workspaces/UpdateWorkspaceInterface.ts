@@ -5,7 +5,7 @@ import { Workspace, WorkspaceProps } from '@domain/entities/Workspace';
 export namespace UpdateWorkspaceInterface {
   export type WorkspaceIdType = string;
   export type WorkspaceDataType = Partial<
-    Omit<WorkspaceProps, 'id' | 'createdAt' | 'updatedAt' | 'members' | 'pages'>
+    Omit<WorkspaceProps, 'id' | 'createdAt' | 'updatedAt' | 'members'>
   >;
 
   export type Request = {
