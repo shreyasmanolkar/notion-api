@@ -13,6 +13,7 @@ import { RemoveFromFavoriteRepository } from '@application/interfaces/repositori
 import { UpdatePageContentByPageIdRepository } from '@application/interfaces/repositories/pages/updatePageContentByPageIdRepository';
 import { UpdatePageCoverByPageIdRepository } from '@application/interfaces/repositories/pages/updatePageCoverByPageIdRepository';
 import { UpdatePageIconByPageIdRepository } from '@application/interfaces/repositories/pages/updatePageIconByPageIdRepository';
+import { UpdatePagePathByPageIdRepository } from '@application/interfaces/repositories/pages/updatePagePathByPageIdRepository';
 import { UpdatePageSettingsByPageIdRepository } from '@application/interfaces/repositories/pages/updatePageSettingsByPageIdRepository';
 import { UpdatePageTitleByPageIdRepository } from '@application/interfaces/repositories/pages/updatePageTitleByPageIdRepository';
 import { Page } from '@domain/entities/Page';
@@ -128,6 +129,17 @@ export class UpdatePageTitleByPageIdRepositoryStub
   async updatePageTitleByPageId(
     params: UpdatePageTitleByPageIdRepository.Request
   ): Promise<UpdatePageTitleByPageIdRepository.Response> {
+    const page = mockPage();
+    return page;
+  }
+}
+
+export class UpdatePagePathByPageIdRepositoryStub
+  implements UpdatePagePathByPageIdRepository
+{
+  async updatePagePathByPageId(
+    params: UpdatePagePathByPageIdRepository.Request
+  ): Promise<UpdatePagePathByPageIdRepository.Response> {
     const page = mockPage();
     return page;
   }
