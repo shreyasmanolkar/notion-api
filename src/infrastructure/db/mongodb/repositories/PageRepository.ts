@@ -21,6 +21,7 @@ import { RemoveFromFavoriteRepository } from '@application/interfaces/repositori
 import { DeletePageRepository } from '@application/interfaces/repositories/pages/deletePageRepository';
 import { DeletePagesByWorkspaceIdRepository } from '@application/interfaces/repositories/pages/deletePagesByWorkspaceIdRepository';
 import { GetPageIdsByPathRepository } from '@application/interfaces/repositories/pages/getPageIdsByPathRepository';
+import { UpdatePagePathByPageIdRepository } from '@application/interfaces/repositories/pages/updatePagePathByPageIdRepository';
 
 export class PageRepository
   implements
@@ -35,6 +36,7 @@ export class PageRepository
     UpdatePageIconByPageIdRepository,
     UpdatePageSettingsByPageIdRepository,
     UpdatePageTitleByPageIdRepository,
+    UpdatePagePathByPageIdRepository,
     RemoveFromFavoriteRepository,
     DeletePageRepository,
     DeletePagesByWorkspaceIdRepository
@@ -251,6 +253,21 @@ export class PageRepository
     const { value: rawPageContent } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(pageId) },
       { $set: { title, reference } },
+      { upsert: true, returnDocument: 'after' }
+    );
+
+    return mapDocument(rawPageContent);
+  }
+
+  async updatePagePathByPageId(
+    params: UpdatePagePathByPageIdRepository.Request
+  ): Promise<UpdatePagePathByPageIdRepository.Response> {
+    const collection = await PageRepository.getCollection();
+    const { pageId, path } = params;
+
+    const { value: rawPageContent } = await collection.findOneAndUpdate(
+      { _id: stringToObjectId(pageId) },
+      { $set: { path } },
       { upsert: true, returnDocument: 'after' }
     );
 

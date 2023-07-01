@@ -14,6 +14,7 @@ import { RemoveFromFavoriteInterface } from '@application/interfaces/use-cases/p
 import { UpdatePageContentByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageContentByPageIdInterface';
 import { UpdatePageCoverByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageCoverByPageIdInterface';
 import { UpdatePageIconByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageIconByPageIdInterface';
+import { UpdatePagePathByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePagePathByPageIdInterface';
 import { UpdatePageSettingsByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageSettingsByPageIdInterface';
 import { UpdatePageTitleByPageIdInterface } from '@application/interfaces/use-cases/pages/updatePageTitleByPageIdInterface';
 import mockPage from '@tests/domain/mock-page';
@@ -150,6 +151,17 @@ export class UpdatePageTitleByPageIdStub
   async execute(
     _params: UpdatePageTitleByPageIdInterface.Request
   ): Promise<UpdatePageTitleByPageIdInterface.Response> {
+    const page = mockPage();
+    return page;
+  }
+}
+
+export class UpdatePagePathByPageIdStub
+  implements UpdatePagePathByPageIdInterface
+{
+  async execute(
+    _params: UpdatePagePathByPageIdInterface.Request
+  ): Promise<UpdatePagePathByPageIdInterface.Response> {
     const page = mockPage();
     return page;
   }

@@ -533,6 +533,45 @@ describe('Page Repository', () => {
     });
   });
 
+  describe('updatePagePathByPageId', () => {
+    it('should updated page path and return updated page', async () => {
+      const pageRepository = new PageRepository();
+
+      const {
+        title,
+        icon,
+        coverPicture,
+        content,
+        favorite,
+        pageSettings,
+        path,
+        workspaceId,
+        reference,
+      } = mockPage();
+
+      const { insertedId } = await pageCollection.insertOne({
+        title,
+        icon,
+        coverPicture,
+        content,
+        favorite,
+        pageSettings,
+        path,
+        workspaceId,
+        reference,
+      });
+
+      const updatedPath = 'Parent-Page-path';
+
+      const updatedPage = await pageRepository.updatePagePathByPageId({
+        pageId: objectIdToString(insertedId),
+        path: updatedPath,
+      });
+
+      expect(updatedPage.path).toBe(updatedPath);
+    });
+  });
+
   describe('RemoveFromFavorite', () => {
     it('should remove userId from favorites and return updated page', async () => {
       const pageRepository = new PageRepository();
