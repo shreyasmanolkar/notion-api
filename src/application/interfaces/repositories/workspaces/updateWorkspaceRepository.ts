@@ -4,10 +4,7 @@ export namespace UpdateWorkspaceRepository {
   export type Request = {
     workspaceId: string;
     workspaceData: Partial<
-      Omit<
-        WorkspaceProps,
-        'id' | 'createdAt' | 'updatedAt' | 'members' | 'pages'
-      >
+      Omit<WorkspaceProps, 'id' | 'createdAt' | 'updatedAt' | 'members'>
     >;
   };
   export type Response = Workspace;
