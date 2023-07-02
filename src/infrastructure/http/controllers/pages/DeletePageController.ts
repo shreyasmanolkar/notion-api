@@ -6,6 +6,9 @@ import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/ge
 import { DeletePageInterface } from '@application/interfaces/use-cases/pages/deletePageInterface';
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
 import { RemovePageByPageIdInterface } from '@application/interfaces/use-cases/workspaces/RemovePageByPageIdInterface';
+import { RemovePageIdFromFavoritesByWorkspaceIdInterface } from '@application/interfaces/use-cases/users/RemovePageIdFromFavoritesByWorkspaceIdInterface';
+import { GetWorkspaceByIdInterface } from '@application/interfaces/use-cases/workspaces/GetWorkspaceByIdInterface';
+import { WorkspaceNotFoundError } from '@application/errors/WorkspaceNotFoundError';
 
 export namespace DeletePageController {
   export type Request = HttpRequest<undefined, { pageId: string }>;
@@ -16,7 +19,9 @@ export class DeletePageController extends BaseController {
   constructor(
     private readonly getPageById: GetPageByIdInterface,
     private readonly deletePage: DeletePageInterface,
-    private readonly removePageByPageId: RemovePageByPageIdInterface
+    private readonly removePageByPageId: RemovePageByPageIdInterface,
+    private readonly getWorkspaceById: GetWorkspaceByIdInterface,
+    private readonly removePageIdFromFavoritesByWorkspaceId: RemovePageIdFromFavoritesByWorkspaceIdInterface
   ) {
     super();
   }
@@ -35,6 +40,24 @@ export class DeletePageController extends BaseController {
     await this.removePageByPageId.execute({
       workspaceId: pageOrError.workspaceId,
       pageId,
+    });
+
+    const workspaceId = pageOrError.workspaceId!;
+
+    const workspaceOrError = await this.getWorkspaceById.execute(workspaceId);
+
+    if (workspaceOrError instanceof WorkspaceNotFoundError) {
+      return notFound(workspaceOrError);
+    }
+
+    const userIds = workspaceOrError.members;
+
+    userIds.map(async userId => {
+      await this.removePageIdFromFavoritesByWorkspaceId.execute({
+        userId,
+        workspaceId,
+        pageId,
+      });
     });
 
     await this.deletePage.execute(pageId);

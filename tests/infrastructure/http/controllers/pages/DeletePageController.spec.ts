@@ -6,7 +6,11 @@ import {
   DeletePageStub,
   GetPageByIdStub,
 } from '@tests/application/mocks/pages/use-cases';
-import { RemovePageByPageIdStub } from '@tests/application/mocks/workspaces/use-cases';
+import { RemovePageIdFromFavoritesByWorkspaceIdStub } from '@tests/application/mocks/users/use-cases';
+import {
+  GetWorkspaceByIdStub,
+  RemovePageByPageIdStub,
+} from '@tests/application/mocks/workspaces/use-cases';
 import mockPage from '@tests/domain/mock-page';
 
 type SutTypes = {
@@ -14,17 +18,24 @@ type SutTypes = {
   getPageByIdStub: GetPageByIdStub;
   deletePageStub: DeletePageStub;
   removePageByPageIdStub: RemovePageByPageIdStub;
+  getWorkspaceByIdStub: GetWorkspaceByIdStub;
+  removePageIdFromFavoritesByWorkspaceIdStub: RemovePageIdFromFavoritesByWorkspaceIdStub;
 };
 
 const makeSut = (): SutTypes => {
   const getPageByIdStub = new GetPageByIdStub();
   const deletePageStub = new DeletePageStub();
   const removePageByPageIdStub = new RemovePageByPageIdStub();
+  const getWorkspaceByIdStub = new GetWorkspaceByIdStub();
+  const removePageIdFromFavoritesByWorkspaceIdStub =
+    new RemovePageIdFromFavoritesByWorkspaceIdStub();
 
   const sut = new DeletePageController(
     getPageByIdStub,
     deletePageStub,
-    removePageByPageIdStub
+    removePageByPageIdStub,
+    getWorkspaceByIdStub,
+    removePageIdFromFavoritesByWorkspaceIdStub
   );
 
   return {
@@ -32,6 +43,8 @@ const makeSut = (): SutTypes => {
     getPageByIdStub,
     deletePageStub,
     removePageByPageIdStub,
+    getWorkspaceByIdStub,
+    removePageIdFromFavoritesByWorkspaceIdStub,
   };
 };
 
