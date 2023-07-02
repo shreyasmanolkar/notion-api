@@ -9,6 +9,7 @@ const mockPage = (): Page => {
     icon: '1F54A',
     coverPicture: {
       url: 'http://sample-url.com',
+      verticalPosition: 35,
     },
     content: {
       type: 'doc',

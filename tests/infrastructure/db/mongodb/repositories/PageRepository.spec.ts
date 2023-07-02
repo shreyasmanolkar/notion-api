@@ -405,9 +405,11 @@ describe('Page Repository', () => {
       const updatedPage = await pageRepository.updatePageCoverByPageId({
         pageId: objectIdToString(insertedId),
         url: updatedCover,
+        verticalPosition: 0,
       });
 
       expect(updatedPage.coverPicture.url).toBe(updatedCover);
+      expect(updatedPage.coverPicture.verticalPosition).toBe(0);
     });
   });
 
