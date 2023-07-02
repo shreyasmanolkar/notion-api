@@ -6,6 +6,7 @@ export namespace UpdatePageCoverByPageIdInterface {
   export type Request = {
     pageId: string;
     url: string;
+    verticalPosition: number;
   };
   export type Response = Page | PageNotFoundError;
 }

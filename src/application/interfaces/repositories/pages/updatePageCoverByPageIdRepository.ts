@@ -4,6 +4,7 @@ export namespace UpdatePageCoverByPageIdRepository {
   export type Request = {
     pageId: string;
     url: string;
+    verticalPosition: number;
   };
   export type Response = Page;
 }

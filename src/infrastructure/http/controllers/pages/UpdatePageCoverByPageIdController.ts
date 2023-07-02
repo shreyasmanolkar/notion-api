@@ -8,7 +8,10 @@ import { UpdatePageCoverByPageIdInterface } from '@application/interfaces/use-ca
 import { noContent, notFound } from '@infrastructure/http/helpers/http';
 
 export namespace UpdatePageCoverByPageIdController {
-  export type Request = HttpRequest<{ url: string }, { pageId: string }>;
+  export type Request = HttpRequest<
+    { url: string; verticalPosition: number },
+    { pageId: string }
+  >;
   export type Response = HttpResponse<undefined | PageNotFoundError>;
 }
 
@@ -25,7 +28,7 @@ export class UpdatePageCoverByPageIdController extends BaseController {
     httpRequest: UpdatePageCoverByPageIdController.Request
   ): Promise<UpdatePageCoverByPageIdController.Response> {
     const { pageId } = httpRequest.params!;
-    const { url } = httpRequest.body!;
+    const { url, verticalPosition } = httpRequest.body!;
 
     const pageOrError = await this.getPageById.execute(pageId);
 
@@ -36,6 +39,7 @@ export class UpdatePageCoverByPageIdController extends BaseController {
     await this.updatePageCoverByPageId.execute({
       pageId,
       url,
+      verticalPosition,
     });
 
     return noContent();

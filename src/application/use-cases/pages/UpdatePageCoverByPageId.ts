@@ -14,7 +14,7 @@ export class UpdatePageCoverByPageId
   async execute(
     params: UpdatePageCoverByPageIdInterface.Request
   ): Promise<UpdatePageCoverByPageIdInterface.Response> {
-    const { pageId, url } = params;
+    const { pageId, url, verticalPosition } = params;
 
     const page = await this.getPageByIdRepository.getPageById(pageId);
 
@@ -26,6 +26,7 @@ export class UpdatePageCoverByPageId
       await this.updatePageCoverByPageIdRepository.updatePageCoverByPageId({
         pageId,
         url,
+        verticalPosition,
       });
 
     return updated;
