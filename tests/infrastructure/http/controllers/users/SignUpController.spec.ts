@@ -130,6 +130,7 @@ describe('SignUpController', () => {
         icon: '1F575',
         coverPicture: {
           url: 'http://cover-picture.com',
+          verticalPosition: 32,
         },
         content: {
           type: 'doc',

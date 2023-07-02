@@ -38,10 +38,12 @@ describe('UpdatePageCoverByPageId', () => {
     await sut.execute({
       pageId: id,
       url: coverPicture.url,
+      verticalPosition: coverPicture.verticalPosition,
     });
     expect(updatePageCoverByPageIdRepositorySpy).toHaveBeenCalledWith({
       pageId: id,
       url: coverPicture.url,
+      verticalPosition: coverPicture.verticalPosition,
     });
   });
 
@@ -55,6 +57,7 @@ describe('UpdatePageCoverByPageId', () => {
     const response = await sut.execute({
       pageId: id,
       url: coverPicture.url,
+      verticalPosition: coverPicture.verticalPosition,
     });
     expect(response).toEqual(new PageNotFoundError());
   });
@@ -66,6 +69,7 @@ describe('UpdatePageCoverByPageId', () => {
     const response = await sut.execute({
       pageId: page.id,
       url: page.coverPicture.url,
+      verticalPosition: page.coverPicture.verticalPosition,
     });
 
     expect(response).toEqual(page);

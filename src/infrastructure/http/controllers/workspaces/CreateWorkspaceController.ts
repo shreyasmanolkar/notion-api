@@ -54,6 +54,7 @@ export class CreateWorkspaceController extends BaseController {
       icon: '1F575',
       coverPicture: {
         url: 'http://cover-picture.com',
+        verticalPosition: 23,
       },
       content: {
         type: 'doc',

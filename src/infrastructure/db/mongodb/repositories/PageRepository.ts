@@ -185,11 +185,11 @@ export class PageRepository
     params: UpdatePageCoverByPageIdRepository.Request
   ): Promise<UpdatePageCoverByPageIdRepository.Response> {
     const collection = await PageRepository.getCollection();
-    const { pageId, url } = params;
+    const { pageId, url, verticalPosition } = params;
 
     const { value: rawPageContent } = await collection.findOneAndUpdate(
       { _id: stringToObjectId(pageId) },
-      { $set: { coverPicture: { url } } },
+      { $set: { coverPicture: { url, verticalPosition } } },
       { upsert: true, returnDocument: 'after' }
     );
 
