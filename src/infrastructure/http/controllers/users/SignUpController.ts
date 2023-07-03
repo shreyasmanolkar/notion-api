@@ -58,8 +58,8 @@ export class SignUpController extends BaseController {
       title: 'notion clone project',
       icon: '1F575',
       coverPicture: {
-        url: 'http://cover-picture.com',
-        verticalPosition: 32,
+        url: '',
+        verticalPosition: 0,
       },
       content: {
         type: 'doc',
