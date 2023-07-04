@@ -49,7 +49,7 @@ export class PageRepository
     pageData: CreatePageRepository.Request
   ): Promise<CreatePageRepository.Response> {
     const collection = await PageRepository.getCollection();
-    const uniqueId = randomBytes(32).toString('hex');
+    const uniqueId = randomBytes(16).toString('hex');
     const { title } = pageData;
 
     const titleArray = title.split(' ');
