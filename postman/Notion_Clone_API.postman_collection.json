@@ -1,0 +1,5082 @@
+{
+	"info": {
+		"_postman_id": "1895a06a-fd28-4899-844d-9c70f0e569d2",
+		"name": "Notion_Clone_API",
+		"description": "Welcome to the API documentation for Notion Clone! This collection provides detailed information about the endpoints and functionalities available for interacting with the Notion Clone application through its API.\n\n## Overview\n\nNotion Clone is an application designed to replicate the core features of the popular productivity tool, Notion. With the Notion Clone API, developers can programmatically create, update, and retrieve various resources such as pages, workspaces, and blocks. This allows seamless integration of Notion Clone with other applications, enabling users to automate tasks, extract data, and build custom workflows.\n\n## API Base URL\n\nThe base URL for accessing the Notion Clone API is:\n\n```\nhttps://api.notionclone.com/v1\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20114396"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}"
+							]
+						},
+						"description": "Retrieves information about a user based on their unique ID."
+					},
+					"response": [
+						{
+							"name": "Get User By Id 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/users/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "303"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12f-TYkKEwR87nctgjWfayGwf8RyxQs\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:09:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"first user\",\n    \"email\": \"user@email.com\",\n    \"isDarkMode\": true,\n    \"profilePicture\": {\n        \"url\": \"sample-url\"\n    },\n    \"workspaces\": [\n        {\n            \"workspaceId\": \"64aed7cc997d040c494aa94c\",\n            \"workspaceName\": \"home-workspace\",\n            \"workspaceIcon\": \"1f30e\",\n            \"favorites\": []\n        }\n    ],\n    \"createdAt\": \"2023-07-12T16:41:48.756Z\",\n    \"id\": \"64aed7cc997d040c494aa94e\"\n}"
+						}
+					]
+				},
+				{
+					"name": "User Workspace Access",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access"
+							]
+						},
+						"description": "Retrieves the workspaces accessible by a user."
+					},
+					"response": [
+						{
+							"name": "User Workspace Access 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/users//workspaces-access",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										"",
+										"workspaces-access"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "116"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"74-lzJHBVipfeXHDzYZRWguhTw8w8E\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:16:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"workspaceId\": \"64aed7cc997d040c494aa94c\",\n        \"workspaceName\": \"home-workspace\",\n        \"workspaceIcon\": \"1f30e\",\n        \"favorites\": []\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "User Favorites By WorkspaceId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId/favorites",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId",
+								"favorites"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aed7cc997d040c494aa94c"
+								}
+							]
+						},
+						"description": "Retrieves the favorite pages of a user by workspaceId."
+					},
+					"response": [
+						{
+							"name": "User Favorites By WorkspaceId 403",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/users//workspaces-access/:workspaceId/favorites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										"",
+										"workspaces-access",
+										":workspaceId",
+										"favorites"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aec2d0997d040c494aa946"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d-/waey6VZqBbTEnh3EBMXMUYcgBU\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:18:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Permission denied\"\n}"
+						},
+						{
+							"name": "User Favorites By WorkspaceId 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId/favorites",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"users",
+										"{{authenticatedUserId}}",
+										"workspaces-access",
+										":workspaceId",
+										"favorites"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aed7cc997d040c494aa94c"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-m1ci6lI0bVccfrW3TbXVAMJXomI\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:20:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"64aed7cc997d040c494aa94d\"\n]"
+						}
+					]
+				},
+				{
+					"name": "Add workspace To User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "new-workspace-id"
+								}
+							]
+						},
+						"description": "Adds a workspace to a user's accessible workspaces."
+					},
+					"response": [
+						{
+							"name": "Add workspace To User 204",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/users//workspaces-access/:workspaceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										"",
+										"workspaces-access",
+										":workspaceId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "new-workspace-id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:23:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Add PageId To  Favorites",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId/favorites/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId",
+								"favorites",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aed7cc997d040c494aa94c"
+								},
+								{
+									"key": "pageId",
+									"value": "64aed7cc997d040c494aa94d"
+								}
+							]
+						},
+						"description": "Adds a page ID to a user's favorites by workspaceId."
+					},
+					"response": [
+						{
+							"name": "Add PageId To  Favorites 204",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/users//workspaces-access/:workspaceId/favorites/:pageId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										"",
+										"workspaces-access",
+										":workspaceId",
+										"favorites",
+										":pageId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aed7cc997d040c494aa94c"
+										},
+										{
+											"key": "pageId",
+											"value": "64aed7cc997d040c494aa94d"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:20:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update Profile Picture",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"data:image/jpeg;base64,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\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/profile-picture",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"profile-picture"
+							]
+						},
+						"description": "Updates the profile picture of a user."
+					},
+					"response": [
+						{
+							"name": "Update Profile Picture 204",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"url\": \"data:image/jpeg;base64,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\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/users//profile-picture",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										"",
+										"profile-picture"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:33:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"v2-updated-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}"
+							]
+						},
+						"description": "Updates the details of a user.\n\ncan update name, email, isDarkMode."
+					},
+					"response": [
+						{
+							"name": "Update User 200",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"v2-updated-name\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/users/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4468"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1174-cTa0cfFu4APXZutPcO1Mh2Te+po\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:35:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"v2-updated-name\",\n    \"email\": \"user@email.com\",\n    \"password\": \"$2b$10$kRrE4ofmRjfkEVdVFE5RuO3IqbPliiosGGsSqfINsQLXMvXC8gxRC\",\n    \"isDarkMode\": true,\n    \"profilePicture\": {\n        \"url\": \"data:image/jpeg;base64,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\"\n    },\n    \"workspaces\": [\n        {\n            \"workspaceId\": \"64aed7cc997d040c494aa94c\",\n            \"workspaceName\": \"home-workspace\",\n            \"workspaceIcon\": \"1f30e\",\n            \"favorites\": [\n                \"64aed7cc997d040c494aa94d\"\n            ]\n        }\n    ],\n    \"createdAt\": \"2023-07-12T16:41:48.756Z\",\n    \"updatedAt\": \"2023-07-12T17:35:07.923Z\",\n    \"id\": \"64aed7cc997d040c494aa94e\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Remove Workspace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "new-workspace-id"
+								}
+							]
+						},
+						"description": "Removes a workspace from a user's accessible workspaces."
+					},
+					"response": [
+						{
+							"name": "Remove Workspace 204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/users//workspaces-access/:workspaceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										"",
+										"workspaces-access",
+										":workspaceId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "new-workspace-id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:26:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Remove PageId From  Favorites",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}/workspaces-access/:workspaceId/favorites/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}",
+								"workspaces-access",
+								":workspaceId",
+								"favorites",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aed7cc997d040c494aa94c"
+								},
+								{
+									"key": "pageId",
+									"value": "64aee544997d040c494aa954"
+								}
+							]
+						},
+						"description": "Removes a page ID from a user's favorites."
+					},
+					"response": [
+						{
+							"name": "Remove PageId From  Favorites 204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/users//workspaces-access/:workspaceId/favorites/:pageId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										"",
+										"workspaces-access",
+										":workspaceId",
+										"favorites",
+										":pageId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aed7cc997d040c494aa94c"
+										},
+										{
+											"key": "pageId",
+											"value": "64aee544997d040c494aa954"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:51:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/users/{{authenticatedUserId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"users",
+								"{{authenticatedUserId}}"
+							]
+						},
+						"description": "Deletes a user and all associated data."
+					},
+					"response": [
+						{
+							"name": "Delete User 204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/users/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"users",
+										""
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:55:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "The Users folder contains API endpoints related to user management and information retrieval. Use these endpoints to retrieve user details, update profiles, manage workspaces, and handle favorites."
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"first user\",\n    \"email\": \"user@email.com\",\n    \"password\": \"password\",\n    \"isDarkMode\": true,\n    \"profilePicture\": {\n        \"url\": \"sample-url\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/register",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"register"
+							]
+						},
+						"description": "Creates a new user account with the provided credentials."
+					},
+					"response": [
+						{
+							"name": "Register 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"first user\",\n    \"email\": \"user@email.com\",\n    \"password\": \"password\",\n    \"isDarkMode\": true,\n    \"profilePicture\": {\n        \"url\": \"sample-url\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "token_v1=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGFlZDdjYzk5N2QwNDBjNDk0YWE5NGUiLCJpYXQiOjE2ODkxODAxMDh9.JWZ1ylU-CePCE6clIzOCS5_fpfvYeoagoF-tBVrckyw; Path=/; Expires=Thu, 11 Jul 2024 16:41:48 GMT; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "Content-Length",
+									"value": "194"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c2-dYQUpXS2vY464uzn/xZTm+nPZ4I\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 16:41:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGFlZDdjYzk5N2QwNDBjNDk0YWE5NGUiLCJpYXQiOjE2ODkxODAxMDgsImV4cCI6MTY4OTE4MTAwOH0.UhdWiDJNVUYJditazxkrManpnMNSTq70DMc2SkBo4Uk\"\n}"
+						},
+						{
+							"name": "Register 409",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"first user\",\n    \"email\": \"user@email.com\",\n    \"password\": \"password\",\n    \"isDarkMode\": true,\n    \"profilePicture\": {\n        \"url\": \"sample-url\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/register",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"register"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-OEt1KAmpexNUImW6qjYDZWx9AjE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 16:46:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Email is already in use\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set('accessToken', jsonData.accessToken);",
+									"",
+									"let [jwtHeader, jwtPayload, jwtSignature] = jsonData.accessToken.split('.');",
+									"",
+									"let decodedPayload = JSON.parse(atob(jwtPayload));",
+									"",
+									"pm.collectionVariables.set('authenticatedUserId', decodedPayload.userId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@email.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/login",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"login"
+							]
+						},
+						"description": "Authenticates a user with email and password and generates an access token."
+					},
+					"response": [
+						{
+							"name": "Login 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user@email.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "token_v1=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGFlZDdjYzk5N2QwNDBjNDk0YWE5NGUiLCJpYXQiOjE2ODkxODEyNTl9.FEjI1X0yqdOzed6ZgktN3f-TXOpMl6zTWdNNvZAV51Q; Path=/; Expires=Thu, 11 Jul 2024 17:00:59 GMT; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "Content-Length",
+									"value": "194"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c2-tIMECEROSOlyqQIbqFNcTOL5yrs\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:00:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGFlZDdjYzk5N2QwNDBjNDk0YWE5NGUiLCJpYXQiOjE2ODkxODEyNTksImV4cCI6MTY4OTE4MjE1OX0.DCsYTQ1DiEf4jrgTJq7k_Au6R4MdNboY2lrIY0sd_Ks\"\n}"
+						},
+						{
+							"name": "Login 401",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user@email.com\",\n    \"password\": \"passwords\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/login",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-+L4NhuSHCOzVDDlFtXKqHQQ0k4g\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:01:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid Password\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/logout",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"logout"
+							]
+						},
+						"description": "Invalidates the current user's access token, and delete refresh token effectively logging them out."
+					},
+					"response": [
+						{
+							"name": "Logout 403",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"logout"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-7TS5L8oNHbc4slGDfUm9L1mnwgk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 16:59:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid authentication token\"\n}"
+						},
+						{
+							"name": "Logout 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/logout",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "token_v1=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-rnOq3+Wk6B47JX+uAB2dhtQox00\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 16:59:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"signed out successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set('accessToken', jsonData.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/token",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"token"
+							]
+						},
+						"description": "Generates a new access token using a refresh token."
+					},
+					"response": [
+						{
+							"name": "Get Access Token 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/v1/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "194"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c2-3yCHz7p0QwFy54YtYLMs+7BwCX4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 16:59:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGFlZDdjYzk5N2QwNDBjNDk0YWE5NGUiLCJpYXQiOjE2ODkxODExNjAsImV4cCI6MTY4OTE4MjA2MH0.If_RPEFnmRqoBbX2ggFH1aImPFALZQ27srgU3QpVPMo\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The Authentication folder contains API endpoints related to user authentication, registration, and access token management. Use these endpoints to handle user authentication and session management in the Notion Clone application."
+		},
+		{
+			"name": "Workspaces",
+			"item": [
+				{
+					"name": "Get Workspace By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef009997d040c494aa955"
+								}
+							]
+						},
+						"description": "Retrieves information about a workspace based on its unique ID."
+					},
+					"response": [
+						{
+							"name": "Get Workspace By Id 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef009997d040c494aa955"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "359"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"167-XbpIVHoR1Fruu8ghC+88ANRabBI\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:38:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"home-workspace\",\n    \"icon\": \"1f30e\",\n    \"members\": [\n        \"64aef009997d040c494aa957\"\n    ],\n    \"pages\": [\n        {\n            \"id\": \"64aef009997d040c494aa956\",\n            \"reference\": \"notion-clone-project-d52a917310fbdf32566db50bed1a95aa\",\n            \"path\": null,\n            \"icon\": \"1F575\",\n            \"title\": \"notion clone project\",\n            \"createdAt\": \"2023-07-12T18:25:13.046Z\"\n        }\n    ],\n    \"createdAt\": \"2023-07-12T18:25:13.043Z\",\n    \"id\": \"64aef009997d040c494aa955\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Workspace Members",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/members",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"members"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef009997d040c494aa955"
+								}
+							]
+						},
+						"description": "Retrieves all members associated with a workspace."
+					},
+					"response": [
+						{
+							"name": "Get All Workspace Members 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId/members",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId",
+										"members"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef009997d040c494aa955"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-2GFT+uVht2Mwu7LV/7/cug9m3eo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:39:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"64aef009997d040c494aa957\"\n]"
+						}
+					]
+				},
+				{
+					"name": "Get All Workspace Root Pages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/pages/root",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"pages",
+								"root"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef009997d040c494aa955"
+								}
+							]
+						},
+						"description": "Retrieves all root-level pages within a workspace."
+					},
+					"response": [
+						{
+							"name": "Get All Workspace Root Pages 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId/pages/root",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId",
+										"pages",
+										"root"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef009997d040c494aa955"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "200"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c8-r/9oMv7sARQtFZPtKxT5YZMyvA4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:39:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"64aef009997d040c494aa956\",\n        \"reference\": \"notion-clone-project-d52a917310fbdf32566db50bed1a95aa\",\n        \"path\": null,\n        \"icon\": \"1F575\",\n        \"title\": \"notion clone project\",\n        \"createdAt\": \"2023-07-12T18:25:13.046Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Children Pages By PageReference",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/pages/:pageReference/childrens",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"pages",
+								":pageReference",
+								"childrens"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef009997d040c494aa955"
+								},
+								{
+									"key": "pageReference",
+									"value": "notion-clone-project-d52a917310fbdf32566db50bed1a95aa"
+								}
+							]
+						},
+						"description": "Retrieves the children pages of a given parent page within a workspace."
+					},
+					"response": [
+						{
+							"name": "Get Children Pages By PageReference 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId/pages/:pageReference/childrens",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId",
+										"pages",
+										":pageReference",
+										"childrens"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef009997d040c494aa955"
+										},
+										{
+											"key": "pageReference",
+											"value": "notion-clone-project-d52a917310fbdf32566db50bed1a95aa"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "235"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"eb-zJpjEJyCj5NKtKoMJicL/iUy5iY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:45:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"64aef479997d040c494aa95a\",\n        \"reference\": \"flying-star-3d3cd031ca1937b41b67e706873c116a\",\n        \"path\": \",notion-clone-project-d52a917310fbdf32566db50bed1a95aa.\",\n        \"icon\": \"1f4ab\",\n        \"title\": \"flying star\",\n        \"createdAt\": \"2023-07-12T18:44:09.468Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create Workspace",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"office-workspace-4\",\n    \"icon\": \"1f6d5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces"
+							]
+						},
+						"description": "Creates a new workspace with the provided details."
+					},
+					"response": [
+						{
+							"name": "Create Workspace 201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"office-workspace-4\",\n    \"icon\": \"1f6d5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-UdFb7HhGqa5tEkb+Px8//I5jZM4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:46:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"workspaceId\": \"64aef4e8997d040c494aa95b\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Member To Workspaces",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"office-workspace\",\n    \"icon\": \"1F41A\",\n    \"members\": [\"646fb0c7e4682ebc5d2ea329\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/members/:memberId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"members",
+								":memberId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef4e8997d040c494aa95b"
+								},
+								{
+									"key": "memberId",
+									"value": "646fbaaaa4682ebcccceaa31"
+								}
+							]
+						},
+						"description": "Adds a member to a workspace."
+					},
+					"response": [
+						{
+							"name": "Add Member To Workspaces 204",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"office-workspace\",\n    \"icon\": \"1F41A\",\n    \"members\": [\"646fb0c7e4682ebc5d2ea329\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId/members/:memberId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId",
+										"members",
+										":memberId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef4e8997d040c494aa95b"
+										},
+										{
+											"key": "memberId",
+											"value": "646fbaaaa4682ebcccceaa31"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:46:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Add Page To Workspace",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"646fb0c7e44445ac5d2eeeee\",\n    \"icon\": \"1A42A\",\n    \"reference\": \"sample-page-title-two-646fb0c7e4682ebc11223421\",\n    \"path\": \",sample-page-title-646fb0c7e4682ebc55555555,\",\n    \"title\": \"sample-page-title-two\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/pages",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"pages"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef4e8997d040c494aa95b"
+								}
+							]
+						},
+						"description": "Adds a page to a workspace."
+					},
+					"response": [
+						{
+							"name": "Add Page To Workspace 204",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"646fb0c7e44445ac5d2eeeee\",\n    \"icon\": \"1A42A\",\n    \"reference\": \"sample-page-title-two-646fb0c7e4682ebc11223421\",\n    \"path\": \",sample-page-title-646fb0c7e4682ebc55555555,\",\n    \"title\": \"sample-page-title-two\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId/pages",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId",
+										"pages"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef4e8997d040c494aa95b"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:47:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update Workspace",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pages\":[\n        {\n            \"id\": \"649ee1e93f7140d51b9a9e53\",\n            \"reference\": \"red-wine-49cd9d456cb244ec586229cdc598f08ca096577c062d9135502069ea63a341c5\",\n            \"path\": null,\n            \"icon\": \"1fab5\",\n            \"title\": \"red wine\",\n            \"createdAt\": \"2023-06-30T14:08:41.522+0000\"\n        },\n        {\n            \"id\": \"649de5920670af22d633f3c0\",\n            \"reference\": \"oh-my-god-8692c58d1baa8e9ee72948e9e3ba56df44f47d28a776b50b0ee0bd72043dc5ff\",\n            \"path\": null,\n            \"icon\": \"1f413\",\n            \"title\": \"oh my god\",\n            \"createdAt\": \"2023-06-29T20:12:02.636+0000\"\n        },\n        {\n            \"id\": \"649ee3e93f7140d51b9a9e54\",\n            \"reference\": \"knot-b82bf972632ec3a7d58c5bafd8b8a9bd74dcf3f79612b92c3542f98cbd1c0a71\",\n            \"path\": null,\n            \"icon\": \"1f477-200d-2640-fe0f\",\n            \"title\": \"knot\",\n            \"createdAt\": \"2023-06-30T14:17:13.082+0000\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef4e8997d040c494aa95b"
+								}
+							]
+						},
+						"description": "Updates the details of a workspace.\n\ncan update name, icon."
+					},
+					"response": [
+						{
+							"name": "Update Workspace 200",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"pages\":[\n        {\n            \"id\": \"649ee1e93f7140d51b9a9e53\",\n            \"reference\": \"red-wine-49cd9d456cb244ec586229cdc598f08ca096577c062d9135502069ea63a341c5\",\n            \"path\": null,\n            \"icon\": \"1fab5\",\n            \"title\": \"red wine\",\n            \"createdAt\": \"2023-06-30T14:08:41.522+0000\"\n        },\n        {\n            \"id\": \"649de5920670af22d633f3c0\",\n            \"reference\": \"oh-my-god-8692c58d1baa8e9ee72948e9e3ba56df44f47d28a776b50b0ee0bd72043dc5ff\",\n            \"path\": null,\n            \"icon\": \"1f413\",\n            \"title\": \"oh my god\",\n            \"createdAt\": \"2023-06-29T20:12:02.636+0000\"\n        },\n        {\n            \"id\": \"649ee3e93f7140d51b9a9e54\",\n            \"reference\": \"knot-b82bf972632ec3a7d58c5bafd8b8a9bd74dcf3f79612b92c3542f98cbd1c0a71\",\n            \"path\": null,\n            \"icon\": \"1f477-200d-2640-fe0f\",\n            \"title\": \"knot\",\n            \"createdAt\": \"2023-06-30T14:17:13.082+0000\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef4e8997d040c494aa95b"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "872"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"368-fKU8U+cxLQPGIXuxIFf22os8fJE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:47:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"office-workspace-4\",\n    \"icon\": \"1f6d5\",\n    \"members\": [\n        \"64aef009997d040c494aa957\",\n        \"646fbaaaa4682ebcccceaa31\"\n    ],\n    \"pages\": [\n        {\n            \"id\": \"649ee1e93f7140d51b9a9e53\",\n            \"reference\": \"red-wine-49cd9d456cb244ec586229cdc598f08ca096577c062d9135502069ea63a341c5\",\n            \"path\": null,\n            \"icon\": \"1fab5\",\n            \"title\": \"red wine\",\n            \"createdAt\": \"2023-06-30T14:08:41.522+0000\"\n        },\n        {\n            \"id\": \"649de5920670af22d633f3c0\",\n            \"reference\": \"oh-my-god-8692c58d1baa8e9ee72948e9e3ba56df44f47d28a776b50b0ee0bd72043dc5ff\",\n            \"path\": null,\n            \"icon\": \"1f413\",\n            \"title\": \"oh my god\",\n            \"createdAt\": \"2023-06-29T20:12:02.636+0000\"\n        },\n        {\n            \"id\": \"649ee3e93f7140d51b9a9e54\",\n            \"reference\": \"knot-b82bf972632ec3a7d58c5bafd8b8a9bd74dcf3f79612b92c3542f98cbd1c0a71\",\n            \"path\": null,\n            \"icon\": \"1f477-200d-2640-fe0f\",\n            \"title\": \"knot\",\n            \"createdAt\": \"2023-06-30T14:17:13.082+0000\"\n        }\n    ],\n    \"createdAt\": \"2023-07-12T18:46:00.281Z\",\n    \"updatedAt\": \"2023-07-12T18:47:53.754Z\",\n    \"id\": \"64aef4e8997d040c494aa95b\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Remove Page From Workspace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/pages/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"pages",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef4e8997d040c494aa95b"
+								},
+								{
+									"key": "pageId",
+									"value": "649ee1e93f7140d51b9a9e53"
+								}
+							]
+						},
+						"description": "Removes a page from a workspace."
+					},
+					"response": [
+						{
+							"name": "Remove Page From Workspace 204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId/pages/:pageId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId",
+										"pages",
+										":pageId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef4e8997d040c494aa95b"
+										},
+										{
+											"key": "pageId",
+											"value": "649ee1e93f7140d51b9a9e53"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:48:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Remove Member From Workspace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId/members/:memberId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId",
+								"members",
+								":memberId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef4e8997d040c494aa95b"
+								},
+								{
+									"key": "memberId",
+									"value": "646fbaaaa4682ebcccceaa31"
+								}
+							]
+						},
+						"description": "Removes a member from a workspace."
+					},
+					"response": [
+						{
+							"name": "Remove Member From Workspace 204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId/members/:memberId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId",
+										"members",
+										":memberId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef4e8997d040c494aa95b"
+										},
+										{
+											"key": "memberId",
+											"value": "646fbaaaa4682ebcccceaa31"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:49:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Delete Workspace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/workspaces/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"workspaces",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef4e8997d040c494aa95b"
+								}
+							]
+						},
+						"description": "Deletes a workspace and all associated data."
+					},
+					"response": [
+						{
+							"name": "Delete Workspace 204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/workspaces/:workspaceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"workspaces",
+										":workspaceId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef4e8997d040c494aa95b"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:50:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "The Workspaces folder contains API endpoints related to workspace management and information retrieval. Use these endpoints to retrieve workspace details, manage members, and handle pages within a workspace."
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Get Page By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Retrieves information about a page based on its unique ID."
+					},
+					"response": [
+						{
+							"name": "Get Page By Id 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "582"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"246-Ehl/rfDyQefCV10cPe/qPs8uq2M\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:14:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"title\": \"flying star\",\n    \"icon\": \"1f4ab\",\n    \"coverPicture\": {\n        \"url\": \"http://sample-url-img.com\"\n    },\n    \"content\": {\n        \"type\": \"doc\",\n        \"content\": [\n            {\n                \"type\": \"dBlock\",\n                \"content\": [\n                    {\n                        \"type\": \"heading\",\n                        \"attrs\": {\n                            \"level\": 1\n                        },\n                        \"content\": [\n                            {\n                                \"type\": \"text\",\n                                \"text\": \"art of lifting heavy\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        ]\n    },\n    \"favorite\": [],\n    \"pageSettings\": {\n        \"font\": \"serif\",\n        \"smallText\": true,\n        \"fullWidth\": true,\n        \"lock\": false\n    },\n    \"path\": \",notion-clone-project-d52a917310fbdf32566db50bed1a95aa.\",\n    \"workspaceId\": \"64aef009997d040c494aa955\",\n    \"reference\": \"flying-star-3d3cd031ca1937b41b67e706873c116a\",\n    \"createdAt\": \"2023-07-12T18:44:09.468Z\",\n    \"id\": \"64aef479997d040c494aa95a\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Page Content",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/content",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"content"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Retrieves the content of a page."
+					},
+					"response": [
+						{
+							"name": "Get Page Content 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/content",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId",
+										"content"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "153"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"99-Z0YeLfrvfa+VGdES57Bk5aKo7Qw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:15:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"doc\",\n    \"content\": [\n        {\n            \"type\": \"dBlock\",\n            \"content\": [\n                {\n                    \"type\": \"heading\",\n                    \"attrs\": {\n                        \"level\": 1\n                    },\n                    \"content\": [\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"art of heavy lifting\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Page Settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/settings",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"settings"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Retrieves the settings of a page."
+					},
+					"response": [
+						{
+							"name": "Get Page Settings 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/settings",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId",
+										"settings"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-sX4oqHtw9Upq5z5IPYqI+IoPeA4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:16:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"font\": \"serif\",\n    \"smallText\": true,\n    \"fullWidth\": true,\n    \"lock\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Page",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"flying star\",\n    \"icon\": \"1f4ab\",\n    \"coverPicture\": {\n        \"url\": \"http://sample-url-img.com\"\n    },\n    \"content\": {\n        \"type\": \"doc\",\n        \"content\": [\n            {\n                \"type\": \"dBlock\",\n                \"content\": [\n                    {\n                        \"type\": \"heading\",\n                        \"attrs\": {\n                            \"level\": 1\n                        },\n                        \"content\": [\n                            {\n                                \"type\": \"text\",\n                                \"text\": \"art of lifting heavy\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        ]\n    },\n    \"favorite\": [],\n    \"pageSettings\": {\n      \"font\": \"serif\",\n      \"smallText\": true,\n      \"fullWidth\": true,\n      \"lock\": false\n    },\n    \"path\": \",notion-clone-project-d52a917310fbdf32566db50bed1a95aa.\",\n    \"workspaceId\": \"64aef009997d040c494aa955\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages"
+							]
+						},
+						"description": "Creates a new page within a workspace."
+					},
+					"response": [
+						{
+							"name": "Create Page 201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"flying star\",\n    \"icon\": \"1f4ab\",\n    \"coverPicture\": {\n        \"url\": \"http://sample-url-img.com\"\n    },\n    \"content\": {\n        \"type\": \"doc\",\n        \"content\": [\n            {\n                \"type\": \"dBlock\",\n                \"content\": [\n                    {\n                        \"type\": \"heading\",\n                        \"attrs\": {\n                            \"level\": 1\n                        },\n                        \"content\": [\n                            {\n                                \"type\": \"text\",\n                                \"text\": \"art of lifting heavy\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        ]\n    },\n    \"favorite\": [],\n    \"pageSettings\": {\n      \"font\": \"serif\",\n      \"smallText\": true,\n      \"fullWidth\": true,\n      \"lock\": false\n    },\n    \"path\": null,\n    \"workspaceId\": \"64aed7cc997d040c494aa94c\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/pages",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"pages"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-s2NoUA2bWNnweCQVrGrvtQohQMg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 17:39:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"64aee544997d040c494aa954\"\n}"
+						},
+						{
+							"name": "Create Child Page 201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"flying star\",\n    \"icon\": \"1f4ab\",\n    \"coverPicture\": {\n        \"url\": \"http://sample-url-img.com\"\n    },\n    \"content\": {\n        \"type\": \"doc\",\n        \"content\": [\n            {\n                \"type\": \"dBlock\",\n                \"content\": [\n                    {\n                        \"type\": \"heading\",\n                        \"attrs\": {\n                            \"level\": 1\n                        },\n                        \"content\": [\n                            {\n                                \"type\": \"text\",\n                                \"text\": \"art of lifting heavy\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        ]\n    },\n    \"favorite\": [],\n    \"pageSettings\": {\n      \"font\": \"serif\",\n      \"smallText\": true,\n      \"fullWidth\": true,\n      \"lock\": false\n    },\n    \"path\": \",notion-clone-project-d52a917310fbdf32566db50bed1a95aa.\",\n    \"workspaceId\": \"64aef009997d040c494aa955\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-QgyTVRot5Wz67SZOyZaiGRMbAOY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:44:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"64aef479997d040c494aa95a\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Page To Favorite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/favorites",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"favorites"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Adds a page to a user's favorites."
+					},
+					"response": [
+						{
+							"name": "Add Page To Favorite 204",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/favorites",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId",
+										"favorites"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:17:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update Page Content",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": {\n      \"type\": \"doc\",\n      \"content\": [\n        {\n          \"type\": \"dBlock\",\n          \"content\": [\n            {\n              \"type\": \"heading\",\n              \"attrs\": {\n                \"level\": 1\n              },\n              \"content\": [\n                {\n                  \"type\": \"text\",\n                  \"text\": \"updated notion clone content\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/content",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"content"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Updates the content of a page."
+					},
+					"response": [
+						{
+							"name": "Update Page Content 204",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content\": {\n      \"type\": \"doc\",\n      \"content\": [\n        {\n          \"type\": \"dBlock\",\n          \"content\": [\n            {\n              \"type\": \"heading\",\n              \"attrs\": {\n                \"level\": 1\n              },\n              \"content\": [\n                {\n                  \"type\": \"text\",\n                  \"text\": \"updated notion clone content\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/content",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId",
+										"content"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:17:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update Page Cover",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://updated-cover-picture.com\",\n    \"verticalPosition\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/cover",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"cover"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Updates the cover image of a page."
+					},
+					"response": [
+						{
+							"name": "Update Page Cover 204",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"url\": \"https://updated-cover-picture.com\",\n    \"verticalPosition\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/cover",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId",
+										"cover"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:18:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update Page Icon",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"icon\": \"1f4aa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/icon",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"icon"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Updates the icon of a page."
+					},
+					"response": [
+						{
+							"name": "Update Page Icon 204",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"icon\": \"1f4aa\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/icon",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId",
+										"icon"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:18:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update Page Settings",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"settings\": {\n        \"font\": \"monospace\",\n        \"smallText\": false,\n        \"fullWidth\": true,\n        \"lock\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/settings",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"settings"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Updates the settings of a page."
+					},
+					"response": [
+						{
+							"name": "Update Page Settings 204",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"settings\": {\n        \"font\": \"monospace\",\n        \"smallText\": false,\n        \"fullWidth\": true,\n        \"lock\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/settings",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId",
+										"settings"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:18:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update Page Title",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"kingdom of kings\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/title",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"title"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Updates the title of a page."
+					},
+					"response": [
+						{
+							"name": "Update Page Title 204",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"kingdom of kings\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/title",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId",
+										"title"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:19:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Remove Page From Favorite",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/favorites",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId",
+								"favorites"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef479997d040c494aa95a"
+								}
+							]
+						},
+						"description": "Removes a page from a user's favorites."
+					},
+					"response": [
+						{
+							"name": "Remove Page From Favorite 204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId/favorites",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										":pageId",
+										"favorites"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef479997d040c494aa95a"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:19:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Delete Page",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/:pageId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								":pageId"
+							],
+							"variable": [
+								{
+									"key": "pageId",
+									"value": "64aef3cd997d040c494aa959"
+								}
+							]
+						},
+						"description": "Deletes a page and all associated data."
+					},
+					"response": [
+						{
+							"name": "Delete Page 204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer access_token_issued_using_refresh_token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/pages/:pageId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"pages",
+										":pageId"
+									],
+									"variable": [
+										{
+											"key": "pageId",
+											"value": "64aef3cd997d040c494aa959"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 18:43:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Delete Pages By WorkspaceId",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/all/:workspaceId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{version}}",
+								"pages",
+								"all",
+								":workspaceId"
+							],
+							"variable": [
+								{
+									"key": "workspaceId",
+									"value": "64aef009997d040c494aa955"
+								}
+							]
+						},
+						"description": "Deletes all pages within a workspace."
+					},
+					"response": [
+						{
+							"name": "Delete Pages By WorkspaceId 204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{host}}:{{port}}/{{version}}/pages/all/:workspaceId",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{version}}",
+										"pages",
+										"all",
+										":workspaceId"
+									],
+									"variable": [
+										{
+											"key": "workspaceId",
+											"value": "64aef009997d040c494aa955"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Authorization, Content-Type"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Jul 2023 19:21:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "The Pages folder contains API endpoints related to page management and retrieval within a workspace. Use these endpoints to retrieve page details, update page content, manage settings, and perform various operations on pages."
+		},
+		{
+			"name": "Sample Workspace",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/test",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"test"
+					]
+				},
+				"description": "sample test endpoint"
+			},
+			"response": [
+				{
+					"name": "Sample Workspace 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/test",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"test"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Authorization, Content-Type"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10-/VnJyQBB0+b7i4NY83P42KKVWsM\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 Jul 2023 19:12:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"ok\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "version",
+			"value": "v1",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "access_token_issued_using_refresh_token",
+			"type": "string"
+		},
+		{
+			"key": "protocol",
+			"value": "http",
+			"type": "string"
+		},
+		{
+			"key": "host",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "5000",
+			"type": "string"
+		},
+		{
+			"key": "authenticatedUserId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

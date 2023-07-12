@@ -98,8 +98,8 @@ describe('CreateWorkspaceController', () => {
         title: 'notion clone project',
         icon: '1F575',
         coverPicture: {
-          url: 'http://cover-picture.com',
-          verticalPosition: 23,
+          url: '',
+          verticalPosition: 0,
         },
         content: {
           type: 'doc',
