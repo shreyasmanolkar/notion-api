@@ -17,6 +17,7 @@ import { CreatePageInterface } from '@application/interfaces/use-cases/pages/cre
 import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/getPageByIdInterface';
 import { PageNotFoundError } from '@application/errors/PageNotFoundError';
 import { AddPageInterface } from '@application/interfaces/use-cases/workspaces/AddPageInterface';
+import { getPageContent } from '@infrastructure/util/getPageContent';
 
 export namespace SignUpController {
   export type Request = HttpRequest<SignUpInterface.Request>;
@@ -45,6 +46,8 @@ export class SignUpController extends BaseController {
     const { name, email, password, isDarkMode, profilePicture } =
       httpRequest.body!;
 
+    const content = getPageContent();
+
     const workspace = {
       name: 'home-workspace',
       icon: '1f30e',
@@ -55,40 +58,19 @@ export class SignUpController extends BaseController {
     const workspaceId = await this.createWorkspace.execute(workspace);
 
     const pageId = await this.createPage.execute({
-      title: 'notion clone project',
-      icon: '1F575',
+      title: 'Chandrayaan-3 | चंद्रयान-३',
+      icon: '1f680',
       coverPicture: {
-        url: '',
-        verticalPosition: 0,
+        url: 'https://firebasestorage.googleapis.com/v0/b/notion-clone-a3ef6.appspot.com/o/images%2FF0vw2biaMAEqIf0.jpeg05e36eb3-0353-4ac0-91b7-5356e89c8029?alt=media&token=821e9fe2-19c3-4a67-a42b-145bc368f12b',
+        verticalPosition: -607.0,
       },
-      content: {
-        type: 'doc',
-        content: [
-          {
-            type: 'dBlock',
-            content: [
-              {
-                type: 'heading',
-                attrs: {
-                  level: 1,
-                },
-                content: [
-                  {
-                    type: 'text',
-                    text: 'About Notion Clone Project',
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
+      content,
       favorite: [],
       pageSettings: {
-        font: 'serif',
+        font: 'san-serif',
         smallText: true,
-        fullWidth: true,
-        lock: false,
+        fullWidth: false,
+        lock: true,
       },
       path: null,
       workspaceId,

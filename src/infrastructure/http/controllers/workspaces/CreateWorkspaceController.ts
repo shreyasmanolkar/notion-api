@@ -50,8 +50,8 @@ export class CreateWorkspaceController extends BaseController {
     });
 
     const pageId = await this.createPage.execute({
-      title: 'notion clone project',
-      icon: '1F575',
+      title: 'Notion clone',
+      icon: '1f9ed',
       coverPicture: {
         url: '',
         verticalPosition: 0,
@@ -62,9 +62,9 @@ export class CreateWorkspaceController extends BaseController {
       },
       favorite: [],
       pageSettings: {
-        font: 'serif',
+        font: 'san-serif',
         smallText: true,
-        fullWidth: true,
+        fullWidth: false,
         lock: false,
       },
       path: null,
