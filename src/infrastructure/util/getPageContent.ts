@@ -1,4 +1,4 @@
-export const getPageContent = () => {
+export const getPageOneContent = () => {
   return {
     type: 'doc',
     content: [
@@ -2292,6 +2292,482 @@ export const getPageContent = () => {
         content: [
           {
             type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+    ],
+  };
+};
+
+export const getPageTwoContent = () => {
+  return {
+    type: 'doc',
+    content: [
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'resizableMedia',
+            attrs: {
+              src: 'https://firebasestorage.googleapis.com/v0/b/notion-clone-a3ef6.appspot.com/o/images%2FChandrayaan-3%20gif.webp7c845400-3fe7-4dac-b8fa-c7169587bf94?alt=media&token=2cfcf7bf-fb0d-452d-a6af-ad27086a2ce7',
+              'media-type': 'img',
+              alt: null,
+              title: null,
+              width: 693,
+              height: 390.39,
+              dataAlign: 'center',
+              dataFloat: null,
+            },
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                marks: [
+                  {
+                    type: 'link',
+                    attrs: {
+                      href: 'https://www.isro.gov.in/Chandrayaan3_New.html',
+                      target: '_blank',
+                      class: null,
+                    },
+                  },
+                ],
+                text: 'Chandrayaan-3',
+              },
+              {
+                type: 'text',
+                text: " is the third Moon mission by india's space agemcy ISRO. The goal is to place a lander and rover on the lunar surface and operate them for roughly ne lunar day, or 14 Earth days. The small rover, which weights just 26 killograms (57 pounds), will fly to the Moon inside the lander. Both vehicles are equipped with scientific instruments to study the moon surface.",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'heading',
+            attrs: {
+              level: 3,
+            },
+            content: [
+              {
+                type: 'text',
+                text: 'CHANDRAYAAN-3 LAUNCH VEHICLE INTEGRATION:',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: "The Chandrayaan-3 lander, with it's rover inside, sits atop the propulsion module that will carry it to lunar orbit. The rocket's protective aeroshell fairings, which protect the spacecraft during launch and ascent, can be seen in the background.",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'resizableMedia',
+            attrs: {
+              src: 'https://firebasestorage.googleapis.com/v0/b/notion-clone-a3ef6.appspot.com/o/images%2Fch-3-lv-integration.jpg.webp084e44d9-b784-4649-b7df-4a9d58d1ad58?alt=media&token=9ba15ef7-1c2b-4bab-b688-b8d1392ab5fe',
+              'media-type': 'img',
+              alt: null,
+              title: null,
+              width: '100%',
+              height: 'auto',
+              dataAlign: 'center',
+              dataFloat: null,
+            },
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: 'The Chandrayaam-3 lander and rover are similar in design to those from the Chandrayaan-2 mission. In ',
+              },
+              {
+                type: 'text',
+                marks: [
+                  {
+                    type: 'link',
+                    attrs: {
+                      href: 'https://www.planetary.org/articles/vikram-apparently-crash-lands',
+                      target: '_blank',
+                      class: null,
+                    },
+                  },
+                ],
+                text: 'September 2019',
+              },
+              {
+                type: 'text',
+                text: ', the Chandrayaan-2 Vikram lander successfully lowered itself to within 5 kilometers (3 miles) of the Moon, entering a ',
+              },
+              {
+                type: 'text',
+                marks: [
+                  {
+                    type: 'link',
+                    attrs: {
+                      href: 'https://www.theweek.in/news/sci-tech/2019/11/16/how-did-chandrayaan-2-fail-isro-answer.html',
+                      target: '_blank',
+                      class: null,
+                    },
+                  },
+                ],
+                text: '“fine braking” mode',
+              },
+              {
+                type: 'text',
+                text: " that would have places it gently on the lunar surface. Like it's successor, Chandrayaan-2 was targeting the Moon's south polar region, where ice has been found inside permanently shadowed craters.",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: "Unfortunately, a software glitch caused Vikram to veer off course, and ISRO officials lost contact with the spacecraft. NASA's ",
+              },
+              {
+                type: 'text',
+                marks: [
+                  {
+                    type: 'link',
+                    attrs: {
+                      href: 'https://www.planetary.org/space-missions/lunar-reconnaissance-orbiter',
+                      target: '_blank',
+                      class: null,
+                    },
+                  },
+                ],
+                text: 'Lunar Reconnaissance Orbiter',
+              },
+              {
+                type: 'text',
+                text: ' later ',
+              },
+              {
+                type: 'text',
+                marks: [
+                  {
+                    type: 'link',
+                    attrs: {
+                      href: 'https://www.nasa.gov/image-feature/goddard/2019/vikram-lander-found',
+                      target: '_blank',
+                      class: null,
+                    },
+                  },
+                ],
+                text: 'found debris',
+              },
+              {
+                type: 'text',
+                text: ' from the vehicle scattered about 750 meters (a half mile) from the intended landing area.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: 'The mission was not a total loss: ',
+              },
+              {
+                type: 'text',
+                marks: [
+                  {
+                    type: 'link',
+                    attrs: {
+                      href: 'https://www.planetary.org/space-missions/chandrayaan-2',
+                      target: '_blank',
+                      class: null,
+                    },
+                  },
+                ],
+                text: 'Chandrayaan-2',
+              },
+              {
+                type: 'text',
+                text: ' also included an orbiter that continues to study the Moon from above. Among other scientific functions, the orbiter is equipped to scan for water ice.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: "Having figure out what doomed the Vikram lander, ISRO says they have upgraded the lander's software and performed numerous tests to ensure that Chandrayaan-3 goes according to plan. Cjandrayaan-3 does not include an orbiter, although the propulsion module that will carry the lander  to lunar orbit is equipped with a scienct instrument that will observe Earth as if it were an exoplanet, providing data for future ",
+              },
+              {
+                type: 'text',
+                marks: [
+                  {
+                    type: 'link',
+                    attrs: {
+                      href: 'https://www.planetary.org/worlds/exoplanets',
+                      target: '_blank',
+                      class: null,
+                    },
+                  },
+                ],
+                text: 'exoplanet',
+              },
+              {
+                type: 'text',
+                text: ' studies.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'resizableMedia',
+            attrs: {
+              src: 'https://firebasestorage.googleapis.com/v0/b/notion-clone-a3ef6.appspot.com/o/images%2Fch3-lander-rover.jpg.webp6abeee55-d8b9-4ee3-b9a9-7aa08f20d5c6?alt=media&token=c781cd99-de87-4038-b11a-96fc27d8e403',
+              'media-type': 'img',
+              alt: null,
+              title: null,
+              width: '100%',
+              height: 'auto',
+              dataAlign: 'center',
+              dataFloat: null,
+            },
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'heading',
+            attrs: {
+              level: 3,
+            },
+            content: [
+              {
+                type: 'text',
+                text: 'CHANDRAYAAN-3 LANDER AND ROVER:',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'dBlock',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: "ISRO's Chandrayaan-3 lander is seen here with it's ramp unfolded, revealing a small rover that will drive on the lunar surface",
+              },
+            ],
           },
         ],
       },
