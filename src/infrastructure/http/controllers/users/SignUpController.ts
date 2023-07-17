@@ -61,8 +61,8 @@ export class SignUpController extends BaseController {
       title: 'Chandrayaan-3 | चंद्रयान-३',
       icon: '1f680',
       coverPicture: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/notion-clone-a3ef6.appspot.com/o/images%2FF0vw2biaMAEqIf0.jpeg05e36eb3-0353-4ac0-91b7-5356e89c8029?alt=media&token=821e9fe2-19c3-4a67-a42b-145bc368f12b',
-        verticalPosition: -635,
+        url: '/static/media/nasa_space_shuttle_columbia_and_sunrise.b623df337db2db60dcc0.jpg',
+        verticalPosition: 0,
       },
       content,
       favorite: [],
