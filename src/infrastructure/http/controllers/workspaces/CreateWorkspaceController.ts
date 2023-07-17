@@ -9,6 +9,7 @@ import { GetPageByIdInterface } from '@application/interfaces/use-cases/pages/ge
 import { PageNotFoundError } from '@application/errors/PageNotFoundError';
 import { AddPageInterface } from '@application/interfaces/use-cases/workspaces/AddPageInterface';
 import { AddWorkspaceByUserIdInterface } from '@application/interfaces/use-cases/users/AddWorkspaceByUserIdInterface';
+import { getPageTwoContent } from '@infrastructure/util/getPageContent';
 
 export namespace CreateWorkspaceController {
   export type Request = HttpRequest<CreateWorkspaceInterface.Request> & {
@@ -34,6 +35,7 @@ export class CreateWorkspaceController extends BaseController {
   ): Promise<CreateWorkspaceController.Response> {
     const { name, icon } = httpRequest.body!;
     const userId = httpRequest.userId!;
+    const content = getPageTwoContent();
 
     const workspaceId = await this.createWorkspace.execute({
       name,
@@ -50,22 +52,19 @@ export class CreateWorkspaceController extends BaseController {
     });
 
     const pageId = await this.createPage.execute({
-      title: 'notion clone project',
-      icon: '1F575',
+      title: 'Vikram Lander & Pragyan Rover',
+      icon: '1f52d',
       coverPicture: {
-        url: '',
-        verticalPosition: 0,
+        url: 'https://firebasestorage.googleapis.com/v0/b/notion-clone-a3ef6.appspot.com/o/images%2FF070ZTpaEAAo_bI.jpeg7c96d7d0-a0fc-4ea4-9c40-ba0034f5751c?alt=media&token=5030a9d1-2632-4604-adb0-d671b5df8b9d',
+        verticalPosition: -657,
       },
-      content: {
-        type: 'doc',
-        content: [],
-      },
+      content,
       favorite: [],
       pageSettings: {
-        font: 'serif',
+        font: 'san-serif',
         smallText: true,
         fullWidth: true,
-        lock: false,
+        lock: true,
       },
       path: null,
       workspaceId,
