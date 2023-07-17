@@ -55,8 +55,8 @@ export class CreateWorkspaceController extends BaseController {
       title: 'Vikram Lander & Pragyan Rover',
       icon: '1f52d',
       coverPicture: {
-        url: 'https://firebasestorage.googleapis.com/v0/b/notion-clone-a3ef6.appspot.com/o/images%2FF070ZTpaEAAo_bI.jpeg7c96d7d0-a0fc-4ea4-9c40-ba0034f5751c?alt=media&token=5030a9d1-2632-4604-adb0-d671b5df8b9d',
-        verticalPosition: -657,
+        url: '/static/media/nasa_robert_stewart_spacewalk.b79b6b06db3b4359b361.jpg',
+        verticalPosition: 0,
       },
       content,
       favorite: [],
