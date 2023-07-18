@@ -126,40 +126,18 @@ describe('SignUpController', () => {
 
     expect(createPageSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: 'notion clone project',
-        icon: '1F575',
+        title: 'Chandrayaan-3 | चंद्रयान-३',
+        icon: '1f680',
         coverPicture: {
-          url: '',
+          url: '/static/media/nasa_space_shuttle_columbia_and_sunrise.b623df337db2db60dcc0.jpg',
           verticalPosition: 0,
-        },
-        content: {
-          type: 'doc',
-          content: [
-            {
-              type: 'dBlock',
-              content: [
-                {
-                  type: 'heading',
-                  attrs: {
-                    level: 1,
-                  },
-                  content: [
-                    {
-                      type: 'text',
-                      text: 'About Notion Clone Project',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
         },
         favorite: [],
         pageSettings: {
-          font: 'serif',
+          font: 'san-serif',
           smallText: true,
           fullWidth: true,
-          lock: false,
+          lock: true,
         },
         path: null,
       })

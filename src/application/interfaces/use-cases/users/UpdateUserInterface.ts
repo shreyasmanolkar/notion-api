@@ -5,10 +5,7 @@ import { UseCase } from '@application/interfaces/use-cases/UseCase';
 export namespace UpdateUserInterface {
   export type UserIdType = string;
   export type UserDataType = Partial<
-    Omit<
-      UserProps,
-      'id' | 'createdAt' | 'updatedAt' | 'profilePicture' | 'workspaces'
-    >
+    Omit<UserProps, 'id' | 'createdAt' | 'updatedAt' | 'profilePicture'>
   >;
 
   export type Request = {
