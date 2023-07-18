@@ -95,22 +95,18 @@ describe('CreateWorkspaceController', () => {
 
     expect(createPageSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: 'notion clone project',
-        icon: '1F575',
+        title: 'Vikram Lander & Pragyan Rover',
+        icon: '1f52d',
         coverPicture: {
-          url: '',
+          url: '/static/media/nasa_robert_stewart_spacewalk.b79b6b06db3b4359b361.jpg',
           verticalPosition: 0,
-        },
-        content: {
-          type: 'doc',
-          content: [],
         },
         favorite: [],
         pageSettings: {
-          font: 'serif',
+          font: 'san-serif',
           smallText: true,
           fullWidth: true,
-          lock: false,
+          lock: true,
         },
         path: null,
       })

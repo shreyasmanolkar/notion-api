@@ -69,7 +69,7 @@ export class SignUpController extends BaseController {
       pageSettings: {
         font: 'san-serif',
         smallText: true,
-        fullWidth: false,
+        fullWidth: true,
         lock: true,
       },
       path: null,
