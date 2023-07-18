@@ -117,7 +117,7 @@ describe('SignUpController', () => {
     );
   });
 
-  it.skip('should call CreatePage with given params', async () => {
+  it('should call CreatePage with given params', async () => {
     const { sut, createPageStub } = makeSut();
 
     const createPageSpy = jest.spyOn(createPageStub, 'execute');
