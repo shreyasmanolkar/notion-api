@@ -36,6 +36,7 @@ The app was built based on the Clean Architecture, SOLID principles, and Domain-
 
 ### Clean architecture
 The Clean Architecture is a way to separate the concerns of everything that goes into building complex enterprise applications. 
+![clean-architecture](https://github.com/shreyasmanolkar/notion-api/assets/80336980/e2cd9204-9a92-4f20-a207-6f40e6d1d122)
 
 
 To separate concerns, this application was built with a Clean Architecture. It is divided into Domain, Application, and Infrastructure layers: There is also a Main layer, which is the entry point of the API.
