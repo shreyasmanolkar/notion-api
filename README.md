@@ -166,5 +166,11 @@ code coverage:
 ![screen-2023-07-12-18-23-54](https://github.com/shreyasmanolkar/notion-api/assets/80336980/c334176b-fb3f-4ce9-927f-ba77d92a5cce)
 
 
+## :memo: License
+
+This project is under the MIT license. See the [LICENSE]([https://github.com/shreyasmanolkar/notion-api/LICENSE](https://github.com/shreyasmanolkar/notion-api/blob/main/LICENSE)https://github.com/shreyasmanolkar/notion-api/blob/main/LICENSE) for more information.
+
+---
+
 
 
