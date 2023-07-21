@@ -36,7 +36,8 @@ The app was built based on the Clean Architecture, SOLID principles, and Domain-
 
 ### Clean architecture
 The Clean Architecture is a way to separate the concerns of everything that goes into building complex enterprise applications. 
-![clean-architecture](https://github.com/shreyasmanolkar/notion-api/assets/80336980/e2cd9204-9a92-4f20-a207-6f40e6d1d122)
+
+![clean-architecture](https://github.com/shreyasmanolkar/notion-api/assets/80336980/df305480-b67f-4909-8306-0d993344999f)
 
 
 To separate concerns, this application was built with a Clean Architecture. It is divided into Domain, Application, and Infrastructure layers: There is also a Main layer, which is the entry point of the API.
@@ -96,7 +97,7 @@ By harnessing the flexibility of blocks, the organizational power of pages, and 
 
 this is the core business logic represented in class diagram.
 
-![notion-clone-busincess-logic drawio](https://github.com/shreyasmanolkar/notion-api/assets/80336980/1e506cbd-a0b1-4206-8415-0fc6e9e960af)
+![notion-clone-business-logic drawio](https://github.com/shreyasmanolkar/notion-api/assets/80336980/c9d64aad-1156-4be5-915a-b4b6ab7fea0a)
 
 
 ## Run Locally
@@ -162,8 +163,8 @@ update: package.json:
 ## Screenshots
 
 code coverage:
-![screen-2023-07-12-19-14-37](https://github.com/shreyasmanolkar/notion-api/assets/80336980/b8e058c9-2422-407e-856b-11a0d19b9393)
-![screen-2023-07-12-18-23-54](https://github.com/shreyasmanolkar/notion-api/assets/80336980/c334176b-fb3f-4ce9-927f-ba77d92a5cce)
+![screen-2023-07-12-18-23-54](https://github.com/shreyasmanolkar/notion-api/assets/80336980/d7eaec4b-ffc3-4405-97e1-6bd723c3d8a6)
+![screen-2023-07-12-19-14-37](https://github.com/shreyasmanolkar/notion-api/assets/80336980/c54af692-2145-4edf-939d-f5c8eb5bc694)
 
 
 ## License
