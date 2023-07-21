@@ -163,8 +163,8 @@ update: package.json:
 ## Screenshots
 
 code coverage:
-![screen-2023-07-12-18-23-54](https://github.com/shreyasmanolkar/notion-api/assets/80336980/d7eaec4b-ffc3-4405-97e1-6bd723c3d8a6)
 ![screen-2023-07-12-19-14-37](https://github.com/shreyasmanolkar/notion-api/assets/80336980/c54af692-2145-4edf-939d-f5c8eb5bc694)
+![screen-2023-07-12-18-23-54](https://github.com/shreyasmanolkar/notion-api/assets/80336980/d7eaec4b-ffc3-4405-97e1-6bd723c3d8a6)
 
 
 ## License
