@@ -16,6 +16,9 @@
 
 The Notion-Clone API is a TypeScript-based backend project that serves as a clone of the popular note-taking and collaboration application, Notion. This API is designed to handle authentication and authorization while providing similar functionalities to Notion, allowing users to create, manage, and collaborate on various types of content such as notes, databases, and task lists. The project follows best practices in software development, including Clean Architecture, Domain Driven Design (DDD), and Test Driven Development (TDD), ensuring a well-structured, maintainable, and extensible codebase.
 
+## Demo Video: 
+https://www.youtube.com/watch?v=XkFgv8AsUe0&t=13s
+
 ## Detail Blog
 https://shreyasmanolkar.hashnode.dev/building-notion-clone-part-1-planning-the-architecture
 
