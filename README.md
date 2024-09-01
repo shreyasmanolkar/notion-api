@@ -108,7 +108,19 @@ this is the core business logic represented in class diagram.
 
 ## Run Locally
 
-Clone the project
+Create notion-clone directory
+
+```bash
+  mkdir notion-clone
+```
+
+Go to the project directory
+
+```bash
+  cd notion-clone
+```
+
+Clone the api project adjacent to [notion-browser-client](https://github.com/shreyasmanolkar/notion-browser-client) 
 
 ```bash
   git clone git@github.com:shreyasmanolkar/notion-api.git
@@ -125,6 +137,16 @@ Install dependencies
 ```bash
   npm install
 ```
+
+Create .env file
+
+```bash
+  cp .env-example .env
+```
+
+Add Mongo URL in .env
+
+
 Create build
 
 ```bash
