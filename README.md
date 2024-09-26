@@ -154,9 +154,9 @@ Run docker container
   docker-compose up
 ```
 
-2) use mongodb Atlas or mongoDB locally as pass connection string / mongo URL in .env
+2) use mongodb Atlas or mongoDB locally and pass connection string / mongo URL in .env
 
-Add Mongo URL in .env
+Add mongo URL in .env
 
 
 Create build
