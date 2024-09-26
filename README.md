@@ -144,6 +144,18 @@ Create .env file
   cp .env-example .env
 ```
 
+To connect DB we have 2 options
+
+1) run docker container
+
+Run docker container
+
+```bash
+  docker-compose up
+```
+
+2) use mongodb Atlas or mongoDB locally as pass connection string / mongo URL in .env
+
 Add Mongo URL in .env
 
 
@@ -157,6 +169,12 @@ Start the server
 
 ```bash
   npm run start
+```
+
+Stop the server
+
+```bash
+  docker-compose down --volumes
 ```
 
 

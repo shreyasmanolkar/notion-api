@@ -8,13 +8,14 @@
     "build:watch": "npm run build -- --watch",
     "start": "node dist/main/server.js",
     "dev": "nodemon -L --watch ./dist ./dist/main/server.js",
-    "start:dev": "concurrently --kill-others-on-fail \"npm run build:watch\" \"npm run dev\"",
+    "start:dev": "npm run build && npm run start",
     "test": "jest --passWithNoTests --runInBand --no-cache",
     "test:staged": "npm run test --findRelatedTests",
     "test:ci": "npm run test -- --coverage",
     "test:only": "jest -- -t SignUpController.spec.ts",
     "lint": "eslint --ignore-path .gitignore --ext .ts --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "update": "npm update"
   },
   "keywords": [],
   "author": "",
